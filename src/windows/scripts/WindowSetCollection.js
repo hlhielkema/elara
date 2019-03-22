@@ -3,7 +3,9 @@ function WindowSetCollection() {
     this.sets = [];
     this.selected = null;
     this.events = {
-        selectedChanged: new WindowManagerEvent(this)
+        selectedChanged: new WindowManagerEvent(this),
+        added: new WindowManagerEvent(this),
+        removed: new WindowManagerEvent(this),
     }
 }
 
@@ -12,21 +14,20 @@ WindowSetCollection.prototype.getSelected = function () {
 }
 
 WindowSetCollection.prototype.add = function () {
-    var collection = new WindowSet();
-    this.sets.push(collection);
+    var set = new WindowSet();
+    this.sets.push(set);
 
-    collection.events.focusChanged.subscribe(function () {
-        // Update the taskbar
-        irelium.windows.taskbar.update();
-
+    // Invoke the added event
+    this.events.added.invoke(set);
+    
+    // [WARNING] LEGACY
+    set.events.focusChanged.subscribe(function () {        
         // Update the app menu in the toolbar
         irelium.toolbar.updateAppMenu();
     });
 
-    collection.events.changed.subscribe(function () {
-        // Update the taskbar
-        irelium.windows.taskbar.update();
-
+    // [WARNING] LEGACY
+    set.events.changed.subscribe(function () {
         // Update the app menu in the toolbar
         irelium.toolbar.updateAppMenu();
     });
