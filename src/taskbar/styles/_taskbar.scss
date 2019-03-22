@@ -1,0 +1,47 @@
+﻿.sys-taskbar {
+    //background: #000;
+    float: left;
+    width: 100%;
+    height: 30px;
+
+    .sys-window-buttons {
+        float: left;
+        height: 30px;
+
+        .sys-window-button {
+            color: #fff;
+            float: left;
+            height: 28px;
+            width: 140px;
+            margin-right: 4px;
+            border-bottom: solid 2px #03A9F4;
+            line-height: 26px;
+            font-size: 12px;
+            padding: 0px 7px;
+            box-sizing: border-box;
+            cursor: pointer;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            &.window-focus {
+                border-color: #FF9800;
+            }
+
+            svg {
+                float: left;
+                color: #fff;
+                margin: 4px 8px 4px 0px;
+            }
+
+            span {
+                float: left;
+                width: 102px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
