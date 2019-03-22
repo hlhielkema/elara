@@ -244,7 +244,6 @@ WindowController.prototype.move = function (x, y) {
     this.applyState();    
 }
 
-// WARNING: ref to Irelium
 WindowController.prototype.resize = function (width, height) {
     if (typeof width === 'string') {
         var relative = width;

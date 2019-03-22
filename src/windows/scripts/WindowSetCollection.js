@@ -18,19 +18,7 @@ WindowSetCollection.prototype.add = function () {
     this.sets.push(set);
 
     // Invoke the added event
-    this.events.added.invoke(set);
-    
-    // [WARNING] LEGACY
-    set.events.focusChanged.subscribe(function () {        
-        // Update the app menu in the toolbar
-        irelium.toolbar.updateAppMenu();
-    });
-
-    // [WARNING] LEGACY
-    set.events.changed.subscribe(function () {
-        // Update the app menu in the toolbar
-        irelium.toolbar.updateAppMenu();
-    });
+    this.events.added.invoke(set);   
 }
 
 WindowSetCollection.prototype.selectAt = function (index) {
