@@ -43,6 +43,7 @@ function MouseDragDropTracker() {
         return false;
     };
 
+    // Get if any drag-drop session is active
     self.hasSession = function () {
         return self.session !== null;
     }

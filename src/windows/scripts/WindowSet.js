@@ -36,7 +36,8 @@ WindowSet.prototype.add = function (controller) {
     this.events.changed.invoke();
 }
 
-// Get a window controller by its identifier
+// Get a window controller by its identifier.
+// Returns null if not found.
 WindowSet.prototype.get = function (controllerId) {
     controllerId = +controllerId;
     for (var i = 0; i < this.controllers.length; i++) {

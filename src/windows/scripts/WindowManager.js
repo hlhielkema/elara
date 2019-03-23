@@ -1,7 +1,9 @@
 ﻿// constructor: WindowManager
 function WindowManager() {
-    //
+    // Windows container element
     this.windowContainer = null;   
+
+    // Window set collection
     this.windowSetCollection = new WindowSetCollection();
 
     // Systems
@@ -32,9 +34,15 @@ WindowManager.prototype.bind = function (elementSelector) {
 }
 
 // Get a controller by its unique id
-// TODO: search in all controller sets
 WindowManager.prototype.getController = function (controllerId) {   
-    return this.getActiveControllerSet().get(controllerId);
+    var count = this.windowSetCollection.count();
+    for (var i = 0; i < count; i++) {
+        var controller = this.windowSetCollection.getAt(i).get(controllerId);
+        if (controller !== null) {
+            return controller;
+        }
+    }
+    return null;
 }
 
 // Get the active controller set
@@ -51,6 +59,7 @@ WindowManager.prototype.getActiveControllerSet = function () {
 
 // Create a new window in the current controller collection
 WindowManager.prototype.createWindow = function (customOptions) {
+    // Create the window controller
     var controller = new WindowController(this.getNextId());
 
     // Default options
@@ -64,7 +73,7 @@ WindowManager.prototype.createWindow = function (customOptions) {
             x: 100,
             y: 100
         },
-        icon: '/images/feather/box.svg',        
+        icon: null, // path to SVG image     
         allowMinimize: true,
         allowMaximize: true,
         allowClose: true,
@@ -89,16 +98,17 @@ WindowManager.prototype.createWindow = function (customOptions) {
     controller.resize(options.size.width, options.size.height);
     controller.setIcon(options.icon);
     controller.setTitle(options.title);
-console.log(options);
+
     // Set the allow states
     controller.setAllowMinimize(options.allowMinimize);
     controller.setAllowMaximize(options.allowMaximize);
     controller.setAllowClose(options.allowClose);
-    controller.setAlwaysOnTop(options.allowClose);
+    controller.setAlwaysOnTop(options.alwaysOnTop);
 
     // Add the window element to the windows container
     this.windowContainer.appendChild(window);
 
+    // Get the active window controller set
     var activeCollection = this.getActiveControllerSet();
 
     // Store the controller

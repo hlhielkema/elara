@@ -36,11 +36,6 @@ function WindowController(id) {
         focus: new WindowManagerEvent(this),
         lostFocus: new WindowManagerEvent(this),
     }
-
-    // Legacy:
-    this.getMenuItems = function () {
-        return [];
-    }
 }
 
 // Apply the dimensions from this.position and this.size on the window element.
@@ -84,7 +79,7 @@ WindowController.prototype.applyState = function () {
     }
 }
 
-
+// Set the relative state of the window
 WindowController.prototype.setRelative = function (relative) {
     if (this.state.relative != relative) {
         this.state.relative = relative;
@@ -98,11 +93,13 @@ WindowController.prototype.setRelative = function (relative) {
     }
 }  
 
+// Show the window
 WindowController.prototype.show = function () {    
     this.state.hidden = false;
     this.applyState();
 }
 
+// Minimize the window
 WindowController.prototype.minimize = function () {
     this.state.hidden = true;
     this.applyState();
@@ -112,20 +109,23 @@ WindowController.prototype.minimize = function () {
     }   
 }
 
+// Set the title of the window
 WindowController.prototype.setTitle = function (title) {
     this.title = title;
     this.windowElement.querySelector('.sys-title').innerText = title;
 };
 
-
+// Get the title of the window
 WindowController.prototype.getTitle = function () {
     return this.title;
 };
 
+// Get the content container element of the window
 WindowController.prototype.getContentContainer = function () {
     return this.windowElement.querySelector('.sys-window-content');
 }
 
+// Toggle if the window is maximized
 WindowController.prototype.toggleMaximize = function () {
     if (this.state.relative) {
         this.setRelative(false);
@@ -135,14 +135,18 @@ WindowController.prototype.toggleMaximize = function () {
     }
 }
 
+// Get the (unique) id of the window
 WindowController.prototype.getId = function () {
     return this.id;
 }
 
+// Get the window element
 WindowController.prototype.getWindow = function () {
     return this.windowElement;
 }
 
+// Bind a window element to the controller.
+// Don't call this function multiple times on one controller.
 WindowController.prototype.bindWindowElement = function (window) {    
     // Add the click event listeners
     var controller = this;
@@ -154,16 +158,18 @@ WindowController.prototype.bindWindowElement = function (window) {
     // Add the controller id to the window div
     window.setAttribute('data-controller-id', this.getId());
 
-    //
+    // Store the window element and apply the dimensions and states
     this.windowElement = window;
     this.applyDimensions();
     this.applyState();
 }
 
+// Maximize the window
 WindowController.prototype.maximize = function () {
     this.resize('fullscreen');
 };
 
+// Close the window
 WindowController.prototype.close = function () {
     // Remove the element from the DOM
     this.windowElement.parentElement.removeChild(this.windowElement);
@@ -172,10 +178,13 @@ WindowController.prototype.close = function () {
     this.events.closed.invoke();    
 }
 
+// Get the icon of the window
 WindowController.prototype.getIcon = function () {
     return this.icon;
 }
 
+// Set the icon of the window.
+// The value should be a path to a SVG image.
 WindowController.prototype.setIcon = function (icon) {
     if (this.icon !== icon) {
         this.icon = icon;
@@ -186,8 +195,7 @@ WindowController.prototype.setIcon = function (icon) {
     }
 }
 
-//--
-
+// Set the non-relative dimensions of the window
 WindowController.prototype.setNonRelativeDimensions = function (x, y, width, height) {
     if (x === null) {
         this.nonRelativeDimensions = null;
@@ -202,6 +210,7 @@ WindowController.prototype.setNonRelativeDimensions = function (x, y, width, hei
     }
 };
 
+// Restore the non-relative size
 WindowController.prototype.restoreNonRelativeSize = function () {
     if (this.nonRelativeDimensions !== null) {
         this.resize(this.nonRelativeDimensions.width, this.nonRelativeDimensions.height);
@@ -209,6 +218,7 @@ WindowController.prototype.restoreNonRelativeSize = function () {
     }
 }
 
+// Restore the non-relative position
 WindowController.prototype.restoreNonRelativePosition = function () {
     if (this.nonRelativeDimensions !== null) {
         this.move(this.nonRelativeDimensions.x, this.nonRelativeDimensions.y);
@@ -216,6 +226,7 @@ WindowController.prototype.restoreNonRelativePosition = function () {
     }
 }
 
+// Restore the non-relative dimensions(position and size) of the window
 WindowController.prototype.restoreNonRelativeDimensions = function () {
     if (this.nonRelativeDimensions !== null) {
         var dim = this.nonRelativeDimensions;
@@ -225,15 +236,19 @@ WindowController.prototype.restoreNonRelativeDimensions = function () {
     }
 }
 
+// Get if the window is focussed
 WindowController.prototype.hasFocus = function () {
     return this.windowElement.classList.contains('sys-window-focus');
 }
 
+// Focus the window
 WindowController.prototype.focus = function () {
     // Invoke the focus event
     this.events.focus.invoke();
 }
 
+// Toggle the focus state of the window.
+// This function is used by the taskbar.
 WindowController.prototype.focusFromTaskbar = function () {
     if (this.hasFocus()) {
         this.minimize();
@@ -244,6 +259,7 @@ WindowController.prototype.focusFromTaskbar = function () {
     }
 }    
 
+// Move the window
 WindowController.prototype.move = function (x, y) {   
     this.position.x = new ComplexValue(x);
     this.position.y = new ComplexValue(y);
@@ -252,38 +268,54 @@ WindowController.prototype.move = function (x, y) {
     this.applyState();    
 }
 
+// Resize the window
+// This function support two ways of using it.
+// Examples:
+// - controller.resize('fullscreen');
+// - controller.resize('300px', '180px');
 WindowController.prototype.resize = function (width, height) {
     if (typeof width === 'string') {
+        // The snap-area name is stored in the with parameter
         var relative = width;
 
+        // Active the non-relative mode
         this.setRelative(true);
         
+        // Get the dimensions for the snap-area
         var dimensions = WINDOW_SNAP_AREAS[relative];
 
+        // Update the dimensions
         this.position.x = new ComplexValue(dimensions.left);
         this.position.y = new ComplexValue(dimensions.top);
         this.size.x = new ComplexValue(dimensions.width);
         this.size.y = new ComplexValue(dimensions.height);
+
+        // Apply the dimensions
         this.applyDimensions();   
     }
     else {
+        // Update the size
         this.size.x = new ComplexValue(width);
         this.size.y = new ComplexValue(height);
+
+        // Apply the dimensions
         this.applyDimensions();           
     }
 }
 
+// Stash the window
 WindowController.prototype.stash = function () {
     this.state.stashed = true;
     this.applyState();
 }
 
+// Resume(unstash) the window
 WindowController.prototype.resume = function () {
     this.state.stashed = false;
     this.applyState();
 }
 
-//
+// Set if minimizing the window is allowed
 WindowController.prototype.setAllowMinimize = function(allowMinimize) {
     if (this.state.allowMinimize !== allowMinimize) {
         this.state.allowMinimize = allowMinimize;
@@ -291,7 +323,7 @@ WindowController.prototype.setAllowMinimize = function(allowMinimize) {
     }    
 }
 
-//
+// Set if maximizing the window is allowed
 WindowController.prototype.setAllowMaximize = function(allowMaximize) {
     if (this.state.allowMaximize !== allowMaximize) {
         this.state.allowMaximize = allowMaximize;
@@ -299,7 +331,7 @@ WindowController.prototype.setAllowMaximize = function(allowMaximize) {
     }
 }
 
-//
+// Set if closing the window is allowed
 WindowController.prototype.setAllowClose = function(allowClose) {
     if (this.state.allowClose !== allowClose) {
         this.state.allowClose = allowClose;
@@ -307,7 +339,7 @@ WindowController.prototype.setAllowClose = function(allowClose) {
     }
 }
 
-//
+// Set if the window should always be on top
 WindowController.prototype.setAlwaysOnTop = function(alwaysOnTop) {
     if (this.state.alwaysOnTop !== alwaysOnTop) {
         this.state.alwaysOnTop = alwaysOnTop;
