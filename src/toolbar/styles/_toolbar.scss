@@ -1,0 +1,88 @@
+﻿.sys-toolbar {
+    background: #313131;
+    float: left;
+    width: 100%;
+    height: 28px;
+    position: relative;
+
+    .sys-dropdown-button {
+        float: left;
+
+        .sys-button {
+            float: left;
+            height: 28px;
+            line-height: 28px;
+            padding: 0 12px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 10px;
+            letter-spacing: 1px;
+
+            &:hover {
+                background: #444;
+            }
+        }
+
+        .sys-dropdown-items {
+            display: none;
+            background: #444;
+            position: absolute;
+            top: 28px;
+            width: 260px;
+            z-index: 5000;
+
+
+            .sys-menu-button {
+                float: left;
+                height: 28px;
+                width: 100%;
+                line-height: 28px;
+                padding: 0 12px;
+                cursor: pointer;
+                color: #fff;
+                font-size: 10px;
+                box-sizing: border-box;
+                letter-spacing: 1px;
+
+                &:hover {
+                    background: #313131;
+                }
+
+                .sys-button-icon-container {
+                    float: left;
+                    padding: 6px 10px 6px 0px;
+                }
+
+                .sys-button-label {
+                    float: left;
+                }
+            }
+        }
+
+        &.opened {
+            .sys-button {
+                background: #444;
+            }
+
+            .sys-dropdown-items {
+                display: block;
+            }
+        }
+    }
+
+    .sys-seperator {
+        float: left;
+        background: #464646;
+        height: 20px;
+        width: 2px;
+        margin: 4px;
+    }
+
+    .sys-toolbar-clock, .sys-machine-name {
+        color: #fff;
+        float: right;
+        padding: 8px;
+        font-size: 12px;
+        font-family: monospace;
+    }
+}
