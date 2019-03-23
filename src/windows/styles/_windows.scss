@@ -153,4 +153,19 @@
         width: 100%;
         cursor: auto;
     }
+
+    &.sys-window-disable-minimize .sys-control-button.minimize {
+        display: none;
+    }
+
+    &.sys-window-disable-maximize .sys-control-button.maximize {
+        display: none;
+    }
+
+    &.sys-window-disable-close .sys-control-button.close {
+        display: none;
+    }
+
+    &.sys-window-always-on-top {
+    }
 }
