@@ -64,15 +64,12 @@ WindowManager.prototype.createWindow = function (customOptions) {
             x: 100,
             y: 100
         },
-        icon: '/images/feather/box.svg'
+        icon: '/images/feather/box.svg',        
+        allowMinimize: true,
+        allowMaximize: true,
+        allowClose: true,
+        alwaysOnTop: false,
     };
-
-    function extend(a, b) {
-        for (var key in b)
-            if (b.hasOwnProperty(key))
-                a[key] = b[key];
-        return a;
-    }
 
     // Apply the custom options on the default options        
     for (var key in customOptions) {
@@ -92,6 +89,12 @@ WindowManager.prototype.createWindow = function (customOptions) {
     controller.resize(options.size.width, options.size.height);
     controller.setIcon(options.icon);
     controller.setTitle(options.title);
+console.log(options);
+    // Set the allow states
+    controller.setAllowMinimize(options.allowMinimize);
+    controller.setAllowMaximize(options.allowMaximize);
+    controller.setAllowClose(options.allowClose);
+    controller.setAlwaysOnTop(options.allowClose);
 
     // Add the window element to the windows container
     this.windowContainer.appendChild(window);

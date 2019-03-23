@@ -21,6 +21,10 @@ function WindowController(id) {
         resizing: false,
         focus: false,
         stashed: false,
+        allowMinimize: true,
+        allowMaximize: true,
+        allowClose: true,
+        alwaysOnTop: false,
     }    
     
     // Window element
@@ -53,8 +57,8 @@ WindowController.prototype.applyDimensions = function () {
 // Apply the states from this.state on the window element
 WindowController.prototype.applyState = function () {
     var controller = this;
-    function applySingleState(stateName, className) {
-        if (controller.state[stateName]) {
+    function applySingleState(stateName, className, invert) {
+        if (controller.state[stateName] !== invert) {
             if (!controller.windowElement.classList.contains(className)) {
                 controller.windowElement.classList.add(className);
             }            
@@ -67,12 +71,16 @@ WindowController.prototype.applyState = function () {
     }
 
     if (this.windowElement !== null) {        
-        applySingleState('hidden', 'sys-window-hidden');
-        applySingleState('relative', 'sys-window-relative');
-        applySingleState('moving', 'sys-window-moving');
-        applySingleState('resizing', 'sys-window-resizing');
-        applySingleState('focus', 'sys-window-focus');
-        applySingleState('stashed', 'sys-window-stashed');
+        applySingleState('hidden', 'sys-window-hidden', false);
+        applySingleState('relative', 'sys-window-relative', false);
+        applySingleState('moving', 'sys-window-moving', false);
+        applySingleState('resizing', 'sys-window-resizing', false);
+        applySingleState('focus', 'sys-window-focus', false);
+        applySingleState('stashed', 'sys-window-stashed', false);
+        applySingleState('allowMinimize', 'sys-window-disable-minimize', true);
+        applySingleState('allowMaximize', 'sys-window-disable-maximize', true);
+        applySingleState('allowClose', 'sys-window-disable-close', true);
+        applySingleState('alwaysOnTop', 'sys-window-always-on-top', false);
     }
 }
 
@@ -273,4 +281,36 @@ WindowController.prototype.stash = function () {
 WindowController.prototype.resume = function () {
     this.state.stashed = false;
     this.applyState();
+}
+
+//
+WindowController.prototype.setAllowMinimize = function(allowMinimize) {
+    if (this.state.allowMinimize !== allowMinimize) {
+        this.state.allowMinimize = allowMinimize;
+        this.applyState();
+    }    
+}
+
+//
+WindowController.prototype.setAllowMaximize = function(allowMaximize) {
+    if (this.state.allowMaximize !== allowMaximize) {
+        this.state.allowMaximize = allowMaximize;
+        this.applyState();
+    }
+}
+
+//
+WindowController.prototype.setAllowClose = function(allowClose) {
+    if (this.state.allowClose !== allowClose) {
+        this.state.allowClose = allowClose;
+        this.applyState();
+    }
+}
+
+//
+WindowController.prototype.setAlwaysOnTop = function(alwaysOnTop) {
+    if (this.state.alwaysOnTop !== alwaysOnTop) {
+        this.state.alwaysOnTop = alwaysOnTop;
+        this.applyState();
+    }
 }
