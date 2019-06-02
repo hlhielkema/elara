@@ -41,11 +41,11 @@ function WindowController(id) {
 // Apply the dimensions from this.position and this.size on the window element.
 WindowController.prototype.applyDimensions = function () {
     if (this.windowElement !== null) {
-        this.windowElement.style['left'] = this.position.x.raw();
-        this.windowElement.style['top'] = this.position.y.raw();
+        this.windowElement.style['left'] = this.position.x.cssValue();
+        this.windowElement.style['top'] = this.position.y.cssValue();
         this.windowElement.style['z-index'] = this.position.z.raw();
-        this.windowElement.style['width'] = this.size.x.raw();
-        this.windowElement.style['height'] = this.size.y.raw();
+        this.windowElement.style['width'] = this.size.x.cssValue();
+        this.windowElement.style['height'] = this.size.y.cssValue();
     }
 }
 

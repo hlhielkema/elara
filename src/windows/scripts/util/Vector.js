@@ -36,6 +36,10 @@
             throw 'The value does not have the unit: px.';
         }
     }
+
+    self.cssValue = function () {
+        return self.number + self.unit;
+    }
 }
 
 // constructor: Vector2
