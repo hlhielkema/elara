@@ -55,7 +55,34 @@ WindowManager.prototype.getActiveControllerSet = function () {
 
     // Return the selected window set
     return this.windowSetCollection.getSelected();
-}
+};
+
+// Create a new window in the current controller collection with an iframe in it
+WindowManager.prototype.createIFrameWindow = function (source, customOptions) {    
+    // Create the window
+    var controller = this.createWindow(customOptions);
+
+    // Get the content container
+    var content = controller.getContentContainer();
+    
+    // Create the iframe and set its source
+    var iframe = document.createElement('iframe');
+    iframe.src = source;
+
+    // Add the iframe to the content container
+    content.appendChild(iframe);  
+
+    // Use the title of the page as the title of the window
+    iframe.onload = function() {        
+        controller.setTitle(iframe.contentDocument.title);
+    }    
+
+    // Attach the iframe to the controller for easy access
+    controller.iframe = iframe;
+
+    // Return the new window controller
+    return controller;
+};
 
 // Create a new window in the current controller collection
 WindowManager.prototype.createWindow = function (customOptions) {
@@ -119,7 +146,7 @@ WindowManager.prototype.createWindow = function (customOptions) {
 
     // Return the window controller
     return controller;
-}
+};
 
 // Get the suggested docking zone for a cursor position
 WindowManager.prototype.getSuggestedDocking = function (cursorX, cursorY) {

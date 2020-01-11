@@ -160,7 +160,6 @@
   position: absolute;
   left: 0;
   top: 0;
-  background: red;
   height: 100%;
   width: 100%;
   display: none;
@@ -180,4 +179,8 @@
 
 .sys-window.sys-window-disable-close .sys-control-button.close {
   display: none;
+}
+
+.sys-window.sys-window-always-on-top {
+  z-index: 1000;
 }

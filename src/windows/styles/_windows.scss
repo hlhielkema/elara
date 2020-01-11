@@ -162,8 +162,7 @@
     .sys-window-overlay {
         position: absolute;
         left: 0;
-        top: 0;
-        background: red;
+        top: 0;        
         height: 100%;
         width: 100%;
         display: none;
@@ -186,5 +185,6 @@
     }
 
     &.sys-window-always-on-top {
+        z-index: 1000;
     }
 }
