@@ -131,15 +131,15 @@
   border-radius: 50%;
 }
 
-.elara-window.elara-window-focus .sys-control-box .sys-control-button.minimize {
+.elara-window.elara-window-focus .elara-control-box .elara-control-button.minimize {
   background: #EDC528;
 }
 
-.elara-window.elara-window-focus .sys-control-box .sys-control-button.maximize {
+.elara-window.elara-window-focus .elara-control-box .elara-control-button.maximize {
   background: #45DF4B;
 }
 
-.elara-window.elara-window-focus .sys-control-box .sys-control-button.close {
+.elara-window.elara-window-focus .elara-control-box .elara-control-button.close {
   background: #E7494A;
 }
 
