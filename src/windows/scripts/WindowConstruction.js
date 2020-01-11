@@ -13,15 +13,18 @@ function WindowConstruction() {
         // Create the window element
         var window = document.createElement('div');        
         var windowVisible = document.createElement('div');
+        var windowOverlay = document.createElement('div');
 
         // Set the window class
         window.className = 'sys-window';        
         windowVisible.className = 'sys-window-visible';
+        windowOverlay.className = 'sys-window-overlay';
 
         // Combine the elements
         window.appendChild(windowVisible);        
         windowVisible.appendChild(titleBar);
-        windowVisible.appendChild(content);                
+        windowVisible.appendChild(content);     
+        windowVisible.appendChild(windowOverlay);
 
         // Return the created window
         return window;

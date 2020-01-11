@@ -152,6 +152,25 @@
         height: calc(100% - 32px);
         width: 100%;
         cursor: auto;
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .sys-window-overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: red;
+        height: 100%;
+        width: 100%;
+        display: none;
+    }
+
+    &.sys-window-resizing .sys-window-overlay {
+        display: block;
     }
 
     &.sys-window-disable-minimize .sys-control-button.minimize {
