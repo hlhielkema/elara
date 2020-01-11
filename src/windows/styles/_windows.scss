@@ -1,4 +1,4 @@
-﻿.sys-window-container {
+﻿.elara-window-container {
     float: left;
     width: 100%;
     height: calc(100% - 58px);
@@ -29,31 +29,30 @@
     }
 }
 
-.sys-window-container.window-dragging-active {    
+.elara-window-container.window-dragging-active {    
     .window-drag-overlay {
         display: block;        
     }
 }
 
-.sys-window {
+.elara-window {
     position: absolute;
     left: 200px;
     top: 200px;
     min-width: 200px;
-    min-height: 200px;
-    //opacity: 0.95;
+    min-height: 200px;    
     -webkit-transition: width .2s,height .2s,top .2s,left .2s;
     transition: width .2s,height .2s,top .2s,left .2s;
 
-    .sys-window-visible {
+    .elara-window-visible {
         float: left;
         width: 100%;
         height: 100%;
         overflow: hidden;
     }
 
-    &:not(.sys-window-relative) {
-        .sys-window-visible {
+    &:not(.elara-window-relative) {
+        .elara-window-visible {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             border-radius: 4px;
             box-sizing: border-box;
@@ -67,13 +66,13 @@
         border-color: blue;
     }
 
-    &.sys-window-relative {
+    &.elara-window-relative {
         outline: solid 1px rgba(0, 0, 0, 0.2);
         opacity: 1;
     }
 
-    &.sys-window-moving {
-        .sys-window-visible {
+    &.elara-window-moving {
+        .elara-window-visible {
             box-shadow: 0 4px 20px 13px rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
         }
 
@@ -82,8 +81,8 @@
         cursor: -webkit-grabbing;
     }
 
-    &.sys-window-resizing {
-        .sys-window-visible {
+    &.elara-window-resizing {
+        .elara-window-visible {
             box-shadow: 0 4px 20px 13px rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
         }
 
@@ -92,35 +91,35 @@
         cursor: -webkit-grabbing;
     }
 
-    &.sys-window-hidden, &.sys-window-stashed {
+    &.elara-window-hidden, &.elara-window-stashed {
         display: none;
     }
 
-    .sys-title-bar {
+    .elara-title-bar {
         float: left;
         width: 100%;
         height: 32px;
         background: #373737;
         cursor: auto;
 
-        .sys-icon-container {
+        .elara-icon-container {
             float: left;
             margin: 8px;
             color: #fff;
         }
 
-        .sys-title {
+        .elara-title {
             float: left;
             color: #fff;
             padding: 10px 0;
             font-size: 12px;
         }
 
-        .sys-control-box {
+        .elara-control-box {
             float: right;
             margin: 2px 4px;
 
-            .sys-control-button {
+            .elara-control-button {
                 width: 12px;
                 height: 12px;
                 float: left;
@@ -132,7 +131,7 @@
         }
     }
 
-    &.sys-window-focus .sys-control-box .sys-control-button {
+    &.elara-window-focus .sys-control-box .sys-control-button {
         &.minimize {
             background: #EDC528;
         }
@@ -146,7 +145,7 @@
         }
     }
 
-    .sys-window-content {
+    .elara-window-content {
         float: left;
         background: #fff;
         height: calc(100% - 32px);
@@ -159,7 +158,7 @@
         }
     }
 
-    .sys-window-overlay {
+    .elara-window-overlay {
         position: absolute;
         left: 0;
         top: 0;        
@@ -168,23 +167,23 @@
         display: none;
     }
 
-    &.sys-window-resizing .sys-window-overlay {
+    &.elara-window-resizing .elara-window-overlay {
         display: block;
     }
 
-    &.sys-window-disable-minimize .sys-control-button.minimize {
+    &.elara-window-disable-minimize .elara-control-button.minimize {
         display: none;
     }
 
-    &.sys-window-disable-maximize .sys-control-button.maximize {
+    &.elara-window-disable-maximize .elara-control-button.maximize {
         display: none;
     }
 
-    &.sys-window-disable-close .sys-control-button.close {
+    &.elara-window-disable-close .elara-control-button.close {
         display: none;
     }
 
-    &.sys-window-always-on-top {
+    &.elara-window-always-on-top {
         z-index: 1000;
     }
 }

@@ -15,7 +15,7 @@ ElaraToolbar.prototype.bind = function (elementSelector, windowManager) {
     this.toolbarElement.innerHTML = '';
 
     var zonesContainer = document.createElement('div');
-    zonesContainer.classList.add('sys-toolbar-buttons');
+    zonesContainer.classList.add('elara-toolbar-buttons');
     this.toolbarElement.appendChild(zonesContainer);
 }
 
@@ -28,7 +28,7 @@ ElaraToolbar.prototype.addZone = function(zone) {
 
 ElaraToolbar.prototype.renderMenu = function() {    
     // Get the zones container element and clear it
-    var zonesContainer = this.toolbarElement.querySelector('.sys-toolbar-buttons');
+    var zonesContainer = this.toolbarElement.querySelector('.elara-toolbar-buttons');
     zonesContainer.innerHTML = '';
 
     var itemsAfterSeperator = false;
@@ -52,7 +52,7 @@ ElaraToolbar.prototype.renderMenu = function() {
 
 ElaraToolbar.prototype.constructSeperator = function() {
     var seperator = document.createElement('div');
-    seperator.className = 'sys-seperator';
+    seperator.className = 'elara-seperator';
     return seperator;
 }
 
@@ -61,12 +61,12 @@ ElaraToolbar.prototype.constructorDropdownButton = function(dropdownMenu) {
     var button = document.createElement('div');
     var items = document.createElement('div');
 
-    dropdownButton.className = 'sys-dropdown-button';
+    dropdownButton.className = 'elara-dropdown-button';
 
-    button.className = 'sys-button';
+    button.className = 'elara-button';
     button.innerText = dropdownMenu.title;
 
-    items.className = 'sys-dropdown-items';
+    items.className = 'elara-dropdown-items';
 
     var self = this;
     button.addEventListener('click', function () {
@@ -82,7 +82,7 @@ ElaraToolbar.prototype.constructorDropdownButton = function(dropdownMenu) {
 ElaraToolbar.prototype.constructButton = function(button) {
     
     var buttonElement = document.createElement('div');
-    buttonElement.className = 'sys-menu-button';
+    buttonElement.className = 'elara-menu-button';
 
     var self = this;
     buttonElement.addEventListener('click', function () {
@@ -96,13 +96,13 @@ ElaraToolbar.prototype.constructButton = function(button) {
     if (button.icon !== undefined) {
 
         var icon = document.createElement('div');
-        icon.className = 'sys-button-icon-container';
+        icon.className = 'elara-button-icon-container';
         icon.appendChild(svgUtil.createSvgElement(button.icon, 16, 16));
         buttonElement.appendChild(icon);
     }
 
     var label = document.createElement('div');
-    label.className = 'sys-menu-button-label';
+    label.className = 'elara-menu-button-label';
     label.innerText = button.title;
     buttonElement.appendChild(label);            
 
@@ -118,7 +118,7 @@ ElaraToolbar.prototype.open = function(dropdownButton, dropdownMenu) {
         this.close();
 
         dropdownButton.classList.add('opened');
-        var buttons = dropdownButton.querySelector('.sys-dropdown-items');
+        var buttons = dropdownButton.querySelector('.elara-dropdown-items');
         var items = dropdownMenu.items;
         for (var i = 0; i < items.length; i++) {
             var button = this.constructButton(items[i]);
@@ -128,9 +128,9 @@ ElaraToolbar.prototype.open = function(dropdownButton, dropdownMenu) {
 }
 
 ElaraToolbar.prototype.close = function() {
-    var buttons = this.toolbarElement.querySelectorAll('.sys-dropdown-button');
+    var buttons = this.toolbarElement.querySelectorAll('.elara-dropdown-button');
     for (var i = 0; i < buttons.length; i++) {
-        var items = buttons[i].querySelectorAll('.sys-dropdown-items');
+        var items = buttons[i].querySelectorAll('.elara-dropdown-items');
         for (var j = 0; j < items.length; j++) {
             items[j].innerHTML = '';
         }

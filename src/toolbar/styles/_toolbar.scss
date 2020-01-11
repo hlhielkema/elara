@@ -1,14 +1,14 @@
-﻿.sys-toolbar {
+﻿.elara-toolbar {
     background: #313131;
     float: left;
     width: 100%;
     height: 28px;
     position: relative;
 
-    .sys-dropdown-button {
+    .elara-dropdown-button {
         float: left;
 
-        .sys-button {
+        .elara-button {
             float: left;
             height: 28px;
             line-height: 28px;
@@ -23,7 +23,7 @@
             }
         }
 
-        .sys-dropdown-items {
+        .elara-dropdown-items {
             display: none;
             background: #444;
             position: absolute;
@@ -32,7 +32,7 @@
             z-index: 5000;
 
 
-            .sys-menu-button {
+            .elara-menu-button {
                 float: left;
                 height: 28px;
                 width: 100%;
@@ -48,29 +48,29 @@
                     background: #313131;
                 }
 
-                .sys-button-icon-container {
+                .elara-button-icon-container {
                     float: left;
                     padding: 6px 10px 6px 0px;
                 }
 
-                .sys-button-label {
+                .elara-button-label {
                     float: left;
                 }
             }
         }
 
         &.opened {
-            .sys-button {
+            .elara-button {
                 background: #444;
             }
 
-            .sys-dropdown-items {
+            .elara-dropdown-items {
                 display: block;
             }
         }
     }
 
-    .sys-seperator {
+    .elara-seperator {
         float: left;
         background: #464646;
         height: 20px;
@@ -78,7 +78,7 @@
         margin: 4px;
     }
 
-    .sys-toolbar-clock, .sys-machine-name {
+    .elara-toolbar-clock, .elara-machine-name {
         color: #fff;
         float: right;
         padding: 8px;

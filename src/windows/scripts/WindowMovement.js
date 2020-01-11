@@ -6,7 +6,7 @@ function WindowMovement(windowManager) {
     self.onTitlebarGrab = function (e) {
         self.engine.start(e, {
             init: function (session) {
-                session.window = session.target.closest('.sys-window');
+                session.window = session.target.closest('.elara-window');
                 session.controller = windowManager.getController(session.window.getAttribute('data-controller-id'));;
 
                 // Determine the initial position of the window inside its container
@@ -114,7 +114,7 @@ function WindowMovement(windowManager) {
     self.onWindowGrab = function (e) {
         self.engine.start(e, {
             init: function (session) {
-                session.window = session.target.closest('.sys-window');
+                session.window = session.target.closest('.elara-window');
                 session.controller = windowManager.getController(session.window.getAttribute('data-controller-id'));;                                
 
                 // Determine the initial position of the window inside its container
@@ -202,19 +202,19 @@ function WindowMovement(windowManager) {
         // Bind a mouse-down event on title bars of windows
         document.addEventListener('mousedown', function (e) {        
             // Move
-            if (e.target.classList.contains('sys-title-bar') || e.target.classList.contains('sys-title')) {           
+            if (e.target.classList.contains('elara-title-bar') || e.target.classList.contains('elara-title')) {           
                 self.onTitlebarGrab(e);
             }
 
             // Resize
-            else if (e.target.classList.contains('sys-window')) {             
+            else if (e.target.classList.contains('elara-window')) {             
                 self.onWindowGrab(e);                
             }
 
             else {
                 // Try to find a window element in the click event path
                 for (var i = 0; i < e.path.length; i++) {                    
-                    if (e.path[i].classList !== undefined && e.path[i].classList.contains('sys-window')) {                        
+                    if (e.path[i].classList !== undefined && e.path[i].classList.contains('elara-window')) {                        
                         // Get the controller of the window
                         var controller = windowManager.getController(e.path[i].getAttribute('data-controller-id'));
                         if (!controller.state.focus) {
@@ -228,7 +228,7 @@ function WindowMovement(windowManager) {
         });        
 
         document.addEventListener('mousemove', function (e) {
-            if (e.target.classList !== undefined && e.target.classList.contains('sys-window') && !self.engine.hasSession()) {                
+            if (e.target.classList !== undefined && e.target.classList.contains('elara-window') && !self.engine.hasSession()) {                
                 var window = e.target;
                 var windowRect = window.getBoundingClientRect();
                 var onWindowX = e.pageX - windowRect.left;

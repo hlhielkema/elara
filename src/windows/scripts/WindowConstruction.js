@@ -16,9 +16,9 @@ function WindowConstruction() {
         var windowOverlay = document.createElement('div');
 
         // Set the window class
-        window.className = 'sys-window';        
-        windowVisible.className = 'sys-window-visible';
-        windowOverlay.className = 'sys-window-overlay';
+        window.className = 'elara-window';        
+        windowVisible.className = 'elara-window-visible';
+        windowOverlay.className = 'elara-window-overlay';
 
         // Combine the elements
         window.appendChild(windowVisible);        
@@ -38,9 +38,9 @@ function WindowConstruction() {
         var iconContainer = document.createElement('div');        
 
         // Set the classes
-        titleBar.className = 'sys-title-bar';
-        title.className = 'sys-title';
-        iconContainer.className = 'sys-icon-container';        
+        titleBar.className = 'elara-title-bar';
+        title.className = 'elara-title';
+        iconContainer.className = 'elara-icon-container';        
         
         // Create the control box
         controlBox = self.controlbox();
@@ -62,10 +62,10 @@ function WindowConstruction() {
         var controlBox = document.createElement('div');
 
         // Set the classes
-        minimize.className = 'sys-control-button minimize';
-        maximize.className = 'sys-control-button maximize';
-        close.className = 'sys-control-button close';
-        controlBox.className = 'sys-control-box';
+        minimize.className = 'elara-control-button minimize';
+        maximize.className = 'elara-control-button maximize';
+        close.className = 'elara-control-button close';
+        controlBox.className = 'elara-control-box';
         
         // Add the button elements to the control box element
         controlBox.appendChild(minimize);
@@ -82,7 +82,7 @@ function WindowConstruction() {
         var content = document.createElement('div');
 
         // Set the class
-        content.className = 'sys-window-content';
+        content.className = 'elara-window-content';
 
         // Return the content element
         return content;

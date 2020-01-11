@@ -1,4 +1,4 @@
-.sys-toolbar {
+.elara-toolbar {
   background: #313131;
   float: left;
   width: 100%;
@@ -6,11 +6,11 @@
   position: relative;
 }
 
-.sys-toolbar .sys-dropdown-button {
+.elara-toolbar .elara-dropdown-button {
   float: left;
 }
 
-.sys-toolbar .sys-dropdown-button .sys-button {
+.elara-toolbar .elara-dropdown-button .elara-button {
   float: left;
   height: 28px;
   line-height: 28px;
@@ -21,11 +21,11 @@
   letter-spacing: 1px;
 }
 
-.sys-toolbar .sys-dropdown-button .sys-button:hover {
+.elara-toolbar .elara-dropdown-button .elara-button:hover {
   background: #444;
 }
 
-.sys-toolbar .sys-dropdown-button .sys-dropdown-items {
+.elara-toolbar .elara-dropdown-button .elara-dropdown-items {
   display: none;
   background: #444;
   position: absolute;
@@ -34,7 +34,7 @@
   z-index: 5000;
 }
 
-.sys-toolbar .sys-dropdown-button .sys-dropdown-items .sys-menu-button {
+.elara-toolbar .elara-dropdown-button .elara-dropdown-items .elara-menu-button {
   float: left;
   height: 28px;
   width: 100%;
@@ -47,28 +47,28 @@
   letter-spacing: 1px;
 }
 
-.sys-toolbar .sys-dropdown-button .sys-dropdown-items .sys-menu-button:hover {
+.elara-toolbar .elara-dropdown-button .elara-dropdown-items .elara-menu-button:hover {
   background: #313131;
 }
 
-.sys-toolbar .sys-dropdown-button .sys-dropdown-items .sys-menu-button .sys-button-icon-container {
+.elara-toolbar .elara-dropdown-button .elara-dropdown-items .elara-menu-button .elara-button-icon-container {
   float: left;
   padding: 6px 10px 6px 0px;
 }
 
-.sys-toolbar .sys-dropdown-button .sys-dropdown-items .sys-menu-button .sys-button-label {
+.elara-toolbar .elara-dropdown-button .elara-dropdown-items .elara-menu-button .elara-button-label {
   float: left;
 }
 
-.sys-toolbar .sys-dropdown-button.opened .sys-button {
+.elara-toolbar .elara-dropdown-button.opened .elara-button {
   background: #444;
 }
 
-.sys-toolbar .sys-dropdown-button.opened .sys-dropdown-items {
+.elara-toolbar .elara-dropdown-button.opened .elara-dropdown-items {
   display: block;
 }
 
-.sys-toolbar .sys-seperator {
+.elara-toolbar .elara-seperator {
   float: left;
   background: #464646;
   height: 20px;
@@ -76,7 +76,7 @@
   margin: 4px;
 }
 
-.sys-toolbar .sys-toolbar-clock, .sys-toolbar .sys-machine-name {
+.elara-toolbar .elara-toolbar-clock, .elara-toolbar .elara-machine-name {
   color: #fff;
   float: right;
   padding: 8px;

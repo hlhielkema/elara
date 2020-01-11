@@ -1,15 +1,15 @@
-.sys-taskbar {
+.elara-taskbar {
   float: left;
   width: 100%;
   height: 30px;
 }
 
-.sys-taskbar .elara-windows {
+.elara-taskbar .elara-windows {
   float: left;
   height: 30px;
 }
 
-.sys-taskbar .elara-windows .sys-window-button {
+.elara-taskbar .elara-windows .elara-window-button {
   color: #fff;
   float: left;
   height: 28px;
@@ -23,21 +23,21 @@
   cursor: pointer;
 }
 
-.sys-taskbar .elara-windows .sys-window-button:hover {
+.elara-taskbar .elara-windows .elara-window-button:hover {
   background: rgba(255, 255, 255, 0.1);
 }
 
-.sys-taskbar .elara-windows .sys-window-button.window-focus {
+.elara-taskbar .elara-windows .elara-window-button.window-focus {
   border-color: #FF9800;
 }
 
-.sys-taskbar .elara-windows .sys-window-button svg {
+.elara-taskbar .elara-windows .elara-window-button svg {
   float: left;
   color: #fff;
   margin: 4px 8px 4px 0px;
 }
 
-.sys-taskbar .elara-windows .sys-window-button span {
+.elara-taskbar .elara-windows .elara-window-button span {
   float: left;
   width: 102px;
   white-space: nowrap;
@@ -45,12 +45,12 @@
   text-overflow: ellipsis;
 }
 
-.sys-taskbar .elara-window-sets {
+.elara-taskbar .elara-window-sets {
   float: right;
   height: 30px;
 }
 
-.sys-taskbar .elara-window-sets .window-set {
+.elara-taskbar .elara-window-sets .window-set {
   float: left;
   background: #242424;
   height: 26px;
@@ -65,11 +65,11 @@
   line-height: 26px;
 }
 
-.sys-taskbar .elara-window-sets .window-set:not(.active) {
+.elara-taskbar .elara-window-sets .window-set:not(.active) {
   cursor: pointer;
 }
 
-.sys-taskbar .elara-window-sets .window-set.active {
+.elara-taskbar .elara-window-sets .window-set.active {
   background: #313131;
   color: #999;
 }

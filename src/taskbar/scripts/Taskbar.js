@@ -68,7 +68,7 @@ Taskbar.prototype.update = function() {
         var label = document.createElement('span');
 
         // Set the button class
-        button.className = 'sys-window-button';
+        button.className = 'elara-window-button';
 
         // Set the text of the window title label
         label.innerText = controller.getTitle();

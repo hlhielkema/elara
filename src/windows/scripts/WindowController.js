@@ -66,16 +66,16 @@ WindowController.prototype.applyState = function () {
     }
 
     if (this.windowElement !== null) {        
-        applySingleState('hidden', 'sys-window-hidden', false);
-        applySingleState('relative', 'sys-window-relative', false);
-        applySingleState('moving', 'sys-window-moving', false);
-        applySingleState('resizing', 'sys-window-resizing', false);
-        applySingleState('focus', 'sys-window-focus', false);
-        applySingleState('stashed', 'sys-window-stashed', false);
-        applySingleState('allowMinimize', 'sys-window-disable-minimize', true);
-        applySingleState('allowMaximize', 'sys-window-disable-maximize', true);
-        applySingleState('allowClose', 'sys-window-disable-close', true);
-        applySingleState('alwaysOnTop', 'sys-window-always-on-top', false);
+        applySingleState('hidden', 'elara-window-hidden', false);
+        applySingleState('relative', 'elara-window-relative', false);
+        applySingleState('moving', 'elara-window-moving', false);
+        applySingleState('resizing', 'elara-window-resizing', false);
+        applySingleState('focus', 'elara-window-focus', false);
+        applySingleState('stashed', 'elara-window-stashed', false);
+        applySingleState('allowMinimize', 'elara-window-disable-minimize', true);
+        applySingleState('allowMaximize', 'elara-window-disable-maximize', true);
+        applySingleState('allowClose', 'elara-window-disable-close', true);
+        applySingleState('alwaysOnTop', 'elara-window-always-on-top', false);
     }
 }
 
@@ -112,7 +112,7 @@ WindowController.prototype.minimize = function () {
 // Set the title of the window
 WindowController.prototype.setTitle = function (title) {
     this.title = title;
-    this.windowElement.querySelector('.sys-title').innerText = title;
+    this.windowElement.querySelector('.elara-title').innerText = title;
 };
 
 // Get the title of the window
@@ -122,7 +122,7 @@ WindowController.prototype.getTitle = function () {
 
 // Get the content container element of the window
 WindowController.prototype.getContentContainer = function () {
-    return this.windowElement.querySelector('.sys-window-content');
+    return this.windowElement.querySelector('.elara-window-content');
 }
 
 // Toggle if the window is maximized
@@ -150,10 +150,10 @@ WindowController.prototype.getWindow = function () {
 WindowController.prototype.bindWindowElement = function (window) {    
     // Add the click event listeners
     var controller = this;
-    window.querySelector('.sys-control-button.minimize').addEventListener('click', function () { controller.minimize() });
-    window.querySelector('.sys-control-button.maximize').addEventListener('click', function () { controller.maximize() });
-    window.querySelector('.sys-control-button.close').addEventListener('click', function () { controller.close() });
-    window.querySelector('.sys-title-bar').addEventListener('dblclick', function () { controller.toggleMaximize() });
+    window.querySelector('.elara-control-button.minimize').addEventListener('click', function () { controller.minimize() });
+    window.querySelector('.elara-control-button.maximize').addEventListener('click', function () { controller.maximize() });
+    window.querySelector('.elara-control-button.close').addEventListener('click', function () { controller.close() });
+    window.querySelector('.elara-title-bar').addEventListener('dblclick', function () { controller.toggleMaximize() });
 
     // Add the controller id to the window div
     window.setAttribute('data-controller-id', this.getId());
@@ -189,7 +189,7 @@ WindowController.prototype.setIcon = function (icon) {
     if (this.icon !== icon) {
         this.icon = icon;
 
-        var iconContainer = this.windowElement.querySelector('.sys-icon-container');
+        var iconContainer = this.windowElement.querySelector('.elara-icon-container');
         iconContainer.innerHTML = '';
         iconContainer.appendChild(svgUtil.createSvgElement(this.icon, 16, 16))
     }
@@ -238,7 +238,7 @@ WindowController.prototype.restoreNonRelativeDimensions = function () {
 
 // Get if the window is focussed
 WindowController.prototype.hasFocus = function () {
-    return this.windowElement.classList.contains('sys-window-focus');
+    return this.windowElement.classList.contains('elara-window-focus');
 }
 
 // Focus the window

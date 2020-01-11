@@ -1,4 +1,4 @@
-.sys-window-container {
+.elara-window-container {
   float: left;
   width: 100%;
   height: calc(100% - 58px);
@@ -6,7 +6,7 @@
   position: relative;
 }
 
-.sys-window-container .window-drag-overlay {
+.elara-window-container .window-drag-overlay {
   position: relative;
   display: none;
   width: 100%;
@@ -17,11 +17,11 @@
   top: 0;
 }
 
-.sys-window-container .window-drag-overlay .dock-preview {
+.elara-window-container .window-drag-overlay .dock-preview {
   position: absolute;
 }
 
-.sys-window-container .window-drag-overlay .dock-preview div {
+.elara-window-container .window-drag-overlay .dock-preview div {
   content: ' ';
   margin: 10px;
   width: calc(100% - 20px);
@@ -30,11 +30,11 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-.sys-window-container.window-dragging-active .window-drag-overlay {
+.elara-window-container.window-dragging-active .window-drag-overlay {
   display: block;
 }
 
-.sys-window {
+.elara-window {
   position: absolute;
   left: 200px;
   top: 200px;
@@ -44,58 +44,58 @@
   transition: width .2s,height .2s,top .2s,left .2s;
 }
 
-.sys-window .sys-window-visible {
+.elara-window .elara-window-visible {
   float: left;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
-.sys-window:not(.sys-window-relative) {
+.elara-window:not(.elara-window-relative) {
   cursor: nw-resize;
   padding: 8px;
 }
 
-.sys-window:not(.sys-window-relative) .sys-window-visible {
+.elara-window:not(.elara-window-relative) .elara-window-visible {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-.sys-window:hover {
+.elara-window:hover {
   border-color: blue;
 }
 
-.sys-window.sys-window-relative {
+.elara-window.elara-window-relative {
   outline: solid 1px rgba(0, 0, 0, 0.2);
   opacity: 1;
 }
 
-.sys-window.sys-window-moving {
+.elara-window.elara-window-moving {
   -webkit-transition: none;
   transition: none;
   cursor: -webkit-grabbing;
 }
 
-.sys-window.sys-window-moving .sys-window-visible {
+.elara-window.elara-window-moving .elara-window-visible {
   box-shadow: 0 4px 20px 13px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.sys-window.sys-window-resizing {
+.elara-window.elara-window-resizing {
   -webkit-transition: none;
   transition: none;
   cursor: -webkit-grabbing;
 }
 
-.sys-window.sys-window-resizing .sys-window-visible {
+.elara-window.elara-window-resizing .elara-window-visible {
   box-shadow: 0 4px 20px 13px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.sys-window.sys-window-hidden, .sys-window.sys-window-stashed {
+.elara-window.elara-window-hidden, .elara-window.elara-window-stashed {
   display: none;
 }
 
-.sys-window .sys-title-bar {
+.elara-window .elara-title-bar {
   float: left;
   width: 100%;
   height: 32px;
@@ -103,25 +103,25 @@
   cursor: auto;
 }
 
-.sys-window .sys-title-bar .sys-icon-container {
+.elara-window .elara-title-bar .elara-icon-container {
   float: left;
   margin: 8px;
   color: #fff;
 }
 
-.sys-window .sys-title-bar .sys-title {
+.elara-window .elara-title-bar .elara-title {
   float: left;
   color: #fff;
   padding: 10px 0;
   font-size: 12px;
 }
 
-.sys-window .sys-title-bar .sys-control-box {
+.elara-window .elara-title-bar .elara-control-box {
   float: right;
   margin: 2px 4px;
 }
 
-.sys-window .sys-title-bar .sys-control-box .sys-control-button {
+.elara-window .elara-title-bar .elara-control-box .elara-control-button {
   width: 12px;
   height: 12px;
   float: left;
@@ -131,19 +131,19 @@
   border-radius: 50%;
 }
 
-.sys-window.sys-window-focus .sys-control-box .sys-control-button.minimize {
+.elara-window.elara-window-focus .sys-control-box .sys-control-button.minimize {
   background: #EDC528;
 }
 
-.sys-window.sys-window-focus .sys-control-box .sys-control-button.maximize {
+.elara-window.elara-window-focus .sys-control-box .sys-control-button.maximize {
   background: #45DF4B;
 }
 
-.sys-window.sys-window-focus .sys-control-box .sys-control-button.close {
+.elara-window.elara-window-focus .sys-control-box .sys-control-button.close {
   background: #E7494A;
 }
 
-.sys-window .sys-window-content {
+.elara-window .elara-window-content {
   float: left;
   background: #fff;
   height: calc(100% - 32px);
@@ -151,12 +151,12 @@
   cursor: auto;
 }
 
-.sys-window .sys-window-content iframe {
+.elara-window .elara-window-content iframe {
   width: 100%;
   height: 100%;
 }
 
-.sys-window .sys-window-overlay {
+.elara-window .elara-window-overlay {
   position: absolute;
   left: 0;
   top: 0;
@@ -165,22 +165,22 @@
   display: none;
 }
 
-.sys-window.sys-window-resizing .sys-window-overlay {
+.elara-window.elara-window-resizing .elara-window-overlay {
   display: block;
 }
 
-.sys-window.sys-window-disable-minimize .sys-control-button.minimize {
+.elara-window.elara-window-disable-minimize .elara-control-button.minimize {
   display: none;
 }
 
-.sys-window.sys-window-disable-maximize .sys-control-button.maximize {
+.elara-window.elara-window-disable-maximize .elara-control-button.maximize {
   display: none;
 }
 
-.sys-window.sys-window-disable-close .sys-control-button.close {
+.elara-window.elara-window-disable-close .elara-control-button.close {
   display: none;
 }
 
-.sys-window.sys-window-always-on-top {
+.elara-window.elara-window-always-on-top {
   z-index: 1000;
 }
