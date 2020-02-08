@@ -27,8 +27,6 @@ var ELARA_WINDOW_LAYOUTS = [
     }
 ];
 
-
-
 function initLauncherZone(toolbar, windows) {
     var launcherZone = new ElaraToolbarZone('launcher');
     toolbar.addZone(launcherZone);
@@ -37,34 +35,26 @@ function initLauncherZone(toolbar, windows) {
         var items = [];
 
         items.push({
-            'title': 'Open example window 1',
+            'title': 'Open welcome window',
             'icon': 'img/feather/hard-drive.svg',
             'click': function () {
-                startFrame(windows, '/window_1.html');
+                startFrame(windows, '/welcome/index.html', 'Welcome');
             }
         });
 
         items.push({
-            'title': 'Open example window 2',
+            'title': 'Layers.js page',
             'icon': 'img/feather/hard-drive.svg',
             'click': function () {
-                startFrame(windows, '/window_2.html');
+                startFrame(windows, 'https://hlhielkema.github.io/layers.js/', 'Layers.js');
             }
-        });
+        });        
 
         items.push({
-            'title': 'Open example window 3',
+            'title': 'Open external site (Wikipedia)',
             'icon': 'img/feather/hard-drive.svg',
             'click': function () {
-                startFrame(windows, '/window_3.html');
-            }
-        });
-
-        items.push({
-            'title': 'Open external site',
-            'icon': 'img/feather/hard-drive.svg',
-            'click': function () {
-                startFrame(windows, 'https://wikipedia.com');
+                startFrame(windows, 'https://wikipedia.com', 'Wikipedia.com');
             }
         });
   
@@ -131,10 +121,10 @@ function initSystemZone(toolbar, windows)
     });
 }
 
-function startFrame(windows, source) {
+function startFrame(windows, source, title) {
     var controller = windows.createIFrameWindow(source,
         {
-            title: 'Application',
+            title: title,
             size: {
                 width: 1400,
                 height: 800
@@ -143,25 +133,20 @@ function startFrame(windows, source) {
         }
     );
 
-    window.debugcontroller = controller;
-
     controller.iframe.onload = function() {
-        // Set the title
-        controller.setTitle(controller.iframe.contentDocument.title);
+        if (controller.iframe.contentDocument !== null) {
+            // Set the title
+            controller.setTitle(controller.iframe.contentDocument.title);
 
-        // Try to read the desired icon from the meta element
-        var iconMetaElement = controller.iframe.contentDocument.head.querySelector('meta[name=elara-icon]');
-        if (iconMetaElement !== null) {
-            var icon = iconMetaElement.content;        
-            controller.setIcon(icon);
+            // Try to read the desired icon from the meta element
+            var iconMetaElement = controller.iframe.contentDocument.head.querySelector('meta[name=elara-icon]');
+            if (iconMetaElement !== null) {
+                var icon = iconMetaElement.content;        
+                controller.setIcon(icon);
+            }
         }
     }    
 
-    controller.getMenuItems = function () {
-        return [
-
-        ];
-    };
     controller.focus();
 }
 
@@ -196,7 +181,7 @@ function startElaraDemo()
 
     toolbar.renderMenu(); // temp fix
 
-    startFrame(windows, '/window_1.html');
+    startFrame(windows, '/welcome/index.html', 'Welcome');
 }
 
 startElaraDemo();
