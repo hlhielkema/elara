@@ -1,4 +1,7 @@
-﻿// constructor: WindowSet
+﻿import WindowManagerEvent from "./util/WindowManagerEvent.js";
+import { ComplexValue } from "./util/Vector.js"
+
+// constructor: WindowSet
 function WindowSet() {
     this.controllers = []; // ordered by z-index
     this.orderedControllers = []; // ordered by add order
@@ -219,3 +222,5 @@ WindowSet.prototype.split = function () {
         }
     }
 };
+
+export default WindowSet;

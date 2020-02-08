@@ -56,3 +56,5 @@ function Vector3(x, y, z) {
     self.y = y;
     self.z = z;
 }
+
+export { ComplexValue, Vector2, Vector3 };

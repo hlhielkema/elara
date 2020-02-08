@@ -1,3 +1,5 @@
+import svgUtil from "./util/SvgUtil.js";
+
 // constructor: Taskbar
 function Taskbar() {
     // Taskbar DIV element    
@@ -141,3 +143,5 @@ Taskbar.prototype.updateSetButton = function() {
         windowSets.appendChild(button);        
     }
 }
+
+export default Taskbar;

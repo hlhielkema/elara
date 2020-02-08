@@ -24,3 +24,5 @@ WindowManagerEvent.prototype.invoke = function (eventData) {
         this.subscribers[i](this.owner, eventData);
     }
 }
+
+export default WindowManagerEvent;

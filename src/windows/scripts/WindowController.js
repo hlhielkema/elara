@@ -1,4 +1,9 @@
-﻿// constructor: WindowController
+﻿import { Vector2, Vector3, ComplexValue } from './util/Vector.js';
+import WindowManagerEvent from "./util/WindowManagerEvent.js";
+import WINDOW_SNAP_AREAS from "./configuration/WINDOW_SNAP_AREAS.js"
+import svgUtil from "./util/SvgUtil.js";
+
+// constructor: WindowController
 function WindowController(id) {        
     this.id = id;    
     this.nonRelativeDimensions = null;
@@ -346,3 +351,5 @@ WindowController.prototype.setAlwaysOnTop = function(alwaysOnTop) {
         this.applyState();
     }
 }
+
+export default WindowController;

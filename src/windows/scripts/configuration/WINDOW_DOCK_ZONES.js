@@ -58,3 +58,5 @@ var WINDOW_DOCK_ZONES = [
         name: 'bottom'
     }
 ];
+
+export default WINDOW_DOCK_ZONES;

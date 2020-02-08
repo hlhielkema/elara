@@ -1,4 +1,11 @@
-﻿// constructor: WindowManager
+﻿import WindowSetCollection from "./WindowSetCollection.js";
+import WindowMovement from "./WindowMovement.js";
+import WindowConstruction from "./WindowConstruction.js";
+import WindowController from "./WindowController.js";
+import WINDOW_DOCK_ZONES from "./configuration/WINDOW_DOCK_ZONES.js";
+import WINDOW_SNAP_AREAS from "./configuration/WINDOW_SNAP_AREAS.js"
+
+// constructor: WindowManager
 function WindowManager() {
     // Windows container element
     this.windowContainer = null;   
@@ -209,3 +216,5 @@ WindowManager.prototype.renderSuggestedDocking = function (cursorX, cursorY) {
         }
     }
 }; 
+
+export default WindowManager;

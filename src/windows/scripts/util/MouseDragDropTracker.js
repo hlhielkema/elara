@@ -85,3 +85,5 @@ function MouseDragDropTracker() {
         self.session = null;
     };    
 }
+
+export default MouseDragDropTracker;

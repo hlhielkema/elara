@@ -55,3 +55,5 @@ var WINDOW_SNAP_AREAS = {
         'height': '50%',
     }
 };
+
+export default WINDOW_SNAP_AREAS;

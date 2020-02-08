@@ -25,6 +25,12 @@ namespace ElaraDemo
 
             app.UseStaticFiles(new StaticFileOptions()
             {
+                RequestPath = "/dist",
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\dist")),
+            });
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\shared")),
             });
 

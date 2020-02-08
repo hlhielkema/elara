@@ -1,4 +1,5 @@
-﻿
+﻿import MouseDragDropTracker from "./util/MouseDragDropTracker.js"
+
 function WindowMovement(windowManager) {
     var self = this;
     self.engine = new MouseDragDropTracker();
@@ -239,3 +240,5 @@ function WindowMovement(windowManager) {
         });
     };    
 }
+
+export default WindowMovement;

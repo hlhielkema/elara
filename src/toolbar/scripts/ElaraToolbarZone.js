@@ -21,3 +21,5 @@ ElaraToolbarZone.prototype.getMenus = function() {
 ElaraToolbarZone.prototype.setDataSource = function(dataSource) {
     this.dataSource = dataSource;
 }
+
+export default ElaraToolbarZone;

@@ -21,3 +21,5 @@ function Rectangle(x, y, width, height) {
                vector.y <= self.bottom()
     }
 }
+
+export default Rectangle;

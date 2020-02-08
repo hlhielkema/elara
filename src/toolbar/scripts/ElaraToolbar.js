@@ -1,3 +1,5 @@
+import svgUtil from "./util/SvgUtil.js";
+
 // constructor: ElaraToolbar
 function ElaraToolbar() {
     // Elements
@@ -141,3 +143,5 @@ ElaraToolbar.prototype.close = function() {
 ElaraToolbar.prototype.renderTray = function() {
     // TODO
 }
+
+export default ElaraToolbar;

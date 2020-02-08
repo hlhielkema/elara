@@ -43,7 +43,7 @@ function WindowConstruction() {
         iconContainer.className = 'elara-icon-container';        
         
         // Create the control box
-        controlBox = self.controlbox();
+        var controlBox = self.controlbox();
 
         // Combine the element
         titleBar.appendChild(iconContainer);
@@ -88,3 +88,5 @@ function WindowConstruction() {
         return content;
     };
 }
+
+export default WindowConstruction;

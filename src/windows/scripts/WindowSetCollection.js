@@ -1,4 +1,7 @@
-﻿// constructor: WindowSetCollection
+﻿import WindowManagerEvent from "./util/WindowManagerEvent.js";
+import WindowSet from "./WindowSet.js";
+
+// constructor: WindowSetCollection
 function WindowSetCollection() {
     this.sets = [];
     this.selected = null;
@@ -51,3 +54,5 @@ WindowSetCollection.prototype.selectAt = function (index) {
 WindowSetCollection.prototype.count = function () {
     return this.sets.length;
 }
+
+export default WindowSetCollection;
