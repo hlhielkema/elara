@@ -38,7 +38,7 @@ function initLauncherZone(toolbar, windows) {
             'title': 'Open welcome window',
             'icon': 'img/feather/hard-drive.svg',
             'click': function () {
-                startFrame(windows, '/welcome/index.html', 'Welcome');
+                startFrame(windows, 'welcome/index.html', 'Welcome');
             }
         });
 
@@ -129,7 +129,7 @@ function startFrame(windows, source, title) {
                 width: 1400,
                 height: 800
             },
-            icon: '/img/feather/circle.svg'
+            icon: 'img/feather/circle.svg'
         }
     );
 
@@ -181,7 +181,7 @@ function startElaraDemo()
 
     toolbar.renderMenu(); // temp fix
 
-    startFrame(windows, '/welcome/index.html', 'Welcome');
+    startFrame(windows, 'welcome/index.html', 'Welcome');
 }
 
 startElaraDemo();
