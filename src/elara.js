@@ -8,7 +8,7 @@ window.Taskbar = Taskbar;
 window.ElaraToolbar = ElaraToolbar;
 window.ElaraToolbarZone = ElaraToolbarZone;
 
-import "./util/_reset.css";
-import "./windows/styles/_windows.css";
-import "./toolbar/styles/_toolbar.css";
-import "./taskbar/styles/_taskbar.css";
+import "./util/_reset.min.css";
+import "./windows/styles/_windows.min.css";
+import "./toolbar/styles/_toolbar.min.css";
+import "./taskbar/styles/_taskbar.min.css";
