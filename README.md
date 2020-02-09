@@ -7,6 +7,8 @@ The Elara Window Manager
 
 ## Build
 
+https://nodejs.org/en/
+
 ```
 npm run build
 ```

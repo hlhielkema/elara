@@ -25,9 +25,7 @@ WindowSetCollection.prototype.add = function () {
     this.sets.push(set);
 
     // Invoke the added event
-    this.events.added.invoke(set);   
-    
-    
+    this.events.added.invoke(set);      
 }
 
 WindowSetCollection.prototype.select = function (set) {

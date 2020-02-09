@@ -1,17 +1,18 @@
 import svgUtil from "./util/SvgUtil.js";
+import ToolbarZone from "./ToolbarZone.js";
 
-// constructor: ElaraToolbar
-function ElaraToolbar() {
+// constructor: Toolbar
+function Toolbar() {
     // Elements
     this.toolbarElement = null;
 
     // Items
-    this.zones = []; // ElaraToolbarZone
+    this.zones = []; // ToolbarZone
     this.tray = [];
 }
 
 // Bind to an element and initialize
-ElaraToolbar.prototype.bind = function (elementSelector, windowManager) {
+Toolbar.prototype.bind = function (elementSelector, windowManager) {
     // Query for the taskbar element and clear it
     this.toolbarElement = document.querySelector(elementSelector);    
     this.toolbarElement.innerHTML = '';
@@ -22,13 +23,14 @@ ElaraToolbar.prototype.bind = function (elementSelector, windowManager) {
 }
 
 // Add a toolbar zone.
-// zone should have type ElaraToolbarZone
-ElaraToolbar.prototype.addZone = function(zone) {
+Toolbar.prototype.addZone = function(name) {
+    var zone = new ToolbarZone(name);
     this.zones.push(zone);
     this.renderMenu();
+    return zone;
 }
 
-ElaraToolbar.prototype.renderMenu = function() {    
+Toolbar.prototype.renderMenu = function() {    
     // Get the zones container element and clear it
     var zonesContainer = this.toolbarElement.querySelector('.elara-toolbar-buttons');
     zonesContainer.innerHTML = '';
@@ -52,13 +54,13 @@ ElaraToolbar.prototype.renderMenu = function() {
     }
 }
 
-ElaraToolbar.prototype.constructSeperator = function() {
+Toolbar.prototype.constructSeperator = function() {
     var seperator = document.createElement('div');
     seperator.className = 'elara-seperator';
     return seperator;
 }
 
-ElaraToolbar.prototype.constructorDropdownButton = function(dropdownMenu) {
+Toolbar.prototype.constructorDropdownButton = function(dropdownMenu) {
     var dropdownButton = document.createElement('div');
     var button = document.createElement('div');
     var items = document.createElement('div');
@@ -81,7 +83,7 @@ ElaraToolbar.prototype.constructorDropdownButton = function(dropdownMenu) {
     return dropdownButton;          
 }
 
-ElaraToolbar.prototype.constructButton = function(button) {
+Toolbar.prototype.constructButton = function(button) {
     
     var buttonElement = document.createElement('div');
     buttonElement.className = 'elara-menu-button';
@@ -111,7 +113,7 @@ ElaraToolbar.prototype.constructButton = function(button) {
     return buttonElement;    
 }
 
-ElaraToolbar.prototype.open = function(dropdownButton, dropdownMenu) {
+Toolbar.prototype.open = function(dropdownButton, dropdownMenu) {
     if (dropdownButton.classList.contains('opened')) {
         dropdownButton.classList.remove('opened');
     }
@@ -129,7 +131,7 @@ ElaraToolbar.prototype.open = function(dropdownButton, dropdownMenu) {
     }
 }
 
-ElaraToolbar.prototype.close = function() {
+Toolbar.prototype.close = function() {
     var buttons = this.toolbarElement.querySelectorAll('.elara-dropdown-button');
     for (var i = 0; i < buttons.length; i++) {
         var items = buttons[i].querySelectorAll('.elara-dropdown-items');
@@ -140,8 +142,8 @@ ElaraToolbar.prototype.close = function() {
     }      
 }
 
-ElaraToolbar.prototype.renderTray = function() {
+Toolbar.prototype.renderTray = function() {
     // TODO
 }
 
-export default ElaraToolbar;
+export default Toolbar;

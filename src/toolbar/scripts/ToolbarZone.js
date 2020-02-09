@@ -1,10 +1,10 @@
-// constructor: ElaraToolbarZone
-function ElaraToolbarZone(name) {
+// constructor: ToolbarZone
+function ToolbarZone(name) {
     this.name = name;
     this.dataSource = null;
 }
 
-ElaraToolbarZone.prototype.getMenus = function() {
+ToolbarZone.prototype.getMenus = function() {
     if (this.dataSource === null) {
         return [
             {
@@ -18,8 +18,8 @@ ElaraToolbarZone.prototype.getMenus = function() {
     }
 };
 
-ElaraToolbarZone.prototype.setDataSource = function(dataSource) {
+ToolbarZone.prototype.setDataSource = function(dataSource) {
     this.dataSource = dataSource;
 }
 
-export default ElaraToolbarZone;
+export default ToolbarZone;

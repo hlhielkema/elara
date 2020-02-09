@@ -27,9 +27,8 @@ var ELARA_WINDOW_LAYOUTS = [
     }
 ];
 
-function initLauncherZone(toolbar, windows) {
-    var launcherZone = new ElaraToolbarZone('launcher');
-    toolbar.addZone(launcherZone);
+function initLauncherZone(toolbar, windows) {    
+    var launcherZone = toolbar.addZone('launcher');
 
     launcherZone.setDataSource(function () {
         var items = [];
@@ -69,8 +68,7 @@ function initLauncherZone(toolbar, windows) {
 
 function initSystemZone(toolbar, windows)
 {
-    var systemZone = new ElaraToolbarZone('system');
-    toolbar.addZone(systemZone);
+    var systemZone = toolbar.addZone('system');    
     
     systemZone.setDataSource(function () {
         function createLayoutFn(name) {
@@ -152,13 +150,16 @@ function startFrame(windows, source, title) {
 
 function startElaraDemo()
 {
-    var windows = new WindowManager();
-    var taskbar = new Taskbar();
-    var toolbar = new ElaraToolbar();
+    // Create the window, taskbar and toolbar managers
+    var windows = new Elara.WindowManager();
+    var taskbar = new Elara.Taskbar();
+    var toolbar = new Elara.Toolbar();
 
+    // Bind the managers to the HTML elements
     windows.bind('.elara-window-container');
     taskbar.bind('.elara-taskbar', windows);
     toolbar.bind('.elara-toolbar', windows);
+
 
     windows.windowSetCollection.events.selectedChanged.subscribe(function () {
         toolbar.renderMenu();
