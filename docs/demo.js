@@ -27,9 +27,8 @@ var ELARA_WINDOW_LAYOUTS = [
     }
 ];
 
-function initLauncherZone(toolbar, windows) {
-    var launcherZone = new ElaraToolbarZone('launcher');
-    toolbar.addZone(launcherZone);
+function initLauncherZone(toolbar, windows) {    
+    var launcherZone = toolbar.addZone('launcher');
 
     launcherZone.setDataSource(function () {
         var items = [];
@@ -51,12 +50,36 @@ function initLauncherZone(toolbar, windows) {
         });        
 
         items.push({
+            'title': 'Domotica dashboard (concept)',
+            'icon': 'img/feather/hard-drive.svg',
+            'click': function () {
+                startFrame(windows, 'https://hlhielkema.github.io/domotica_dashboard_concept/', 'Dashboard (concept)');
+            }
+        });        
+
+        items.push({
+            'title': 'Open PowerShell (fake)',
+            'icon': 'img/feather/hard-drive.svg',
+            'click': function () {
+                startFrame(windows, 'powershell_cli/index.html', 'PowerShell');
+            }
+        });        
+
+        items.push({
+            'title': 'Picture viewer',
+            'icon': 'img/feather/hard-drive.svg',
+            'click': function () {
+                startFrame(windows, 'picture_viewer/index.html', 'Pictures');
+            }
+        });    
+
+        items.push({
             'title': 'Open external site (Wikipedia)',
             'icon': 'img/feather/hard-drive.svg',
             'click': function () {
                 startFrame(windows, 'https://wikipedia.com', 'Wikipedia.com');
             }
-        });
+        });        
   
         return [
             {
@@ -69,8 +92,7 @@ function initLauncherZone(toolbar, windows) {
 
 function initSystemZone(toolbar, windows)
 {
-    var systemZone = new ElaraToolbarZone('system');
-    toolbar.addZone(systemZone);
+    var systemZone = toolbar.addZone('system');    
     
     systemZone.setDataSource(function () {
         function createLayoutFn(name) {
@@ -152,35 +174,29 @@ function startFrame(windows, source, title) {
 
 function startElaraDemo()
 {
-    var windows = new WindowManager();
-    var taskbar = new Taskbar();
-    var toolbar = new ElaraToolbar();
+    // Create the window, taskbar and toolbar managers
+    var windows = new Elara.WindowManager();
+    var taskbar = new Elara.Taskbar();
+    var toolbar = new Elara.Toolbar();
 
+    // Bind the managers to the HTML elements
     windows.bind('.elara-window-container');
     taskbar.bind('.elara-taskbar', windows);
     toolbar.bind('.elara-toolbar', windows);
 
-    windows.windowSetCollection.events.selectedChanged.subscribe(function () {
-        toolbar.renderMenu();
-    });
-    windows.windowSetCollection.events.added.subscribe(function (owner, set) {
-        set.events.focusChanged.subscribe(function () {
-            toolbar.renderMenu();
-        });
-        set.events.changed.subscribe(function () {
-            toolbar.renderMenu();
-        });
-    });
-
-    windows.getActiveControllerSet(); // temp fix    
+    // Add the second and third workspace
     windows.windowSetCollection.add();
     windows.windowSetCollection.add();
     
+    // Initialize the menu's of the toolbar
     initLauncherZone(toolbar, windows);
     initSystemZone(toolbar, windows);
 
-    toolbar.renderMenu(); // temp fix
+    // Render the toolbar
+    // TODO: render menu when the zones changed. also support SuspendLayout/ResumeLayout.
+    toolbar.renderMenu();
 
+    // Show the welcome page in a window
     startFrame(windows, 'welcome/index.html', 'Welcome');
 }
 

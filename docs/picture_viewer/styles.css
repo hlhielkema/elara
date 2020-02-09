@@ -1,0 +1,38 @@
+html, body {    
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+img.content {
+    float: left;
+    width: 100%;
+    height: calc(100% - 52px);
+}
+
+.controls {
+    float: left;
+    width: 100%;
+    height: 52px;
+    background: #373737;
+}
+
+.controls img.button {
+    float: left;
+    background: #ccc;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.controls img.button:hover {
+    background: #999;
+}
+
+.controls img.button.next {
+    float: right;
+}
