@@ -48,6 +48,15 @@ Taskbar.prototype.bind = function (elementSelector, windowManager) {
         set.events.focusChanged.unsubscribe(changeHandler);    
         set.events.changed.unsubscribe(changeHandler);
     });
+    
+    // Bind to the sets that are already in the collection
+    for (var i = 0; i < this.windowManager.windowSetCollection.count(); i++) {
+        var set = this.windowManager.windowSetCollection.getAt(i);
+        
+        // Subcribe to focus changes of the window set
+        set.events.focusChanged.subscribe(changeHandler);    
+        set.events.changed.subscribe(changeHandler);
+    }
 }
 
 // Update the buttons of the taskbar

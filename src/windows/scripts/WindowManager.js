@@ -13,6 +13,10 @@ function WindowManager() {
     // Window set collection
     this.windowSetCollection = new WindowSetCollection();
 
+    // Add the first window set
+    this.windowSetCollection.add();
+    this.windowSetCollection.selectAt(0);
+
     // Systems
     this.dragging = new WindowMovement(this);
     this.construct = new WindowConstruction();    
@@ -54,12 +58,6 @@ WindowManager.prototype.getController = function (controllerId) {
 
 // Get the active controller set
 WindowManager.prototype.getActiveControllerSet = function () {
-    // Create the first window set if not set exists
-    if (this.windowSetCollection.count() === 0) {        
-        this.windowSetCollection.add();
-        this.windowSetCollection.selectAt(0);
-    }
-
     // Return the selected window set
     return this.windowSetCollection.getSelected();
 };
