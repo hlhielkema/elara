@@ -66,6 +66,14 @@ function initLauncherZone(toolbar, windows) {
         });        
 
         items.push({
+            'title': 'Picture viewer',
+            'icon': 'img/feather/hard-drive.svg',
+            'click': function () {
+                startFrame(windows, 'picture_viewer/index.html', 'Pictures');
+            }
+        });    
+
+        items.push({
             'title': 'Open external site (Wikipedia)',
             'icon': 'img/feather/hard-drive.svg',
             'click': function () {
