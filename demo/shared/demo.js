@@ -34,50 +34,50 @@ function initLauncherZone(toolbar, windows) {
         var items = [];
 
         items.push({
-            'title': 'Open welcome window',
-            'icon': 'img/feather/hard-drive.svg',
-            'click': function () {
-                startFrame(windows, 'welcome/index.html', 'Welcome');
+            'title': 'Welcome',
+            'icon': 'img/feather/triangle.svg',
+            'click': function () {                
+                openWelcome();
             }
         });
 
         items.push({
-            'title': 'Layers.js page',
-            'icon': 'img/feather/hard-drive.svg',
+            'title': 'Layers.js',
+            'icon': 'img/feather/layers.svg',
             'click': function () {
-                startFrame(windows, 'https://hlhielkema.github.io/layers.js/', 'Layers.js');
+                openLayersJs();
             }
         });        
 
         items.push({
-            'title': 'Domotica dashboard (concept)',
-            'icon': 'img/feather/hard-drive.svg',
+            'title': 'Domotica dashboard',
+            'icon': 'img/feather/grid.svg',
             'click': function () {
-                startFrame(windows, 'https://hlhielkema.github.io/domotica_dashboard_concept/', 'Dashboard (concept)');
+                openDashboard();
             }
         });        
 
         items.push({
-            'title': 'Open PowerShell (fake)',
-            'icon': 'img/feather/hard-drive.svg',
+            'title': 'PowerShell',
+            'icon': 'img/feather/terminal.svg',
             'click': function () {
-                startFrame(windows, 'powershell_cli/index.html', 'PowerShell');
+                openPowerShell();
             }
         });        
 
         items.push({
             'title': 'Picture viewer',
-            'icon': 'img/feather/hard-drive.svg',
+            'icon': 'img/feather/image.svg',
             'click': function () {
-                startFrame(windows, 'picture_viewer/index.html', 'Pictures');
+                openPictureViewer();
             }
         });    
 
         items.push({
-            'title': 'Open external site (Wikipedia)',
-            'icon': 'img/feather/hard-drive.svg',
+            'title': 'Wikipedia (external site)',
+            'icon': 'img/feather/external-link.svg',
             'click': function () {
-                startFrame(windows, 'https://wikipedia.com', 'Wikipedia.com');
+                openWikipedia();
             }
         });        
   
@@ -143,17 +143,20 @@ function initSystemZone(toolbar, windows)
     });
 }
 
-function startFrame(windows, source, title) {
-    var controller = windows.createIFrameWindow(source,
-        {
+function startFrame(source, title, options) {
+    var windows = window.windows;
+    if (options === undefined) {
+        options = {
             title: title,
             size: {
                 width: 1400,
-                height: 800
+                height:800,
             },
             icon: 'img/feather/circle.svg'
-        }
-    );
+        };
+    }
+
+    var controller = windows.createIFrameWindow(source, options);
 
     controller.iframe.onload = function() {
         if (controller.iframe.contentDocument !== null) {
@@ -179,6 +182,8 @@ function startElaraDemo()
     var taskbar = new Elara.Taskbar();
     var toolbar = new Elara.Toolbar();
 
+    window.windows = windows;
+
     // Bind the managers to the HTML elements
     windows.bind('.elara-window-container');
     taskbar.bind('.elara-taskbar', windows);
@@ -197,7 +202,78 @@ function startElaraDemo()
     toolbar.renderMenu();
 
     // Show the welcome page in a window
-    startFrame(windows, 'welcome/index.html', 'Welcome');
+    openWelcome();
 }
 
 startElaraDemo();
+
+function openWelcome() {
+    startFrame('welcome/index.html', 'Welcome', {
+        title: 'Welcome',
+        size: {
+            width: 800,
+            height: 870
+        },
+        location: {
+            x: 16,
+            y: 16
+        },
+        icon: 'img/feather/triangle.svg'
+    });
+}
+
+function openDashboard() {    
+    startFrame('https://hlhielkema.github.io/domotica_dashboard_concept/', 'Dashboard', {
+        title: 'Dashboard',
+        size: {
+            width: 1400,
+            height:800,
+        },
+        icon: 'img/feather/grid.svg'
+    });
+}
+
+function openLayersJs() {
+    startFrame('https://hlhielkema.github.io/layers.js/', 'Layers.js', {
+        title: 'Layers.js',
+        size: {
+            width: 1260,
+            height:700,
+        },
+        icon: 'img/feather/layers.svg'
+    });
+}
+
+function openPowerShell() {
+    startFrame('powershell_cli/index.html', 'PowerShell', {
+        title: 'PowerShell',
+        size: {
+            width: 860,
+            height:500,
+        },
+        icon: 'img/feather/terminal.svg'
+    });
+}
+
+function openPictureViewer() {
+    startFrame('picture_viewer/index.html', 'Pictures', {
+        title: 'Pictures',
+        size: {
+            width: 1400,
+            height:800,
+        },
+        icon: 'img/feather/image.svg'
+    });
+}
+
+function openWikipedia() {
+    startFrame('https://wikipedia.com', 'Wikipedia.com', 
+    {
+        title: 'Wikipedia.com',
+        size: {
+            width: 1400,
+            height:800,
+        },
+        icon: 'img/feather/external-link.svg'
+    });
+}
