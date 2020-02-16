@@ -7,7 +7,34 @@ The Elara Window Manager
 
 ## Demo
 
-[LIVE DEMO](https://hlhielkema.github.io/elara/)
+
+Open the [LIVE DEMO](https://hlhielkema.github.io/elara/) to try Elara yourself.
+
+*Scroll down for some screenshots*
+
+## Build
+Bundling the Elara code into a single Javascript and CSS file with **Webpack** requires **Node.js**. [Install Node.js](https://nodejs.org/en/) and run the command below to bundle Elara. The files that can be used for distribution will be placed in the `/dist` directory.
+
+```
+npm run build
+```
+
+Grab the files from the `/dist` directory if you want only to use Elara without modifying it.
+
+## Features
+-	Move windows around the screen.
+-	Resize windows from all sides.
+-	Maximize/Minimize/Close windows.
+-	Dock windows on the sides or in the corners of the screen.
+-	Double click the top of the window to maximize it.
+-	Select windows with the taskbar on the bottom of the screen.
+-	Switch between unlimited workspaces, each with their own set of active windows.
+-	Grab windows to bring them to the top level.
+-	Animations and smooth movement.
+-	Split windows, cascade windows, maximize/minimize/show all.
+
+
+---
 
 ## Screenshots
 
@@ -26,28 +53,7 @@ The Elara Window Manager
 
 ---
 
-## Build
-
-https://nodejs.org/en/
-
-```
-npm run build
-```
-
-## Features
--	Move windows around the screen.
--	Resize windows from all sides.
--	Maximize/Minimize/Close windows.
--	Dock windows on the sides or in the corners of the screen.
--	Double click the top of the window to maximize it.
--	Select windows with the taskbar on the bottom of the screen.
--	Switch between unlimited workspaces, each with their own set of active windows.
--	Grab windows to bring them to the top level.
--	Animations and smooth movement.
--	Split windows, cascade windows, maximize/minimize/show all.
-
-
-## Third-party code
+## Third-party resources
 
 ### Feather
 Some of the icons used in the demo are from the Feather icon pack. Feather is licensed under the MIT License.
