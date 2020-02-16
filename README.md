@@ -7,19 +7,11 @@ The Elara Window Manager
 
 ## Demo
 
-
 Open the [LIVE DEMO](https://hlhielkema.github.io/elara/) to try Elara yourself.
 
-*Scroll down for some screenshots*
+*Scroll down for some screenshots.*
 
-## Build
-Bundling the Elara code into a single Javascript and CSS file with **Webpack** requires **Node.js**. [Install Node.js](https://nodejs.org/en/) and run the command below to bundle Elara. The files that can be used for distribution will be placed in the `/dist` directory.
-
-```
-npm run build
-```
-
-Grab the files from the `/dist` directory if you want only to use Elara without modifying it.
+> The demo site is hosted using GitHub pages. Running Elara requires no back-end code besides static file hosting.
 
 ## Features
 -	Move windows around the screen.
@@ -33,6 +25,15 @@ Grab the files from the `/dist` directory if you want only to use Elara without 
 -	Animations and smooth movement.
 -	Split windows, cascade windows, maximize/minimize/show all.
 
+
+## Build
+Bundling the Elara code into a single Javascript and CSS file with **Webpack** requires **Node.js**. [Install Node.js](https://nodejs.org/en/) and run the command below to bundle Elara. The files that can be used for distribution will be placed in the `/dist` directory.
+
+```
+npm run build
+```
+
+Grab the files from the `/dist` directory if you want only to use Elara without modifying it.
 
 ---
 
