@@ -1,4 +1,7 @@
-# Roadmap (Stage 1)
+# Development roadmap
+
+## Roadmap (Stage 1)
+- General improvements
 - Basic toolbar
 - Improved (svg) image handling
 - (Extendable) context menu for taskbar
@@ -8,8 +11,8 @@
 - Support fixed window size
 - Unsnap cursor position
 
-# Roadmap (Stage 2)
-- Light/dark mode
+## Roadmap (Stage 2)
+- Light/dark mode / Themes
 - Scale modes
 - Extendable toolbar
 - Key bindings
@@ -17,14 +20,12 @@
 - Support always on top
 - Support start position modes
 - Launcher like spotlight
+- Improved workspace selection
 
-# Roadmap (Stage 3)
+## Roadmap (Stage 3)
 - Desktop with launch icons (extension)
 - Notifications view (extension)
 - Widgets (extension)
 - Configuration Manager (extension)
 - Support for custom window header
 - Window changing view (alt-tab, win-tab like)
-
-# Roadmap (Stage 4)
-- Integrate with other taskbars with API
