@@ -3,10 +3,51 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="styles.css" />    
     <title>Welcome</title>        
 </head>
 <body>
-    <h1>Welcome to the Elara demo!</h1>
+    <header>
+        <img src="logo_white.svg" class="logo">    
+        <p>Welcome to the live demo of the Elara window manager. Elara enables creating a Windows/MacOS like window manager inside a web browser. This JavaScript library is written with performances and compatibility in mind. No third-party libraries or frameworks are needed to use Elara.</p>
+    </header>
+
+    <div class="content">       
+        <section>
+            <h3>About the project</h3>
+            <p>
+                Elara was developed as a side-project of <a href="https://github.com/hlhielkema" target="_blank">Hielke Hielkema</a>.
+                It’s free to use for both personal and commercial use(MIT). 
+                The code is publicly available on GitHub:
+            </p>
+            <a href="https://github.com/hlhielkema/elara" target="_blank" class="button">View Elara on GitHub</a>    
+        </section>
+        <section>
+            <h3>Demo</h3>
+            <p>Click the buttons below to play with some demo applications:</p>
+            <div class="button" onclick="window.parent.openDashboard()">Dashboard</div>
+            <div class="button" onclick="window.parent.openLayersJs()">Layers.js</div>
+            <div class="button" onclick="window.parent.openPowerShell()">PowerShell</div>
+            <div class="button" onclick="window.parent.openPictureViewer()">Picture Viewer</div>
+        </section>
+        <section>
+            <h3>Features</h3>            
+            <ul>
+                <li>Move windows around the screen.</li>
+                <li>Resize windows from all sides.</li>
+                <li>Maximize/Minimize/Close windows.</li>
+                <li>Dock windows on the sides or in the corners of the screen.</li>
+                <li>Double click the top of the window to maximize it.</li>
+                <li>Select windows with the taskbar on the bottom of the screen.</li>
+                <li>Switch between unlimited workspaces, each with their own set of active windows.</li>
+                <li>Grab windows to bring them to the top level.</li>
+                <li>Animations and smooth movement.</li>
+                <li>Split windows, cascade windows, maximize/minimize/show all.</li>
+            </ul> 
+            <a href="https://github.com/hlhielkema/elara/blob/master/documentation/roadmap.md" target="_blank">View feature roadmap on GitHub →</a>
+        </section>       
+    </div>
 </body>
 </html>
 
