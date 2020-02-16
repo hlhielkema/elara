@@ -45,3 +45,12 @@ npm run build
 -	Grab windows to bring them to the top level.
 -	Animations and smooth movement.
 -	Split windows, cascade windows, maximize/minimize/show all.
+
+
+## Third-party code
+
+### Feather
+Some of the icons used in the demo are from the Feather icon pack. Feather is licensed under the MIT License.
+
+- Website: [feathericons.com](https://feathericons.com)
+- GitHub: [feathericons/feather](https://github.com/feathericons/feather)
