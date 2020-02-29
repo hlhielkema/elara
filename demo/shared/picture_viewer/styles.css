@@ -10,6 +10,8 @@ img.content {
     float: left;
     width: 100%;
     height: calc(100% - 52px);
+    object-fit: contain;
+    background: #000;
 }
 
 .controls {
@@ -22,7 +24,7 @@ img.content {
 .controls img.button {
     float: left;
     background: #ccc;
-    border-radius: 50%;
+    border-radius: 4px;
     width: 32px;
     height: 32px;
     margin: 10px;

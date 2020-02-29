@@ -73,13 +73,13 @@ function initLauncherZone(toolbar, windows) {
             }
         });    
 
-        items.push({
-            'title': 'Wikipedia (external site)',
-            'icon': 'img/feather/external-link.svg',
+        items.push( {
+            'title': 'Animated background',
+            'icon': 'img/feather/zap.svg',
             'click': function () {
-                openWikipedia();
-            }
-        });        
+                openAnimatedBackground();
+            }           
+        });    
   
         return [
             {
@@ -221,15 +221,15 @@ function startElaraDemo()
             open: openLayersJs
         },
         {
+            title: 'Animated background',
+            image: 'img/feather/zap.svg',
+            open: openAnimatedBackground
+        },
+        {
             title: 'PowerShell',
             image: 'img/feather/terminal.svg',
             open: openPowerShell
-        },
-        {
-            title: 'Wikipedia.com',
-            image: 'img/feather/external-link.svg',
-            open: openWikipedia
-        },
+        },  
         {
             title: 'Pictures',       
             image: 'img/feather/image.svg',
@@ -280,6 +280,17 @@ function openLayersJs() {
     });
 }
 
+function openAnimatedBackground() {    
+    startFrame('https://hlhielkema.github.io/animation_playground/dots/index.html', 'Animated background', {
+        title: 'Animated background',
+        size: {
+            width: 1260,
+            height:700,
+        },
+        icon: 'img/feather/zap.svg'
+    });
+}
+
 function openPowerShell() {
     startFrame('powershell_cli/index.html', 'PowerShell', {
         title: 'PowerShell',
@@ -295,21 +306,9 @@ function openPictureViewer() {
     startFrame('picture_viewer/index.html', 'Pictures', {
         title: 'Pictures',
         size: {
-            width: 1400,
+            width: 1000,
             height:800,
         },
         icon: 'img/feather/image.svg'
-    });
-}
-
-function openWikipedia() {
-    startFrame('https://wikipedia.com', 'Wikipedia.com', 
-    {
-        title: 'Wikipedia.com',
-        size: {
-            width: 1400,
-            height:800,
-        },
-        icon: 'img/feather/external-link.svg'
     });
 }
