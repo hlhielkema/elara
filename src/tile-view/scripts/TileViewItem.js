@@ -6,6 +6,10 @@ function TileViewItem(parent, src) {
     this.image = src.image;
     this.open = src.open;
 
+    // States
+    this.x = 0;
+    this.y = 0;
+
     // Inner states
     this.element = null;
 }

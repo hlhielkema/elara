@@ -31,14 +31,30 @@ TileView.prototype.update = function(items) {
     for (var i = 0; i < items.length; i++) {        
         this.items.push(new TileViewItem(this, items[i]));
     }
-    this.updatePositions();
+    
+    // Arrange the items in useful way
+    this.autoArrangeItems();
+
+    // Construct the tile view
     this.construct();
 };
 
-// Update the positions of the tiles to show them in a line from top to bottom
-TileView.prototype.updatePositions = function() {    
+// Auto arrange the items
+TileView.prototype.autoArrangeItems = function() {    
+    // Determine the number of culumns to use.
+    // Replace "ceil" by "floor" to prioritise using the height.
+    var columns = Math.ceil(Math.sqrt(this.items.length));
+
+    // Loop throug the items
     for (var i = 0; i < this.items.length; i++) {   
-        var position = this.translateGridToScreen(0, i);
+        // Determine the x and y coordinate on the grid
+        var x = i % columns;
+        var y = Math.floor(i / columns);
+
+        // Translate the grid position to a screen position
+        var position = this.translateGridToScreen(x, y);
+
+        // Update the item position
         this.items[i].x = position.x;
         this.items[i].y = position.y;
     }
