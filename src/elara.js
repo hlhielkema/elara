@@ -1,4 +1,4 @@
-import "./util/_reset.min.css";
+import "./shared/_reset.min.css";
 
 import Taskbar from "./taskbar/Taskbar.js";
 import Toolbar from "./toolbar/Toolbar.js";

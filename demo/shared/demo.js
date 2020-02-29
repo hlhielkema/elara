@@ -183,8 +183,6 @@ function startElaraDemo()
     var toolbar = new Elara.Toolbar();
     var tileView = new Elara.TileView();
 
-  
-
     window.windows = windows;
 
     // Bind the managers to the HTML elements
@@ -192,7 +190,7 @@ function startElaraDemo()
     taskbar.bind('.elara-taskbar', windows);
     toolbar.bind('.elara-toolbar', windows);
     tileView.bind('.elara-tile-view');
-
+    
     // Add the second and third workspace
     windows.windowSetCollection.add();
     windows.windowSetCollection.add();
@@ -240,7 +238,7 @@ function startElaraDemo()
     ]);
 
     // Show the welcome page in a window
-    openWelcome();
+    //openWelcome();
 }
 
 startElaraDemo();

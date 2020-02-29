@@ -1,4 +1,4 @@
-﻿import MouseDragDropTracker from "./util/MouseDragDropTracker.js"
+﻿import MouseDragDropTracker from "../../shared/scripts/MouseDragDropTracker.js"
 
 // constructor: WindowMovement
 function WindowMovement(windowManager) {    

@@ -2,15 +2,16 @@
   float: left;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .elara-tile-view > .tile {
   float: left;
   width: 96px;
   height: 96px;
-  margin: 16px;
   border: solid 1px transparent;
   cursor: pointer;
+  position: absolute;
 }
 
 .elara-tile-view > .tile > .image-container {
@@ -41,4 +42,8 @@
 .elara-tile-view > .tile:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: #fff;
+}
+
+.elara-tile-view > .tile.animate-position {
+  transition: left 0.2s, top 0.2s;
 }
