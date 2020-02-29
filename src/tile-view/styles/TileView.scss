@@ -13,7 +13,7 @@
         position: absolute;
         color: #fff;
         text-shadow: -1px -1px #000;
-        
+
         > .image-container {
             float: left;
             width: 96px;
@@ -24,6 +24,7 @@
                 float:left;
                 width: 100%;
                 height: 100%;
+                object-fit: contain;
             }
         }
 
