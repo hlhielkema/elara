@@ -33,7 +33,6 @@ function WindowManager() {
 WindowManager.prototype.bind = function (elementSelector) {
     // Query for the window container element and clear it
     this.windowContainer = document.querySelector(elementSelector);    
-    this.windowContainer.innerHTML = '';
 
     // Create and add the drag overlay element
     var dragOverlay = document.createElement('div');

@@ -1,0 +1,44 @@
+.elara-tile-view {
+    float:left;
+    width: 100%;
+    height: 100%;
+
+    > .tile {
+        float:left;
+        width: 96px;
+        height: 96px;
+        margin: 16px;
+        border: solid 1px transparent;
+        cursor: pointer;
+
+        > .image-container {
+            float: left;
+            width: 96px;
+            height: 64px;    
+            margin-top: 4px;
+
+            > img {
+                float:left;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        > .title {
+            float: left;
+            width: 96px;
+            height: 28px;
+            text-align: center;
+            line-height: 28px;
+            font-size: 13px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            user-select: none;           
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
+    }
+}

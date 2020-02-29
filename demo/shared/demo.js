@@ -181,6 +181,9 @@ function startElaraDemo()
     var windows = new Elara.WindowManager();
     var taskbar = new Elara.Taskbar();
     var toolbar = new Elara.Toolbar();
+    var tileView = new Elara.TileView();
+
+  
 
     window.windows = windows;
 
@@ -188,6 +191,7 @@ function startElaraDemo()
     windows.bind('.elara-window-container');
     taskbar.bind('.elara-taskbar', windows);
     toolbar.bind('.elara-toolbar', windows);
+    tileView.bind('.elara-tile-view');
 
     // Add the second and third workspace
     windows.windowSetCollection.add();
@@ -200,6 +204,40 @@ function startElaraDemo()
     // Render the toolbar
     // TODO: render menu when the zones changed. also support SuspendLayout/ResumeLayout.
     toolbar.renderMenu();
+
+    //
+    tileView.update([
+        {
+            title: 'Welcome',            
+            image: 'img/feather/triangle.svg',
+            open: openWelcome
+        },
+        {
+            title: 'Dashboard',
+            image: 'img/feather/grid.svg',
+            open: openDashboard
+        },
+        {
+            title: 'Layers.js',
+            image: 'img/feather/layers.svg',
+            open: openLayersJs
+        },
+        {
+            title: 'PowerShell',
+            image: 'img/feather/terminal.svg',
+            open: openPowerShell
+        },
+        {
+            title: 'Wikipedia.com',
+            image: 'img/feather/external-link.svg',
+            open: openWikipedia
+        },
+        {
+            title: 'Pictures',       
+            image: 'img/feather/image.svg',
+            open: openPictureViewer
+        }
+    ]);
 
     // Show the welcome page in a window
     openWelcome();
