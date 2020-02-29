@@ -11,7 +11,9 @@
         border: solid 1px transparent;
         cursor: pointer;
         position: absolute;
-    
+        color: #fff;
+        text-shadow: -1px -1px #000;
+        
         > .image-container {
             float: left;
             width: 96px;

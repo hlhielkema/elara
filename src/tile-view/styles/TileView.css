@@ -12,6 +12,8 @@
   border: solid 1px transparent;
   cursor: pointer;
   position: absolute;
+  color: #fff;
+  text-shadow: -1px -1px #000;
 }
 
 .elara-tile-view > .tile > .image-container {
