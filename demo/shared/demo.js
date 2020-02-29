@@ -238,7 +238,7 @@ function startElaraDemo()
     ]);
 
     // Show the welcome page in a window
-    //openWelcome();
+    openWelcome();
 }
 
 startElaraDemo();
