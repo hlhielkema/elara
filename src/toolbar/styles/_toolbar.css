@@ -68,6 +68,46 @@
   display: block;
 }
 
+.elara-toolbar .elara-drawer-button {
+  float: left;
+}
+
+.elara-toolbar .elara-drawer-button .elara-button {
+  float: left;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 12px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.elara-toolbar .elara-drawer-button .elara-button:hover {
+  background: #444;
+}
+
+.elara-toolbar .elara-drawer-button .elara-drawer {
+  display: none;
+  float: left;
+  position: absolute;
+  top: 28px;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  z-index: 5000;
+  background: #444;
+  border-bottom: solid 2px #313131;
+}
+
+.elara-toolbar .elara-drawer-button.opened .elara-button {
+  background: #444;
+}
+
+.elara-toolbar .elara-drawer-button.opened .elara-drawer {
+  display: block;
+}
+
 .elara-toolbar .elara-seperator {
   float: left;
   background: #464646;
