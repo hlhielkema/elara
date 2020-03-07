@@ -16,13 +16,7 @@ namespace ElaraDemo
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {     
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                RequestPath = "/elara",
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\src")),
-            });
-
+        {                
             app.UseStaticFiles(new StaticFileOptions()
             {
                 RequestPath = "/dist",

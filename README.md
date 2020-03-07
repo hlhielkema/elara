@@ -36,7 +36,7 @@ npm run build
 Grab the files from the `/dist` directory if you want only to use Elara without modifying it.
 
 
-## Local demo
+## Run local demo server
 
 ### Node.js demo server
 
@@ -54,6 +54,8 @@ Routes:
 
 Elara demo server running at http://127.0.0.1:3000/
 ```
+
+> TIP: Press Ctrl+C to shut down.
 
 ### ASP.NET Core demo server
 
@@ -76,6 +78,26 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: D:\GitHub Workspace\elara\demo\aspnetcore\ElaraDemo
 ```
+
+> TIP: Press Ctrl+C to shut down.
+
+### Go demo server
+
+## Build and run
+
+*Command:*
+```
+cd demo/go
+go build server.go
+.\server.exe
+```
+
+*Output:*
+```
+2020/03/07 13:50:14 Listening on :3500..
+```
+
+> TIP: Press Ctrl+C to shut down.
 
 ---
 
