@@ -5,7 +5,7 @@ Elara enables creating a Windows/MacOS like window manager experience inside a w
 
 ---
 
-## Demo
+## Live demo
 
 Open the [LIVE DEMO](https://hlhielkema.github.io/elara/) to try Elara yourself.
 
@@ -34,6 +34,26 @@ npm run build
 ```
 
 Grab the files from the `/dist` directory if you want only to use Elara without modifying it.
+
+
+## Local demo
+
+### Node.js server
+
+*Command:*
+``` ps
+node demo\nodejs\server.js
+```
+
+*Output:*
+```
+Routes:
+"/"       ->: D:\GitHub Workspace\elara\demo\shared\index.html
+"/dist/*" ->: D:\GitHub Workspace\elara\dist
+"/*"      ->: D:\GitHub Workspace\elara\demo\shared
+
+Elara demo server running at http://127.0.0.1:3000/
+```
 
 ---
 
