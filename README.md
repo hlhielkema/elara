@@ -37,6 +37,13 @@ Grab the files from the `/dist` directory if you want only to use Elara without 
 
 
 ## Run local demo server
+The Elara library itself does not require any backend to work. However, just opening *index.html* on your local system will not work properly. This repository contains 3 implementations of simple servers to try or test Elara. Each server is written in a different programming language. Please use the server implementation you prefer. Use the online live demo described earlier in this document if you just want to try the last stable version of Elara. The server implementations are written in:
+
+- Node.js
+- ASP.NET Core
+- Go
+
+---
 
 ### Node.js demo server
 
@@ -58,6 +65,8 @@ Elara demo server running at http://127.0.0.1:3000/
 ```
 
 > TIP: Press Ctrl+C to shut down.
+
+---
 
 ### ASP.NET Core demo server
 
@@ -84,6 +93,8 @@ info: Microsoft.Hosting.Lifetime[0]
 ```
 
 > TIP: Press Ctrl+C to shut down.
+
+---
 
 ### Go demo server
 
