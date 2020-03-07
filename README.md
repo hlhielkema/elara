@@ -40,6 +40,8 @@ Grab the files from the `/dist` directory if you want only to use Elara without 
 
 ### Node.js demo server
 
+<img src="img/nodejs.png" width="200">
+
 *Command:*
 ``` ps
 node demo\nodejs\server.js
@@ -58,6 +60,8 @@ Elara demo server running at http://127.0.0.1:3000/
 > TIP: Press Ctrl+C to shut down.
 
 ### ASP.NET Core demo server
+
+<img src="img/aspnetcore.png" width="200">
 
 *Command:*
 ``` ps
@@ -82,6 +86,8 @@ info: Microsoft.Hosting.Lifetime[0]
 > TIP: Press Ctrl+C to shut down.
 
 ### Go demo server
+
+<img src="img/golang.png" width="200">
 
 ## Build and run
 
