@@ -14,7 +14,7 @@ func main() {
 	http.Handle("/dist/", http.StripPrefix("/dist/", fsDist))
 	http.Handle("/", fsShared)
 
-	// Listen on 
+	// Listen on port 3500
 	log.Println("Listening on :3500...")	
 	err := http.ListenAndServe(":3500", nil)
 
