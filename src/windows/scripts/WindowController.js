@@ -1,7 +1,7 @@
 ﻿import { Vector2, Vector3, ComplexValue } from './util/Vector.js';
 import WindowManagerEvent from "./util/WindowManagerEvent.js";
 import WINDOW_SNAP_AREAS from "./configuration/WINDOW_SNAP_AREAS.js"
-import svgUtil from "./util/SvgUtil.js";
+import svgUtil from "../../shared/scripts/SvgUtil.js"
 
 // constructor: WindowController
 function WindowController(id) {        

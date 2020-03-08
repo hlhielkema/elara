@@ -1,4 +1,4 @@
-import svgUtil from "./util/SvgUtil.js";
+import svgUtil from "../../shared/scripts/SvgUtil.js"
 
 // constructor: Taskbar
 function Taskbar() {
