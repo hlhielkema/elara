@@ -11,7 +11,7 @@ function WindowManager() {
     this.windowContainer = null;   
 
     // Window set collection
-    this.windowSetCollection = new WindowSetCollection();
+    this.windowSetCollection = new WindowSetCollection(this);
 
     // Add the first window set
     this.windowSetCollection.add();
@@ -213,5 +213,11 @@ WindowManager.prototype.renderSuggestedDocking = function (cursorX, cursorY) {
         }
     }
 }; 
+
+// Get the size of the window container
+WindowManager.prototype.getWindowContainerRect = function() {
+    // Get the dimensions of the window container rectangle
+    return this.windowContainer.getBoundingClientRect();    
+}
 
 export default WindowManager;

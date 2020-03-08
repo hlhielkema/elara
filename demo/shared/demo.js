@@ -125,6 +125,41 @@ function initSystemZone(toolbar, windows)
     toolbar.addDropDownMenu('Windows', items);
 }
 
+function initWorkspacesDrawer(toolbar, windows) {
+    var workspacesDrawer = toolbar.addDrawer('Workspaces');
+    workspacesDrawer.bind(function(drawer) {
+
+        // Workspace click callback
+        var callback = function(index, doubleClick) {   
+            // Select the clicked workspace        
+            windows.windowSetCollection.selectAt(index);
+
+            if (doubleClick) {
+                // Close the drawer on double clicks
+                workspacesDrawer.close();
+            }
+            else {
+                // Update the previews because the selected workspace changed
+                updatePreviews();
+            }
+        };
+
+        function updatePreviews() {            
+            // Create the preview elements
+            var previews = windows.windowSetCollection.createPreviews(280, 180, callback);
+
+            // Update the content of the drawer
+            drawer.innerHTML = '';            
+            for (var i = 0; i < previews.length; i++) {
+                drawer.appendChild(previews[i]);
+            }    
+        }
+
+        // Perform the initial previews update
+        updatePreviews();
+    });
+}
+
 function startFrame(source, title, options) {
     var windows = window.windows;
     if (options === undefined) {
@@ -217,12 +252,8 @@ function startElaraDemo()
     initLauncherZone(toolbar, windows);
     toolbar.addSeperator();
     initSystemZone(toolbar, windows);
-    var workspacesDrawer = toolbar.addDrawer('Workspaces');
-    toolbar.resumeLayout();
-
-    workspacesDrawer.bind(function(drawer) {
-        drawer.innerHTML = 'This is a drawer which can be used for many things.';
-    });
+    initWorkspacesDrawer(toolbar, windows)    
+    toolbar.resumeLayout();    
 
     // Update the tile view items
     updateTileViewItems(tileView);

@@ -13,6 +13,7 @@ function WindowSet() {
     }
 }
 
+// Add a window (controller) to the window set
 WindowSet.prototype.add = function (controller) {
     this.controllers.push(controller);
     this.orderedControllers.push(controller);
@@ -85,6 +86,7 @@ WindowSet.prototype.remove = function (controller) {
     this.events.changed.invoke();
 }
 
+// Get the window controllers in the order of them being added
 WindowSet.prototype.getOrdered = function () {
     return this.orderedControllers;
 }
@@ -138,7 +140,8 @@ WindowSet.prototype.setFocus = function (controller) {
     }    
 }
 
-WindowSet.prototype.resetFocus = function (controller) {
+// Remove the focus state for all windows
+WindowSet.prototype.resetFocus = function () {
     // Reset the focus
     this.focus = null;
     
@@ -158,8 +161,82 @@ WindowSet.prototype.resetFocus = function (controller) {
     }
 }
 
-WindowSet.prototype.getCurrentFocus = function (controller) {
+// Get the focussed window (controller)
+WindowSet.prototype.getCurrentFocus = function () {
     return this.focus;
+}
+
+// Export the dimensions for all windows in the set
+WindowSet.prototype.exportDimensions = function () {
+    var result = [];
+    for (var i = 0; i < this.controllers.length; i++) {
+        var controller = this.controllers[i];
+        result.push({
+            id: controller.id,
+            title: controller.title,
+            x: controller.position.x,
+            y: controller.position.y,
+            width: controller.size.x,
+            height: controller.size.y
+        });
+    }
+    return result;
+}
+
+// Create a preview element for the window set
+WindowSet.prototype.createPreview = function(title, targetWidth, targetHeight, containerWidth, containerHeight) {
+    // Map px/% positions to positions in the target dimensions
+    var map = function(val, container, target) {
+        if (val.unit == 'px') {            
+            return Math.round((val.number / container) * target) + 'px';
+        }
+        else if (val.unit == '%') {
+            return Math.round((val.number / 100) * target) + 'px';
+        }
+        else {
+            throw 'Not supported';
+        }
+    }
+
+    // Create the elements
+    var element = document.createElement('div');
+    var titleOvelayElement = document.createElement('div');
+
+    // Add the classes
+    element.classList.add('elera-window-set-preview');
+    titleOvelayElement.classList.add('title-overlay');
+
+    // Apply the target size on the set preview container
+    element.style.width = targetWidth + 'px';
+    element.style.height =  targetHeight + 'px';
+
+    // Set the set title
+    titleOvelayElement.innerText = title;
+
+    // Loop through the window controllers
+    for (var i = 0; i < this.controllers.length; i++) {
+        // Get the window controller
+        var controller = this.controllers[i];
+
+        // Create the window element
+        var windowElement = document.createElement('div');
+        windowElement.classList.add('window');
+
+        // Set the dimensions of the window element
+        windowElement.style.left = map(controller.position.x, containerWidth, targetWidth);
+        windowElement.style.top =  map(controller.position.y, containerHeight, targetHeight);
+        windowElement.style.width =  map(controller.size.x, containerWidth, targetWidth);
+        windowElement.style.height =  map(controller.size.y, containerHeight, targetHeight);
+        
+        // Add the window element to the set preview container
+        element.appendChild(windowElement);
+    }
+    
+    // Add the title overlay element to the set preview container
+    element.appendChild(titleOvelayElement);    
+
+    // Return the new set preview container element
+    return element;
 }
 
 // --------- LAYOUT ---------
