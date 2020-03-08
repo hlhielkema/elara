@@ -13,6 +13,10 @@ Open the [LIVE DEMO](https://hlhielkema.github.io/elara/) to try Elara yourself.
 
 > The demo site is hosted using GitHub pages. Running Elara requires no back-end code besides static file hosting.
 
+![screenshot A](screenshots/screenshot_a.png)
+
+---
+
 ## Features
 -	Move windows around the screen.
 -	Resize windows from all sides.
