@@ -23,11 +23,6 @@ Taskbar.prototype.bind = function (elementSelector, windowManager) {
     windowButtons.classList.add('elara-windows');
     this.taskbarElement.appendChild(windowButtons);
 
-    // Create and add the window sets buttons container element
-    var windowButtons = document.createElement('div');
-    windowButtons.classList.add('elara-window-sets');
-    this.taskbarElement.appendChild(windowButtons);    
-    
     // Create a handler for changes that invokes the update function
     var self = this;
     var changeHandler = function() {
@@ -103,53 +98,6 @@ Taskbar.prototype.update = function() {
         button.addEventListener('click', function () {
             controller.focusFromTaskbar();
         });
-    }
-
-    // 
-    this.updateSetButton();
-}
-
-// Update the buttons of the window set collections
-Taskbar.prototype.updateSetButton = function() {
-    // Get the window sets buttons container
-    var windowSets = this.taskbarElement.querySelector('.elara-window-sets');
-
-    // Clear the window buttons container DIV
-    windowSets.innerHTML = '';
-
-    // Get the window set collection
-    var setCollection = this.windowManager.windowSetCollection;
-
-    // Get the number of sets
-    var count = setCollection.count();
-    
-    // Get the selected set
-    var selected = setCollection.getSelected();
-
-    // Loop through the window sets
-    for (var i = 0; i < count; i++) {
-        let set = setCollection.getAt(i);
-
-        // Create the button element
-        var button = document.createElement('div');
-        button.classList.add('window-set');
-        button.innerText = (i + 1);
-
-        // Determine if the set is selected
-        if (set === selected) {
-            // Add an active class for the selected window set
-            button.classList.add('active');
-        }
-        else {
-            // Bind the button click event
-            button.addEventListener('click', function () {
-                // Select the window set
-                setCollection.select(set);
-            });
-        }
-        
-        // Add the button to the window sets container
-        windowSets.appendChild(button);        
     }
 }
 

@@ -44,32 +44,3 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-.elara-taskbar .elara-window-sets {
-  float: right;
-  height: 30px;
-}
-
-.elara-taskbar .elara-window-sets .window-set {
-  float: left;
-  background: #242424;
-  height: 26px;
-  padding: 0px;
-  margin: 2px;
-  width: 32px;
-  border: solid 1px black;
-  box-sizing: border-box;
-  font-weight: 600;
-  text-align: center;
-  font-size: 14px;
-  line-height: 26px;
-}
-
-.elara-taskbar .elara-window-sets .window-set:not(.active) {
-  cursor: pointer;
-}
-
-.elara-taskbar .elara-window-sets .window-set.active {
-  background: #313131;
-  color: #999;
-}
