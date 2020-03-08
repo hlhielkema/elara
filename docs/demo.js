@@ -28,118 +28,135 @@ var ELARA_WINDOW_LAYOUTS = [
 ];
 
 function initLauncherZone(toolbar, windows) {    
-    var launcherZone = toolbar.addZone('launcher');
+    var items = [];
 
-    launcherZone.setDataSource(function () {
-        var items = [];
-
-        items.push({
-            'title': 'Welcome',
-            'icon': 'img/feather/triangle.svg',
-            'click': function () {                
-                openWelcome();
-            }
-        });
-
-        items.push({
-            'title': 'Layers.js',
-            'icon': 'img/feather/layers.svg',
-            'click': function () {
-                openLayersJs();
-            }
-        });        
-
-        items.push({
-            'title': 'Domotica dashboard',
-            'icon': 'img/feather/grid.svg',
-            'click': function () {
-                openDashboard();
-            }
-        });        
-
-        items.push({
-            'title': 'PowerShell',
-            'icon': 'img/feather/terminal.svg',
-            'click': function () {
-                openPowerShell();
-            }
-        });        
-
-        items.push({
-            'title': 'Picture viewer',
-            'icon': 'img/feather/image.svg',
-            'click': function () {
-                openPictureViewer();
-            }
-        });    
-
-        items.push( {
-            'title': 'Animated background',
-            'icon': 'img/feather/zap.svg',
-            'click': function () {
-                openAnimatedBackground();
-            }           
-        });    
-  
-        return [
-            {
-                title: 'Applications',
-                items: items
-            }
-        ];
+    items.push({
+        'title': 'Welcome',
+        'icon': 'img/feather/triangle.svg',
+        'click': function () {                
+            openWelcome();
+        }
     });
+
+    items.push({
+        'title': 'Layers.js',
+        'icon': 'img/feather/layers.svg',
+        'click': function () {
+            openLayersJs();
+        }
+    });        
+
+    items.push({
+        'title': 'Domotica dashboard',
+        'icon': 'img/feather/grid.svg',
+        'click': function () {
+            openDashboard();
+        }
+    });        
+
+    items.push({
+        'title': 'PowerShell',
+        'icon': 'img/feather/terminal.svg',
+        'click': function () {
+            openPowerShell();
+        }
+    });        
+
+    items.push({
+        'title': 'Picture viewer',
+        'icon': 'img/feather/image.svg',
+        'click': function () {
+            openPictureViewer();
+        }
+    });    
+
+    items.push( {
+        'title': 'Animated background',
+        'icon': 'img/feather/zap.svg',
+        'click': function () {
+            openAnimatedBackground();
+        }           
+    });    
+
+    toolbar.addDropDownMenu('Applications', items);
 }
 
 function initSystemZone(toolbar, windows)
 {
-    var systemZone = toolbar.addZone('system');    
-    
-    systemZone.setDataSource(function () {
-        function createLayoutFn(name) {
-            return function () {
-                windows.getActiveControllerSet()[name]();
-            };
-        }
-        var items = [];
-        for (var i = 0; i < ELARA_WINDOW_LAYOUTS.length; i++) {
-            let fn = createLayoutFn(ELARA_WINDOW_LAYOUTS[i].name);
-            items.push({
-                'title': ELARA_WINDOW_LAYOUTS[i].title,
-                'icon': ELARA_WINDOW_LAYOUTS[i].icon,
-                'click': function () {
-                    fn();
-                    return true; // cancel close
-                }
-            });
-        }
-
-        for (var j = 0; j < windows.windowSetCollection.count(); j++) {
-            let index = j;
-            items.push({
-                'title': 'Workspace ' + (j + 1),
-                'icon': 'img/feather/monitor.svg',
-                'click': function () {
-                    windows.windowSetCollection.selectAt(index);
-                    return true;
-                }
-            });
-        }
+    function createLayoutFn(name) {
+        return function () {
+            windows.getActiveControllerSet()[name]();
+        };
+    }
+    var items = [];
+    for (var i = 0; i < ELARA_WINDOW_LAYOUTS.length; i++) {
+        let fn = createLayoutFn(ELARA_WINDOW_LAYOUTS[i].name);
         items.push({
-            'title': 'Add workspace',
-            'icon': 'img/feather/plus-square.svg',
+            'title': ELARA_WINDOW_LAYOUTS[i].title,
+            'icon': ELARA_WINDOW_LAYOUTS[i].icon,
             'click': function () {
-                windows.windowSetCollection.add();
-                windows.windowSetCollection.selectAt(windows.windowSetCollection.count() - 1);
+                fn();
+                return true; // cancel close
+            }
+        });
+    }
+
+    for (var j = 0; j < windows.windowSetCollection.count(); j++) {
+        let index = j;
+        items.push({
+            'title': 'Workspace ' + (j + 1),
+            'icon': 'img/feather/monitor.svg',
+            'click': function () {
+                windows.windowSetCollection.selectAt(index);
                 return true;
             }
         });
+    }
+    items.push({
+        'title': 'Add workspace',
+        'icon': 'img/feather/plus-square.svg',
+        'click': function () {
+            windows.windowSetCollection.add();
+            windows.windowSetCollection.selectAt(windows.windowSetCollection.count() - 1);
+            return true;
+        }
+    });
 
-        return [
-            {
-                title: 'Windows',
-                items: items
+    toolbar.addDropDownMenu('Windows', items);
+}
+
+function initWorkspacesDrawer(toolbar, windows) {
+    var workspacesDrawer = toolbar.addDrawer('Workspaces');
+    workspacesDrawer.bind(function(drawer) {
+
+        // Workspace click callback
+        var callback = function(index, doubleClick) {   
+            // Select the clicked workspace        
+            windows.windowSetCollection.selectAt(index);
+
+            if (doubleClick) {
+                // Close the drawer on double clicks
+                workspacesDrawer.close();
             }
-        ];
+            else {
+                // Update the previews because the selected workspace changed
+                updatePreviews();
+            }
+        };
+
+        function updatePreviews() {            
+            // Create the preview elements
+            var previews = windows.windowSetCollection.createPreviews(280, 180, callback);
+
+            // Update the content of the drawer
+            drawer.innerHTML = '';            
+            for (var i = 0; i < previews.length; i++) {
+                drawer.appendChild(previews[i]);
+            }    
+        }
+
+        // Perform the initial previews update
+        updatePreviews();
     });
 }
 
@@ -175,35 +192,7 @@ function startFrame(source, title, options) {
     controller.focus();
 }
 
-function startElaraDemo()
-{
-    // Create the window, taskbar and toolbar managers
-    var windows = new Elara.WindowManager();
-    var taskbar = new Elara.Taskbar();
-    var toolbar = new Elara.Toolbar();
-    var tileView = new Elara.TileView();
-
-    window.windows = windows;
-
-    // Bind the managers to the HTML elements
-    windows.bind('.elara-window-container');
-    taskbar.bind('.elara-taskbar', windows);
-    toolbar.bind('.elara-toolbar', windows);
-    tileView.bind('.elara-tile-view');
-    
-    // Add the second and third workspace
-    windows.windowSetCollection.add();
-    windows.windowSetCollection.add();
-    
-    // Initialize the menu's of the toolbar
-    initLauncherZone(toolbar, windows);
-    initSystemZone(toolbar, windows);
-
-    // Render the toolbar
-    // TODO: render menu when the zones changed. also support SuspendLayout/ResumeLayout.
-    toolbar.renderMenu();
-
-    //
+function updateTileViewItems(tileView) {
     tileView.update([
         {
             title: 'Welcome',            
@@ -236,6 +225,38 @@ function startElaraDemo()
             open: openPictureViewer
         }
     ]);
+}
+
+function startElaraDemo()
+{
+    // Create the window, taskbar and toolbar managers
+    var windows = new Elara.WindowManager();
+    var taskbar = new Elara.Taskbar();
+    var toolbar = new Elara.Toolbar();
+    var tileView = new Elara.TileView();
+
+    window.windows = windows;
+
+    // Bind the managers to the HTML elements
+    windows.bind('.elara-window-container');
+    taskbar.bind('.elara-taskbar', windows);
+    toolbar.bind('.elara-toolbar', windows);
+    tileView.bind('.elara-tile-view');
+    
+    // Add the second and third workspace
+    windows.windowSetCollection.add();
+    windows.windowSetCollection.add();
+    
+    // Initialize the menu's of the toolbar
+    toolbar.suspendLayout();
+    initLauncherZone(toolbar, windows);
+    toolbar.addSeperator();
+    initSystemZone(toolbar, windows);
+    initWorkspacesDrawer(toolbar, windows)    
+    toolbar.resumeLayout();    
+
+    // Update the tile view items
+    updateTileViewItems(tileView);
 
     // Show the welcome page in a window
     openWelcome();
