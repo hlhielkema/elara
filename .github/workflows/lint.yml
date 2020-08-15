@@ -1,0 +1,12 @@
+name: Lint
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Run NPM install
+      run: npm install
+    - name: Run ESLint
+      run: eslint .\src\ --ext .js,.jsx,.ts,.tsx
