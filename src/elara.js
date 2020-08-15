@@ -11,4 +11,3 @@ window.Elara = {
     Toolbar,
     TileView,
 };
-
