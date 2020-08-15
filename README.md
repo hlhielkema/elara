@@ -1,4 +1,5 @@
 
+![ESLint](https://github.com/hlhielkema/elara/workflows/Lint/badge.svg)
 ![banner](logo/banner.svg)
 
 Elara enables creating a Windows/MacOS like window manager experience inside a web browser. This JavaScript library is written with performances and compatibility in mind. No third-party libraries or frameworks are needed to use Elara.
