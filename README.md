@@ -3,7 +3,7 @@
 
 Elara enables creating a Windows/MacOS like window manager experience inside a web browser. This JavaScript library is written with performances and compatibility in mind. No third-party libraries or frameworks are needed to use Elara.
 
-[![ESLint](https://github.com/hlhielkema/elara/workflows/ESLint/badge.svg)](https://github.com/hlhielkema/elara/actions?query=workflow%3ESALint)
+[![ESLint](https://github.com/hlhielkema/elara/workflows/ESLint/badge.svg)](https://github.com/hlhielkema/elara/actions?query=workflow%3AESLint)
 [![](https://img.shields.io/badge/Demo-Open%20live%20demo-brightgreen)](https://hlhielkema.github.io/elara/)
 
 ---
