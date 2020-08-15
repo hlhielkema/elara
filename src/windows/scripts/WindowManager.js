@@ -1,9 +1,9 @@
-import WindowSetCollection from './WindowSetCollection.js';
-import WindowMovement from './WindowMovement.js';
-import WindowConstruction from './WindowConstruction.js';
-import WindowController from './WindowController.js';
-import WINDOW_DOCK_ZONES from './configuration/WINDOW_DOCK_ZONES.js';
-import WINDOW_SNAP_AREAS from './configuration/WINDOW_SNAP_AREAS.js';
+import WindowSetCollection from './WindowSetCollection';
+import WindowMovement from './WindowMovement';
+import WindowConstruction from './WindowConstruction';
+import WindowController from './WindowController';
+import WINDOW_DOCK_ZONES from './configuration/WINDOW_DOCK_ZONES';
+import WINDOW_SNAP_AREAS from './configuration/WINDOW_SNAP_AREAS';
 
 // constructor: WindowManager
 function WindowManager() {
@@ -24,13 +24,14 @@ function WindowManager() {
     // Create unique ID's for the window controller.
     // The id will increase after each get.
     let windowIdCounter = 1;
-    this.getNextId = function () {
-        return windowIdCounter++;
+    this.getNextId = function getNextId() {
+        windowIdCounter += 1;
+        return windowIdCounter;
     };
 }
 
 // Bind to an element and initialize
-WindowManager.prototype.bind = function (elementSelector) {
+WindowManager.prototype.bind = function bind(elementSelector) {
     // Query for the window container element and clear it
     this.windowContainer = document.querySelector(elementSelector);
 
@@ -44,7 +45,7 @@ WindowManager.prototype.bind = function (elementSelector) {
 };
 
 // Get a controller by its unique id
-WindowManager.prototype.getController = function (controllerId) {
+WindowManager.prototype.getController = function getController(controllerId) {
     const count = this.windowSetCollection.count();
     for (let i = 0; i < count; i++) {
         const controller = this.windowSetCollection.getAt(i).get(controllerId);
@@ -56,13 +57,13 @@ WindowManager.prototype.getController = function (controllerId) {
 };
 
 // Get the active controller set
-WindowManager.prototype.getActiveControllerSet = function () {
+WindowManager.prototype.getActiveControllerSet = function getActiveControllerSet() {
     // Return the selected window set
     return this.windowSetCollection.getSelected();
 };
 
 // Create a new window in the current controller collection with an iframe in it
-WindowManager.prototype.createIFrameWindow = function (source, customOptions) {
+WindowManager.prototype.createIFrameWindow = function createIFrameWindow(source, customOptions) {
     // Create the window
     const controller = this.createWindow(customOptions);
 
@@ -77,7 +78,7 @@ WindowManager.prototype.createIFrameWindow = function (source, customOptions) {
     content.appendChild(iframe);
 
     // Use the title of the page as the title of the window
-    iframe.onload = function () {
+    iframe.onload = function onload() {
         controller.setTitle(iframe.contentDocument.title);
     };
 
@@ -89,7 +90,7 @@ WindowManager.prototype.createIFrameWindow = function (source, customOptions) {
 };
 
 // Create a new window in the current controller collection
-WindowManager.prototype.createWindow = function (customOptions) {
+WindowManager.prototype.createWindow = function createWindow(customOptions) {
     // Create the window controller
     const controller = new WindowController(this.getNextId());
 
@@ -112,10 +113,10 @@ WindowManager.prototype.createWindow = function (customOptions) {
     };
 
     // Apply the custom options on the default options
-    for (const key in customOptions) {
-        if (customOptions.hasOwnProperty(key)) {
-            options[key] = customOptions[key];
-        }
+    const customOptionsKeys = Object.keys(customOptions);
+    const customOptionsValues = Object.values(customOptions);
+    for (let i = 0; i < customOptionsKeys.length; i += 1) {
+        options[customOptionsKeys[i]] = customOptionsValues[i];
     }
 
     // Create the window element
@@ -153,7 +154,7 @@ WindowManager.prototype.createWindow = function (customOptions) {
 };
 
 // Get the suggested docking zone for a cursor position
-WindowManager.prototype.getSuggestedDocking = function (cursorX, cursorY) {
+WindowManager.prototype.getSuggestedDocking = function getSuggestedDocking(cursorX, cursorY) {
     // Get the dimensions of the window container rectangle
     const container = this.windowContainer.getBoundingClientRect();
 
@@ -177,7 +178,7 @@ WindowManager.prototype.getSuggestedDocking = function (cursorX, cursorY) {
 };
 
 // Render a suggested docking area
-WindowManager.prototype.renderSuggestedDocking = function (cursorX, cursorY) {
+WindowManager.prototype.renderSuggestedDocking = function renderSuggestedDocking(cursorX, cursorY) {
     // Get the suggested docking for the current cursor position
     const docking = this.getSuggestedDocking(cursorX, cursorY);
 
@@ -204,14 +205,15 @@ WindowManager.prototype.renderSuggestedDocking = function (cursorX, cursorY) {
         preview.style.left = dimensions.left;
         preview.style.width = dimensions.width;
         preview.style.height = dimensions.height;
-    } else if (preview !== null) {
+    }
+    else if (preview !== null) {
         // Hide the preview
         preview.style.display = 'none';
     }
 };
 
 // Get the size of the window container
-WindowManager.prototype.getWindowContainerRect = function () {
+WindowManager.prototype.getWindowContainerRect = function getWindowContainerRect() {
     // Get the dimensions of the window container rectangle
     return this.windowContainer.getBoundingClientRect();
 };

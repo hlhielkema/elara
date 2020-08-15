@@ -12,6 +12,10 @@
     },
     "rules": {        
         "linebreak-style": ["error", "windows"],
-        "indent": ["error", 4]
+        "indent": ["error", 4],
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true}],
+        "max-len": ["warn", { "code": 200 } ], /* remove this rule later */
+        "no-param-reassign": ["warn"],
+        "brace-style": ["error", "stroustrup"]
     }
 }

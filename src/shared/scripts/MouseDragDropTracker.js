@@ -15,7 +15,7 @@ function MouseDragDropTracker() {
     //       init: function (session) { ... },
     //       transform: function (session, dx, dy, x, y, first, completed) { ... }
     //    }
-    self.start = function (e, events) {
+    self.start = function start(e, events) {
         // Create the drag-drop session
         const session = {
             target: e.target,
@@ -44,12 +44,12 @@ function MouseDragDropTracker() {
     };
 
     // Get if any drag-drop session is active
-    self.hasSession = function () {
+    self.hasSession = function hasSession() {
         return self.session !== null;
     };
 
     // Mouse move handler
-    self.moveHandler = function (e) {
+    self.moveHandler = function moveHandler(e) {
         // Calculate the x and y difference between the session start and now.
         const dx = e.pageX - self.session.initialPageX;
         const dy = e.pageY - self.session.initialPageY;
@@ -69,7 +69,7 @@ function MouseDragDropTracker() {
     };
 
     // Mouse up handler
-    self.moveUpHandler = function (e) {
+    self.moveUpHandler = function moveUpHandler(e) {
         // Remove the event listeners for mouse move and mouse up
         window.removeEventListener('mousemove', self.moveHandler, true);
         window.removeEventListener('mouseup', self.moveUpHandler, false);

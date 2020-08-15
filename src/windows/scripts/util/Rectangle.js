@@ -6,15 +6,15 @@ function Rectangle(x, y, width, height) {
     self.width = width;
     self.height = height;
 
-    self.bottom = function () {
+    self.bottom = function bottom() {
         return self.y + self.height;
     };
 
-    self.right = function () {
+    self.right = function right() {
         return self.x + self.width;
     };
 
-    self.contains = function (vector) {
+    self.contains = function contains(vector) {
         return vector.x >= self.x
                && vector.x <= self.right()
                && vector.y >= self.y

@@ -1,4 +1,4 @@
-import svgUtil from '../../shared/scripts/SvgUtil.js';
+import svgUtil from '../../shared/scripts/SvgUtil';
 
 // constructor: Taskbar
 function Taskbar() {
@@ -10,7 +10,7 @@ function Taskbar() {
 }
 
 // Bind to an element and initialize
-Taskbar.prototype.bind = function (elementSelector, windowManager) {
+Taskbar.prototype.bind = function bind(elementSelector, windowManager) {
     // Query for the taskbar element and clear it
     this.taskbarElement = document.querySelector(elementSelector);
     this.taskbarElement.innerHTML = '';
@@ -25,7 +25,7 @@ Taskbar.prototype.bind = function (elementSelector, windowManager) {
 
     // Create a handler for changes that invokes the update function
     const self = this;
-    const changeHandler = function () {
+    const changeHandler = function changeHandler() {
         self.update();
     };
 
@@ -55,7 +55,7 @@ Taskbar.prototype.bind = function (elementSelector, windowManager) {
 };
 
 // Update the buttons of the taskbar
-Taskbar.prototype.update = function () {
+Taskbar.prototype.update = function update() {
     // Get the window buttons container DIV
     const windowButtons = this.taskbarElement.querySelector('.elara-windows');
 

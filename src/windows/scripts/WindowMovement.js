@@ -1,4 +1,4 @@
-import MouseDragDropTracker from '../../shared/scripts/MouseDragDropTracker.js';
+import MouseDragDropTracker from '../../shared/scripts/MouseDragDropTracker';
 
 // constructor: WindowMovement
 function WindowMovement(windowManager) {
@@ -7,7 +7,7 @@ function WindowMovement(windowManager) {
     this.resizeZoneSize = 16;
 }
 
-WindowMovement.prototype.onTitlebarGrab = function (e) {
+WindowMovement.prototype.onTitlebarGrab = function onTitlebarGrab(e) {
     const self = this;
     self.engine.start(e, {
         init(session) {
@@ -47,7 +47,8 @@ WindowMovement.prototype.onTitlebarGrab = function (e) {
                 const docking = self.windowManager.getSuggestedDocking(x, y);
                 if (docking != null) {
                     session.controller.resize(docking);
-                } else {
+                }
+                else {
                     // Move the window to the new position
                     session.controller.move(newX, newY);
                 }
@@ -58,7 +59,8 @@ WindowMovement.prototype.onTitlebarGrab = function (e) {
                 // Update the moving state
                 session.controller.state.moving = false;
                 session.controller.applyState();
-            } else {
+            }
+            else {
                 // Restore its non-relative size when moving the window
                 if (session.controller.state.relative) {
                     session.controller.setRelative(false);
@@ -71,13 +73,13 @@ WindowMovement.prototype.onTitlebarGrab = function (e) {
     });
 };
 
-WindowMovement.prototype.determineResizeCursor = function (hmode, vmode) {
-    if ((hmode === 'resize' && vmode == 'resize')
-        || (hmode === 'move' && vmode == 'move')) {
+WindowMovement.prototype.determineResizeCursor = function determineResizeCursor(hmode, vmode) {
+    if ((hmode === 'resize' && vmode === 'resize')
+        || (hmode === 'move' && vmode === 'move')) {
         return 'nw-resize';
     }
-    if ((hmode === 'resize' && vmode == 'move')
-            || (hmode === 'move' && vmode == 'resize')) {
+    if ((hmode === 'resize' && vmode === 'move')
+            || (hmode === 'move' && vmode === 'resize')) {
         return 'ne-resize';
     }
     if (hmode !== 'none' && vmode === 'none') {
@@ -86,21 +88,23 @@ WindowMovement.prototype.determineResizeCursor = function (hmode, vmode) {
     if (hmode === 'none' && vmode !== 'none') {
         return 'n-resize';
     }
-    throw 'invalid input';
+    throw new Error('invalid input');
 };
 
-WindowMovement.prototype.determineModes = function (onWindowX, onWindowY, realWidth, realHeight) {
+WindowMovement.prototype.determineModes = function determineModes(onWindowX, onWindowY, realWidth, realHeight) {
     const zone = this.resizeZoneSize; // default = 16
     let hmode = 'none';
     let vmode = 'none';
     if (onWindowX < 16) {
         hmode = 'move';
-    } else if (realWidth - onWindowX < zone) {
+    }
+    else if (realWidth - onWindowX < zone) {
         hmode = 'resize';
     }
     if (onWindowY < zone) {
         vmode = 'move';
-    } else if (realHeight - onWindowY < zone) {
+    }
+    else if (realHeight - onWindowY < zone) {
         vmode = 'resize';
     }
     return {
@@ -109,7 +113,7 @@ WindowMovement.prototype.determineModes = function (onWindowX, onWindowY, realWi
     };
 };
 
-WindowMovement.prototype.onWindowGrab = function (e) {
+WindowMovement.prototype.onWindowGrab = function onWindowGrab(e) {
     const self = this;
     self.engine.start(e, {
         init(session) {
@@ -158,14 +162,16 @@ WindowMovement.prototype.onWindowGrab = function (e) {
 
             if (session.hmode === 'resize') {
                 rw += dx;
-            } else if (session.hmode === 'move') {
+            }
+            else if (session.hmode === 'move') {
                 rx += dx;
                 rw -= dx;
             }
 
             if (session.vmode === 'resize') {
                 rh += dy;
-            } else if (session.vmode === 'move') {
+            }
+            else if (session.vmode === 'move') {
                 ry += dy;
                 rh -= dy;
             }
@@ -189,7 +195,7 @@ WindowMovement.prototype.onWindowGrab = function (e) {
     });
 };
 
-WindowMovement.prototype.init = function () {
+WindowMovement.prototype.init = function init() {
     const self = this;
     // Bind a mouse-down event on title bars of windows
     document.addEventListener('mousedown', (e) => {
@@ -197,11 +203,10 @@ WindowMovement.prototype.init = function () {
         if (e.target.classList.contains('elara-title-bar') || e.target.classList.contains('elara-title')) {
             self.onTitlebarGrab(e);
         }
-
-        // Resize
         else if (e.target.classList.contains('elara-window')) {
             self.onWindowGrab(e);
-        } else {
+        }
+        else {
             // Try to find a window element in the click event path
             for (let i = 0; i < e.path.length; i++) {
                 if (e.path[i].classList !== undefined && e.path[i].classList.contains('elara-window')) {

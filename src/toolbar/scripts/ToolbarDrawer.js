@@ -9,7 +9,7 @@ function ToolbarDrawer(parent, title, height) {
     this.drawer = null;
 }
 
-ToolbarDrawer.prototype.construct = function () {
+ToolbarDrawer.prototype.construct = function construct() {
     // Create the elements
     const drawerButton = document.createElement('div');
     const button = document.createElement('div');
@@ -45,11 +45,12 @@ ToolbarDrawer.prototype.construct = function () {
     return drawerButton;
 };
 
-ToolbarDrawer.prototype.open = function () {
+ToolbarDrawer.prototype.open = function open() {
     if (this.drawerButton.classList.contains('opened')) {
         // Close the menu if it's clicked again
         this.close();
-    } else {
+    }
+    else {
         // Close all menu's
         this.parent.closeAll();
 
@@ -63,13 +64,13 @@ ToolbarDrawer.prototype.open = function () {
     }
 };
 
-ToolbarDrawer.prototype.close = function () {
+ToolbarDrawer.prototype.close = function close() {
     if (this.drawerButton.classList.contains('opened')) {
         this.drawerButton.classList.remove('opened');
     }
 };
 
-ToolbarDrawer.prototype.bind = function (openCallback) {
+ToolbarDrawer.prototype.bind = function bind(openCallback) {
     this.openCallback = openCallback;
 };
 

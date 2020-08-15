@@ -1,6 +1,6 @@
-import ToolbarDrawer from './ToolbarDrawer.js';
-import ToolbarDropdownMenu from './ToolbarDropdownMenu.js';
-import ToolbarSeperator from './ToolbarSeperator.js';
+import ToolbarDrawer from './ToolbarDrawer';
+import ToolbarDropdownMenu from './ToolbarDropdownMenu';
+import ToolbarSeperator from './ToolbarSeperator';
 
 // constructor: Toolbar
 function Toolbar() {
@@ -10,27 +10,28 @@ function Toolbar() {
     this.pendingConstruct = false;
 }
 
-Toolbar.prototype.suspendLayout = function () {
+Toolbar.prototype.suspendLayout = function suspendLayout() {
     this.autoUpdate = false;
 };
 
-Toolbar.prototype.resumeLayout = function () {
+Toolbar.prototype.resumeLayout = function resumeLayout() {
     this.autoUpdate = true;
     if (this.pendingConstruct) {
         this.construct();
     }
 };
 
-Toolbar.prototype.constructIfEnabled = function () {
+Toolbar.prototype.constructIfEnabled = function constructIfEnabled() {
     if (this.autoUpdate) {
         this.construct();
-    } else {
+    }
+    else {
         this.pendingConstruct = true;
     }
 };
 
 // Bind to an element and initialize
-Toolbar.prototype.bind = function (elementSelector, windowManager) {
+Toolbar.prototype.bind = function bind(elementSelector) {
     // Query for the taskbar element and clear it
     this.toolbarElement = document.querySelector(elementSelector);
     this.toolbarElement.innerHTML = '';
@@ -40,7 +41,7 @@ Toolbar.prototype.bind = function (elementSelector, windowManager) {
     this.toolbarElement.appendChild(itemsContainer);
 };
 
-Toolbar.prototype.construct = function () {
+Toolbar.prototype.construct = function construct() {
     //
     this.pendingConstruct = false;
 
@@ -54,33 +55,34 @@ Toolbar.prototype.construct = function () {
             for (let j = 0; j < elements.length; j++) {
                 itemsContainer.appendChild(elements[j]);
             }
-        } else if (elements !== null && elements !== undefined) {
+        }
+        else if (elements !== null && elements !== undefined) {
             itemsContainer.appendChild(elements);
         }
     }
 };
 
 // Close all items
-Toolbar.prototype.closeAll = function () {
+Toolbar.prototype.closeAll = function closeAll() {
     for (let i = 0; i < this.items.length; i++) {
         this.items[i].close();
     }
 };
 
 // Add a seperator
-Toolbar.prototype.addSeperator = function () {
+Toolbar.prototype.addSeperator = function addSeperator() {
     this.items.push(new ToolbarSeperator());
     this.constructIfEnabled();
 };
 
 // Add a dropdown menu
-Toolbar.prototype.addDropDownMenu = function (title, items) {
+Toolbar.prototype.addDropDownMenu = function addDropDownMenu(title, items) {
     this.items.push(new ToolbarDropdownMenu(this, title, items));
     this.constructIfEnabled();
 };
 
 // Add a drawer
-Toolbar.prototype.addDrawer = function (title, height) {
+Toolbar.prototype.addDrawer = function addDrawer(title, height) {
     const drawer = new ToolbarDrawer(this, title, height);
     this.items.push(drawer);
     this.constructIfEnabled();

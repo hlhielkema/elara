@@ -7,32 +7,36 @@ function ComplexValue(value) {
     if (Number.isInteger(value)) {
         self.unit = 'px';
         self.number = value;
-    } else if (Number(value) === value && value % 1 !== 0) { // = float
+    }
+    else if (Number(value) === value && value % 1 !== 0) { // = float
         self.unit = 'px';
         self.number = Math.floor(value);
-    } else if (value.endsWith('px')) {
+    }
+    else if (value.endsWith('px')) {
         self.unit = 'px';
         self.number = +value.substring(0, value.length - 2);
-    } else if (value.endsWith('%')) {
+    }
+    else if (value.endsWith('%')) {
         self.unit = '%';
         self.number = +value.substring(0, value.length - 1);
-    } else {
-        throw 'Invalid value';
+    }
+    else {
+        throw new Error('Invalid value');
     }
 
-    self.raw = function () {
+    self.raw = function raw() {
         return self.value;
     };
 
-    self.getPx = function () {
+    self.getPx = function getPx() {
         if (self.unit === 'px') {
             return self.number;
         }
 
-        throw 'The value does not have the unit: px.';
+        throw new Error('The value does not have the unit: px.');
     };
 
-    self.cssValue = function () {
+    self.cssValue = function cssValue() {
         return self.number + self.unit;
     };
 }

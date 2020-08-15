@@ -1,5 +1,5 @@
-import WindowManagerEvent from './util/WindowManagerEvent.js';
-import { ComplexValue } from './util/Vector.js';
+import WindowManagerEvent from './util/WindowManagerEvent';
+import { ComplexValue } from './util/Vector';
 
 // constructor: WindowSet
 function WindowSet() {
@@ -14,7 +14,7 @@ function WindowSet() {
 }
 
 // Add a window (controller) to the window set
-WindowSet.prototype.add = function (controller) {
+WindowSet.prototype.add = function add(controller) {
     this.controllers.push(controller);
     this.orderedControllers.push(controller);
 
@@ -42,10 +42,10 @@ WindowSet.prototype.add = function (controller) {
 
 // Get a window controller by its identifier.
 // Returns null if not found.
-WindowSet.prototype.get = function (controllerId) {
-    controllerId = +controllerId;
+WindowSet.prototype.get = function get(controllerId) {
+    const intControllerId = +controllerId;
     for (let i = 0; i < this.controllers.length; i++) {
-        if (this.controllers[i].getId() == controllerId) {
+        if (this.controllers[i].getId() === intControllerId) {
             return this.controllers[i];
         }
     }
@@ -53,28 +53,28 @@ WindowSet.prototype.get = function (controllerId) {
 };
 
 // Stash the windows of all controllers in this collection
-WindowSet.prototype.stash = function () {
+WindowSet.prototype.stash = function stash() {
     for (let i = 0; i < this.controllers.length; i++) {
         this.controllers[i].stash();
     }
 };
 
 // Resume(undo stash) the windows of all controllers in this collection
-WindowSet.prototype.resume = function () {
+WindowSet.prototype.resume = function resume() {
     for (let i = 0; i < this.controllers.length; i++) {
         this.controllers[i].resume();
     }
 };
 
 // Remove a controller
-WindowSet.prototype.remove = function (controller) {
+WindowSet.prototype.remove = function remove(controller) {
     // Find the index of the controller
     const index = this.controllers.indexOf(controller);
-    if (index === -1) throw 'Window controller not found.';
+    if (index === -1) throw new Error('Window controller not found.');
 
     // Find the index of the controller in the ordered collection
     const orderedIndex = this.orderedControllers.indexOf(controller);
-    if (orderedIndex === -1) throw 'Window controller not found.';
+    if (orderedIndex === -1) throw new Error('Window controller not found.');
 
     // Remove the controller
     this.controllers.splice(index, 1);
@@ -85,11 +85,11 @@ WindowSet.prototype.remove = function (controller) {
 };
 
 // Get the window controllers in the order of them being added
-WindowSet.prototype.getOrdered = function () {
+WindowSet.prototype.getOrdered = function getOrdered() {
     return this.orderedControllers;
 };
 
-WindowSet.prototype.getMaximumForPositionZ = function () {
+WindowSet.prototype.getMaximumForPositionZ = function getMaximumForPositionZ() {
     // Loop through the controllers and get the max depth index
     let max = -1;
     for (let i = 0; i < this.controllers.length; i++) {
@@ -99,25 +99,29 @@ WindowSet.prototype.getMaximumForPositionZ = function () {
     return max;
 };
 
-WindowSet.prototype.setFocus = function (controller) {
+WindowSet.prototype.setFocus = function setFocus(controller) {
     // Set the focussed window
     this.focus = controller;
 
     // Order the controllers in such a way that the parameter controller ends last
     this.controllers.sort((a, b) => {
-        if (a == controller) { return 1; } if (b == controller) { return -1; }
+        if (a === controller) {
+            return 1;
+        } if (b === controller) {
+            return -1;
+        }
         return a.position.z - b.position.z;
     });
 
     // Apply a increasing z-index in the order of the array
-    for (var i = 0; i < this.controllers.length; i++) {
+    for (let i = 0; i < this.controllers.length; i++) {
         this.controllers[i].position.z = new ComplexValue(i);
         this.controllers[i].applyDimensions();
     }
 
     // Update the focus state
     let changed = false;
-    for (var i = 0; i < this.controllers.length; i++) {
+    for (let i = 0; i < this.controllers.length; i++) {
         if (this.controllers[i].state.focus) {
             this.controllers[i].state.focus = false;
             this.controllers[i].applyState();
@@ -137,7 +141,7 @@ WindowSet.prototype.setFocus = function (controller) {
 };
 
 // Remove the focus state for all windows
-WindowSet.prototype.resetFocus = function () {
+WindowSet.prototype.resetFocus = function resetFocus() {
     // Reset the focus
     this.focus = null;
 
@@ -158,12 +162,12 @@ WindowSet.prototype.resetFocus = function () {
 };
 
 // Get the focussed window (controller)
-WindowSet.prototype.getCurrentFocus = function () {
+WindowSet.prototype.getCurrentFocus = function getCurrentFocus() {
     return this.focus;
 };
 
 // Export the dimensions for all windows in the set
-WindowSet.prototype.exportDimensions = function () {
+WindowSet.prototype.exportDimensions = function exportDimensions() {
     const result = [];
     for (let i = 0; i < this.controllers.length; i++) {
         const controller = this.controllers[i];
@@ -180,17 +184,17 @@ WindowSet.prototype.exportDimensions = function () {
 };
 
 // Create a preview element for the window set
-WindowSet.prototype.createPreview = function (title, targetWidth, targetHeight, containerWidth, containerHeight) {
+WindowSet.prototype.createPreview = function createPreview(title, targetWidth, targetHeight, containerWidth, containerHeight) {
     // Map px/% positions to positions in the target dimensions
-    const map = function (val, container, target) {
-        if (val.unit == 'px') {
+    const map = function map(val, container, target) {
+        if (val.unit === 'px') {
             return `${Math.round((val.number / container) * target)}px`;
         }
-        if (val.unit == '%') {
+        if (val.unit === '%') {
             return `${Math.round((val.number / 100) * target)}px`;
         }
 
-        throw 'Not supported';
+        throw new Error('Not supported');
     };
 
     // Create the elements
@@ -236,34 +240,34 @@ WindowSet.prototype.createPreview = function (title, targetWidth, targetHeight, 
 
 // --------- LAYOUT ---------
 
-WindowSet.prototype.cascade = function () {
+WindowSet.prototype.cascade = function cascade() {
     for (let i = 0; i < this.controllers.length; i++) {
         this.controllers[i].show();
         this.controllers[i].move(100 + (i * 50), 100 + (i * 50));
     }
 };
 
-WindowSet.prototype.minimizeAll = function () {
+WindowSet.prototype.minimizeAll = function minimizeAll() {
     for (let i = 0; i < this.controllers.length; i++) {
         this.controllers[i].minimize();
     }
 };
 
-WindowSet.prototype.showAll = function () {
+WindowSet.prototype.showAll = function showAll() {
     for (let i = 0; i < this.controllers.length; i++) {
         this.controllers[i].show();
     }
 };
 
-WindowSet.prototype.maximizeAll = function () {
+WindowSet.prototype.maximizeAll = function maximizeAll() {
     for (let i = 0; i < this.controllers.length; i++) {
         this.controllers[i].show();
         this.controllers[i].maximize();
     }
 };
 
-WindowSet.prototype.split = function () {
-    for (var i = 0; i < this.controllers.length; i++) {
+WindowSet.prototype.split = function split() {
+    for (let i = 0; i < this.controllers.length; i++) {
         this.controllers[i].show();
     }
     const count = this.controllers.length;
@@ -273,20 +277,23 @@ WindowSet.prototype.split = function () {
 
     if (count === 1) {
         this.controllers[0].resize('fullscreen');
-    } else if (count === 2) {
+    }
+    else if (count === 2) {
         this.controllers[0].resize('left');
         this.controllers[1].resize('right');
-    } else if (count === 3) {
+    }
+    else if (count === 3) {
         this.controllers[0].resize('top-left');
         this.controllers[1].resize('top-right');
         this.controllers[2].resize('bottom');
-    } else if (count > 3) {
+    }
+    else if (count > 3) {
         const reversedControllers = this.controllers.reverse();
         reversedControllers[0].resize('top-left');
         reversedControllers[1].resize('top-right');
         reversedControllers[2].resize('bottom-left');
         reversedControllers[3].resize('bottom-right');
-        for (var i = 4; i < count; i++) {
+        for (let i = 4; i < count; i++) {
             reversedControllers[i].hide();
         }
     }

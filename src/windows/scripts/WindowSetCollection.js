@@ -1,5 +1,5 @@
-import WindowManagerEvent from './util/WindowManagerEvent.js';
-import WindowSet from './WindowSet.js';
+import WindowManagerEvent from './util/WindowManagerEvent';
+import WindowSet from './WindowSet';
 
 // constructor: WindowSetCollection
 function WindowSetCollection(parent) {
@@ -14,17 +14,17 @@ function WindowSetCollection(parent) {
 }
 
 // Get the selected window set
-WindowSetCollection.prototype.getSelected = function () {
+WindowSetCollection.prototype.getSelected = function getSelected() {
     return this.selected;
 };
 
 // Get the window set at a given index
-WindowSetCollection.prototype.getAt = function (index) {
+WindowSetCollection.prototype.getAt = function getAt(index) {
     return this.sets[index];
 };
 
 // Add a window set
-WindowSetCollection.prototype.add = function () {
+WindowSetCollection.prototype.add = function add() {
     const set = new WindowSet();
     this.sets.push(set);
 
@@ -33,9 +33,9 @@ WindowSetCollection.prototype.add = function () {
 };
 
 // Select a window set
-WindowSetCollection.prototype.select = function (set) {
+WindowSetCollection.prototype.select = function select(set) {
     if (this.sets.indexOf(set) === -1) {
-        throw 'Set not found';
+        throw new Error('Set not found');
     }
     if (this.selected !== null) {
         this.selected.stash();
@@ -46,7 +46,7 @@ WindowSetCollection.prototype.select = function (set) {
 };
 
 // Select a window set at a given index
-WindowSetCollection.prototype.selectAt = function (index) {
+WindowSetCollection.prototype.selectAt = function selectAt(index) {
     if (this.selected !== null) {
         this.selected.stash();
     }
@@ -56,18 +56,18 @@ WindowSetCollection.prototype.selectAt = function (index) {
 };
 
 // Get the number of window sets
-WindowSetCollection.prototype.count = function () {
+WindowSetCollection.prototype.count = function count() {
     return this.sets.length;
 };
 
 // Export the dimensions for all windows of all window sets
-WindowSetCollection.prototype.exportDimensions = function () {
+WindowSetCollection.prototype.exportDimensions = function exportDimensions() {
     const result = [];
     for (let i = 0; i < this.sets.length; i++) {
         const set = this.sets[i];
         result.push({
             index: i,
-            selected: this.selected == set,
+            selected: this.selected === set,
             windows: set.exportDimensions(),
         });
     }
@@ -75,10 +75,10 @@ WindowSetCollection.prototype.exportDimensions = function () {
 };
 
 // Create preview elements for all window sets
-WindowSetCollection.prototype.createPreviews = function (targetWidth, targetHeight, callback) {
+WindowSetCollection.prototype.createPreviews = function createPreviews(targetWidth, targetHeight, callback) {
     // Create a click callback function
-    const createCallback = function (index, doubleClick) {
-        return function () {
+    const createCallback = function createCallback(index, doubleClick) {
+        return function createCallbackInner() {
             callback(index, doubleClick);
         };
     };

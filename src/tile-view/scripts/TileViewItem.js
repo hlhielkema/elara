@@ -15,7 +15,7 @@ function TileViewItem(parent, src) {
 }
 
 // Construct the tile view item element
-TileViewItem.prototype.construct = function () {
+TileViewItem.prototype.construct = function construct() {
     // Create the elements
     const element = document.createElement('div');
     const titleElement = document.createElement('div');
@@ -59,14 +59,14 @@ TileViewItem.prototype.construct = function () {
 };
 
 // Apply the position on the element
-TileViewItem.prototype.applyPosition = function () {
+TileViewItem.prototype.applyPosition = function applyPosition() {
     // Set the position properties
     this.element.style.top = `${this.y}px`;
     this.element.style.left = `${this.x}px`;
 };
 
 // Start the drag/drop logic(from mousedown event)
-TileViewItem.prototype.startDragDrop = function (e) {
+TileViewItem.prototype.startDragDrop = function startDragDrop(e) {
     const self = this;
     this.parent.engine.start(e, {
         init(session) {

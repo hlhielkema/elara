@@ -1,9 +1,9 @@
 import './shared/_reset.min.css';
 
-import Taskbar from './taskbar/Taskbar.js';
-import Toolbar from './toolbar/Toolbar.js';
-import WindowManager from './windows/Windows.js';
-import TileView from './tile-view/TileView.js';
+import Taskbar from './taskbar/Taskbar';
+import Toolbar from './toolbar/Toolbar';
+import WindowManager from './windows/Windows';
+import TileView from './tile-view/TileView';
 
 window.Elara = {
     WindowManager,

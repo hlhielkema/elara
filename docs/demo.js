@@ -236,7 +236,7 @@ function startElaraDemo() {
     // Bind the managers to the HTML elements
     windows.bind('.elara-window-container');
     taskbar.bind('.elara-taskbar', windows);
-    toolbar.bind('.elara-toolbar', windows);
+    toolbar.bind('.elara-toolbar');
     tileView.bind('.elara-tile-view');
 
     // Add the second and third workspace

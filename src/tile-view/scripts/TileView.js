@@ -1,5 +1,5 @@
-import TileViewItem from './TileViewItem.js';
-import MouseDragDropTracker from '../../shared/scripts/MouseDragDropTracker.js';
+import TileViewItem from './TileViewItem';
+import MouseDragDropTracker from '../../shared/scripts/MouseDragDropTracker';
 
 // constructor: TileView
 function TileView() {
@@ -21,12 +21,12 @@ function TileView() {
 }
 
 // Bind the tile view to a container
-TileView.prototype.bind = function (selector) {
+TileView.prototype.bind = function bind(selector) {
     this.selector = selector;
 };
 
 // Update the items of the tile view
-TileView.prototype.update = function (items) {
+TileView.prototype.update = function update(items) {
     this.items = [];
     for (let i = 0; i < items.length; i++) {
         this.items.push(new TileViewItem(this, items[i]));
@@ -40,7 +40,7 @@ TileView.prototype.update = function (items) {
 };
 
 // Auto arrange the items
-TileView.prototype.autoArrangeItems = function () {
+TileView.prototype.autoArrangeItems = function autoArrangeItems() {
     // Determine the number of culumns to use.
     // Replace "ceil" by "floor" to prioritise using the height.
     const columns = Math.ceil(Math.sqrt(this.items.length));
@@ -61,7 +61,7 @@ TileView.prototype.autoArrangeItems = function () {
 };
 
 // Translate grid coordinates to screen coordinates
-TileView.prototype.translateGridToScreen = function (x, y) {
+TileView.prototype.translateGridToScreen = function translateGridToScreen(x, y) {
     const { grid } = this.settings;
     return {
         x: ((grid.tile.width + (grid.tile.margin * 2)) * x) + grid.tile.margin,
@@ -70,7 +70,7 @@ TileView.prototype.translateGridToScreen = function (x, y) {
 };
 
 // Translate screen coordinates to the nearest grid coordinates.
-TileView.prototype.translateScreenToGrid = function (x, y) {
+TileView.prototype.translateScreenToGrid = function translateScreenToGrid(x, y) {
     const { grid } = this.settings;
     return {
         x: +Math.round((x - grid.tile.margin) / (grid.tile.width + (grid.tile.margin * 2))),
@@ -79,7 +79,7 @@ TileView.prototype.translateScreenToGrid = function (x, y) {
 };
 
 // Construct the tile view
-TileView.prototype.construct = function () {
+TileView.prototype.construct = function construct() {
     // Get the container
     const container = document.querySelector(this.selector);
 

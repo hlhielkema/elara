@@ -1,4 +1,4 @@
-import svgUtil from '../../shared/scripts/SvgUtil.js';
+import svgUtil from '../../shared/scripts/SvgUtil';
 
 // constructor: ToolbarDropdownMenu
 function ToolbarDropdownMenu(parent, title, items) {
@@ -11,7 +11,7 @@ function ToolbarDropdownMenu(parent, title, items) {
 }
 
 // Construct the dropdown menu
-ToolbarDropdownMenu.prototype.construct = function () {
+ToolbarDropdownMenu.prototype.construct = function construct() {
     // Create the elements
     const dropdownButton = document.createElement('div');
     const button = document.createElement('div');
@@ -42,7 +42,7 @@ ToolbarDropdownMenu.prototype.construct = function () {
 };
 
 // Construct a dropdown menu button
-ToolbarDropdownMenu.prototype.constructButton = function (button) {
+ToolbarDropdownMenu.prototype.constructButton = function constructButton(button) {
     const self = this;
 
     // Create the elements
@@ -83,11 +83,12 @@ ToolbarDropdownMenu.prototype.constructButton = function (button) {
 
 // Open the dropdown menu.
 // Close if it's already opened.
-ToolbarDropdownMenu.prototype.open = function () {
+ToolbarDropdownMenu.prototype.open = function open() {
     if (this.dropdownButton.classList.contains('opened')) {
         // Close the menu if it's clicked again
         this.close();
-    } else {
+    }
+    else {
         // Close all menu's
         this.parent.closeAll();
 
@@ -105,7 +106,7 @@ ToolbarDropdownMenu.prototype.open = function () {
 };
 
 // Close the dropdown
-ToolbarDropdownMenu.prototype.close = function () {
+ToolbarDropdownMenu.prototype.close = function close() {
     if (this.dropdownButton.classList.contains('opened')) {
         const items = this.dropdownButton.querySelectorAll('.elara-dropdown-items');
         for (let j = 0; j < items.length; j++) {
