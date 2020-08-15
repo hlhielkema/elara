@@ -42,6 +42,13 @@ npm run build
 Grab the files from the `/dist` directory if you want only to use Elara without modifying it.
 
 
+## Run ESLint
+Use this command to run ESLint.
+
+```
+npm run lint
+```
+
 ## Run local demo server
 The Elara library itself does not require any backend to work. However, just opening *index.html* on your local system will not work properly. This repository contains 3 implementations of simple servers to try or test Elara. Each server is written in a different programming language. Please use the server implementation you prefer. Use the online live demo described earlier in this document if you just want to try the last stable version of Elara. The server implementations are written in:
 

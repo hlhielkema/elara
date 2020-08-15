@@ -11,5 +11,7 @@
         "sourceType": "module"
     },
     "rules": {
+        "linebreak-style": ["error", "windows"],
+        "indent": ["error", 4]
     }
 }
