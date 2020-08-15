@@ -10,7 +10,7 @@
         "ecmaVersion": 11,
         "sourceType": "module"
     },
-    "rules": {
+    "rules": {        
         "linebreak-style": ["error", "windows"],
         "indent": ["error", 4]
     }
