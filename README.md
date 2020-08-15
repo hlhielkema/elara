@@ -5,6 +5,7 @@ Elara enables creating a Windows/MacOS like window manager experience inside a w
 
 [![ESLint](https://github.com/hlhielkema/elara/workflows/ESLint/badge.svg)](https://github.com/hlhielkema/elara/actions?query=workflow%3AESLint)
 [![](https://img.shields.io/badge/Demo-Open%20live%20demo-brightgreen)](https://hlhielkema.github.io/elara/)
+![license](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
