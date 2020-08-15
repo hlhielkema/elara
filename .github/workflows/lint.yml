@@ -9,4 +9,4 @@ jobs:
     - name: Run NPM install
       run: npm install
     - name: Run ESLint
-      run: eslint .\src\ --ext .js,.jsx,.ts,.tsx
+      run: npm run lint
