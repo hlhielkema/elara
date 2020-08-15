@@ -1,8 +1,8 @@
-import svgUtil from "../../shared/scripts/SvgUtil.js"
+import svgUtil from '../../shared/scripts/SvgUtil.js';
 
 // constructor: ToolbarDropdownMenu
-function ToolbarDropdownMenu(parent, title, items) {    
-    this.parent = parent;    
+function ToolbarDropdownMenu(parent, title, items) {
+    this.parent = parent;
     this.title = title;
     this.items = items;
 
@@ -11,11 +11,11 @@ function ToolbarDropdownMenu(parent, title, items) {
 }
 
 // Construct the dropdown menu
-ToolbarDropdownMenu.prototype.construct = function() {
+ToolbarDropdownMenu.prototype.construct = function () {
     // Create the elements
-    var dropdownButton = document.createElement('div');
-    var button = document.createElement('div');
-    var items = document.createElement('div');
+    const dropdownButton = document.createElement('div');
+    const button = document.createElement('div');
+    const items = document.createElement('div');
 
     // Add the classes
     dropdownButton.className = 'elara-dropdown-button';
@@ -33,21 +33,21 @@ ToolbarDropdownMenu.prototype.construct = function() {
     this.dropdownButton = dropdownButton;
 
     // Bind the button click
-    var self = this;
-    button.addEventListener('click', function () {
+    const self = this;
+    button.addEventListener('click', () => {
         self.open();
     });
 
-    return dropdownButton;   
-}
+    return dropdownButton;
+};
 
 // Construct a dropdown menu button
-ToolbarDropdownMenu.prototype.constructButton = function(button) {
-    var self = this;
+ToolbarDropdownMenu.prototype.constructButton = function (button) {
+    const self = this;
 
     // Create the elements
-    var buttonElement = document.createElement('div');
-    var label = document.createElement('div');
+    const buttonElement = document.createElement('div');
+    const label = document.createElement('div');
 
     // Add the classes
     buttonElement.className = 'elara-menu-button';
@@ -58,62 +58,61 @@ ToolbarDropdownMenu.prototype.constructButton = function(button) {
 
     // Add the icon and its container if defined
     if (button.icon !== undefined) {
-        var icon = document.createElement('div');
+        const icon = document.createElement('div');
         icon.className = 'elara-button-icon-container';
         icon.appendChild(svgUtil.createSvgElement(button.icon, 16, 16));
         buttonElement.appendChild(icon);
     }
 
     // Add the title label to the button element
-    buttonElement.appendChild(label);            
+    buttonElement.appendChild(label);
 
     // Bind the click event of the new button
-    buttonElement.addEventListener('click', function () {
+    buttonElement.addEventListener('click', () => {
         // Invoke the click handler of the button
-        var result = button.click();
+        const result = button.click();
 
         // Close the menu if the result is not true
-        if (result !== true) {            
+        if (result !== true) {
             self.close();
         }
     });
 
-    return buttonElement;    
-}
+    return buttonElement;
+};
 
 // Open the dropdown menu.
 // Close if it's already opened.
-ToolbarDropdownMenu.prototype.open = function() {    
+ToolbarDropdownMenu.prototype.open = function () {
     if (this.dropdownButton.classList.contains('opened')) {
         // Close the menu if it's clicked again
         this.close();
-    }
-    else {
+    } else {
         // Close all menu's
         this.parent.closeAll();
 
         // Add the "opened" class to show the buttons
         this.dropdownButton.classList.add('opened');
-        
+
         // Get the buttons container
-        var buttons = this.dropdownButton.querySelector('.elara-dropdown-items');
+        const buttons = this.dropdownButton.querySelector('.elara-dropdown-items');
 
         // Construct the buttons and add them to the container
-        for (var i = 0; i < this.items.length; i++) {            
+        for (let i = 0; i < this.items.length; i++) {
             buttons.appendChild(this.constructButton(this.items[i]));
         }
     }
-}
+};
 
 // Close the dropdown
-ToolbarDropdownMenu.prototype.close = function() { 
+ToolbarDropdownMenu.prototype.close = function () {
     if (this.dropdownButton.classList.contains('opened')) {
-        var items = this.dropdownButton.querySelectorAll('.elara-dropdown-items');
-        for (var j = 0; j < items.length; j++) {
+        const items = this.dropdownButton.querySelectorAll('.elara-dropdown-items');
+        for (let j = 0; j < items.length; j++) {
             items[j].innerHTML = '';
         }
         this.dropdownButton.classList.remove('opened');
     }
-}
+};
 
 export default ToolbarDropdownMenu;

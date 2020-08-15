@@ -1,9 +1,9 @@
-import svgUtil from "../../shared/scripts/SvgUtil.js"
+import svgUtil from '../../shared/scripts/SvgUtil.js';
 
 // constructor: Taskbar
 function Taskbar() {
-    // Taskbar DIV element    
-    this.taskbarElement = null;   
+    // Taskbar DIV element
+    this.taskbarElement = null;
 
     // Owner window manager
     this.windowManager = null;
@@ -12,66 +12,66 @@ function Taskbar() {
 // Bind to an element and initialize
 Taskbar.prototype.bind = function (elementSelector, windowManager) {
     // Query for the taskbar element and clear it
-    this.taskbarElement = document.querySelector(elementSelector);    
+    this.taskbarElement = document.querySelector(elementSelector);
     this.taskbarElement.innerHTML = '';
 
     // Store the window manager
-    this.windowManager = windowManager;    
+    this.windowManager = windowManager;
 
     // Create and add the buttons container element
-    var windowButtons = document.createElement('div');
+    const windowButtons = document.createElement('div');
     windowButtons.classList.add('elara-windows');
     this.taskbarElement.appendChild(windowButtons);
 
     // Create a handler for changes that invokes the update function
-    var self = this;
-    var changeHandler = function() {
+    const self = this;
+    const changeHandler = function () {
         self.update();
-    }
+    };
 
     // Subscribe to changes in the selected window set
     this.windowManager.windowSetCollection.events.selectedChanged.subscribe(changeHandler);
 
     // Subscribe on changes in the window set collection
-    this.windowManager.windowSetCollection.events.added.subscribe(function(owner, set) {
+    this.windowManager.windowSetCollection.events.added.subscribe((owner, set) => {
         // Subcribe to focus changes of the window set
-        set.events.focusChanged.subscribe(changeHandler);    
+        set.events.focusChanged.subscribe(changeHandler);
         set.events.changed.subscribe(changeHandler);
     });
-    this.windowManager.windowSetCollection.events.removed.subscribe(function(owner, set) {
+    this.windowManager.windowSetCollection.events.removed.subscribe((owner, set) => {
         // Unsubcribe from focus changes of the window set
-        set.events.focusChanged.unsubscribe(changeHandler);    
+        set.events.focusChanged.unsubscribe(changeHandler);
         set.events.changed.unsubscribe(changeHandler);
     });
-    
+
     // Bind to the sets that are already in the collection
-    for (var i = 0; i < this.windowManager.windowSetCollection.count(); i++) {
-        var set = this.windowManager.windowSetCollection.getAt(i);
-        
+    for (let i = 0; i < this.windowManager.windowSetCollection.count(); i++) {
+        const set = this.windowManager.windowSetCollection.getAt(i);
+
         // Subcribe to focus changes of the window set
-        set.events.focusChanged.subscribe(changeHandler);    
+        set.events.focusChanged.subscribe(changeHandler);
         set.events.changed.subscribe(changeHandler);
     }
-}
+};
 
 // Update the buttons of the taskbar
-Taskbar.prototype.update = function() {
+Taskbar.prototype.update = function () {
     // Get the window buttons container DIV
-    var windowButtons = this.taskbarElement.querySelector('.elara-windows');
+    const windowButtons = this.taskbarElement.querySelector('.elara-windows');
 
     // Clear the window buttons container DIV
     windowButtons.innerHTML = '';
 
     // Get the (ordered) controller of the active controller set
-    var orderedControllers = this.windowManager.getActiveControllerSet().getOrdered();
+    const orderedControllers = this.windowManager.getActiveControllerSet().getOrdered();
 
     // Loop through the ordered controllers
-    for (var i = 0; i < orderedControllers.length; i++) {
-        let controller = orderedControllers[i];
+    for (let i = 0; i < orderedControllers.length; i++) {
+        const controller = orderedControllers[i];
 
         // Create the elements
-        var button = document.createElement('div');
-        var label = document.createElement('span');
+        const button = document.createElement('div');
+        const label = document.createElement('span');
 
         // Set the button class
         button.className = 'elara-window-button';
@@ -80,7 +80,7 @@ Taskbar.prototype.update = function() {
         label.innerText = controller.getTitle();
 
         // Get the icon element
-        var icon = svgUtil.createSvgElement(controller.getIcon(), 16, 16);
+        const icon = svgUtil.createSvgElement(controller.getIcon(), 16, 16);
 
         // Combine the elements of the button
         button.appendChild(icon);
@@ -95,10 +95,10 @@ Taskbar.prototype.update = function() {
         }
 
         // Bind the button click event
-        button.addEventListener('click', function () {
+        button.addEventListener('click', () => {
             controller.focusFromTaskbar();
         });
     }
-}
+};
 
 export default Taskbar;

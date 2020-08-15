@@ -3,17 +3,17 @@ function ToolbarDrawer(parent, title, height) {
     this.parent = parent;
     this.title = title;
     this.height = height; // optional
-    
+
     //
     this.drawerButton = null;
     this.drawer = null;
 }
 
-ToolbarDrawer.prototype.construct = function() {
+ToolbarDrawer.prototype.construct = function () {
     // Create the elements
-    var drawerButton = document.createElement('div');
-    var button = document.createElement('div');
-    var drawer = document.createElement('div');
+    const drawerButton = document.createElement('div');
+    const button = document.createElement('div');
+    const drawer = document.createElement('div');
 
     // Add the classes
     drawerButton.className = 'elara-drawer-button';
@@ -37,41 +37,40 @@ ToolbarDrawer.prototype.construct = function() {
     }
 
     // Bind the button click
-    var self = this;
-    button.addEventListener('click', function () {
+    const self = this;
+    button.addEventListener('click', () => {
         self.open();
     });
 
-    return drawerButton;   
-}
+    return drawerButton;
+};
 
-ToolbarDrawer.prototype.open = function() {
+ToolbarDrawer.prototype.open = function () {
     if (this.drawerButton.classList.contains('opened')) {
         // Close the menu if it's clicked again
         this.close();
-    }
-    else {
+    } else {
         // Close all menu's
         this.parent.closeAll();
 
         // Invoke the open callback if set
         if (this.openCallback !== null) {
             this.openCallback(this.drawer);
-        }        
+        }
 
         // Add the "opened" class to show the drawer
-        this.drawerButton.classList.add('opened');        
+        this.drawerButton.classList.add('opened');
     }
-}
+};
 
-ToolbarDrawer.prototype.close = function() {
-    if (this.drawerButton.classList.contains('opened')) {       
+ToolbarDrawer.prototype.close = function () {
+    if (this.drawerButton.classList.contains('opened')) {
         this.drawerButton.classList.remove('opened');
     }
-}
+};
 
-ToolbarDrawer.prototype.bind = function(openCallback) {
+ToolbarDrawer.prototype.bind = function (openCallback) {
     this.openCallback = openCallback;
-}
+};
 
 export default ToolbarDrawer;

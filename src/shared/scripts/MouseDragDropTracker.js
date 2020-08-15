@@ -1,6 +1,6 @@
-﻿// constructor: MouseDragDropTracker
+// constructor: MouseDragDropTracker
 function MouseDragDropTracker() {
-    var self = this;
+    const self = this;
 
     // Drag-drop session.
     // The session is started from the function start.
@@ -14,14 +14,14 @@ function MouseDragDropTracker() {
     //    {
     //       init: function (session) { ... },
     //       transform: function (session, dx, dy, x, y, first, completed) { ... }
-    //    }    
+    //    }
     self.start = function (e, events) {
         // Create the drag-drop session
-        var session = {
+        const session = {
             target: e.target,
             initialPageX: e.pageX,
             initialPageY: e.pageY,
-            first: true,            
+            first: true,
             transform: events.transform,
         };
 
@@ -46,13 +46,13 @@ function MouseDragDropTracker() {
     // Get if any drag-drop session is active
     self.hasSession = function () {
         return self.session !== null;
-    }
+    };
 
-    // Mouse move handler    
+    // Mouse move handler
     self.moveHandler = function (e) {
         // Calculate the x and y difference between the session start and now.
-        var dx = e.pageX - self.session.initialPageX;
-        var dy = e.pageY - self.session.initialPageY;
+        const dx = e.pageX - self.session.initialPageX;
+        const dy = e.pageY - self.session.initialPageY;
 
         // Invoke the transform function
         self.session.transform(self.session, dx, dy, e.pageX, e.pageY, self.session.first, false);
@@ -68,22 +68,22 @@ function MouseDragDropTracker() {
         return false;
     };
 
-    // Mouse up handler   
+    // Mouse up handler
     self.moveUpHandler = function (e) {
         // Remove the event listeners for mouse move and mouse up
         window.removeEventListener('mousemove', self.moveHandler, true);
         window.removeEventListener('mouseup', self.moveUpHandler, false);
 
         // Calculate the x and y difference between the session start and now.
-        var dx = e.pageX - self.session.initialPageX;
-        var dy = e.pageY - self.session.initialPageY;
+        const dx = e.pageX - self.session.initialPageX;
+        const dy = e.pageY - self.session.initialPageY;
 
         // Invoke the transform function
         self.session.transform(self.session, dx, dy, e.pageX, e.pageY, self.session.first, true);
 
         // Destroy the drag session
         self.session = null;
-    };    
+    };
 }
 
 export default MouseDragDropTracker;

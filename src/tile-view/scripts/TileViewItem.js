@@ -15,18 +15,18 @@ function TileViewItem(parent, src) {
 }
 
 // Construct the tile view item element
-TileViewItem.prototype.construct = function() {
+TileViewItem.prototype.construct = function () {
     // Create the elements
-    var element = document.createElement('div');   
-    var titleElement = document.createElement('div');
-    var imageContainerElement = document.createElement('div');
-    var imageElement = document.createElement('img');
-    
+    const element = document.createElement('div');
+    const titleElement = document.createElement('div');
+    const imageContainerElement = document.createElement('div');
+    const imageElement = document.createElement('img');
+
     // Add the style classes
     element.classList.add('tile');
     titleElement.classList.add('title');
-    imageContainerElement.classList.add('image-container');    
-    
+    imageContainerElement.classList.add('image-container');
+
     // Set the title text
     titleElement.innerText = this.title;
 
@@ -37,7 +37,7 @@ TileViewItem.prototype.construct = function() {
     imageContainerElement.appendChild(imageElement);
     element.appendChild(imageContainerElement);
     element.appendChild(titleElement);
-        
+
     // Store the last constructed element
     this.element = element;
 
@@ -49,38 +49,38 @@ TileViewItem.prototype.construct = function() {
     titleElement.addEventListener('dblclick', this.open);
 
     // Start the drag/drop logic on the mouse down event
-    var self = this;
-    element.addEventListener('mousedown', function (e) { 
+    const self = this;
+    element.addEventListener('mousedown', (e) => {
         self.startDragDrop(e);
     });
 
     // Return the new constructed tile view item
     return element;
-}
+};
 
 // Apply the position on the element
-TileViewItem.prototype.applyPosition = function() {
+TileViewItem.prototype.applyPosition = function () {
     // Set the position properties
-    this.element.style.top = this.y + 'px';
-    this.element.style.left = this.x + 'px';
-}
+    this.element.style.top = `${this.y}px`;
+    this.element.style.left = `${this.x}px`;
+};
 
 // Start the drag/drop logic(from mousedown event)
-TileViewItem.prototype.startDragDrop = function(e) {
-    var self = this;
+TileViewItem.prototype.startDragDrop = function (e) {
+    const self = this;
     this.parent.engine.start(e, {
-        init: function (session) {
+        init(session) {
             // Store the initial tile position
             session.initialX = self.x;
             session.initialY = self.y;
         },
-        transform: function (session, dx, dy, x, y, first, completed) {  
-            // First transform          
-            if (first) {                
+        transform(session, dx, dy, x, y, first, completed) {
+            // First transform
+            if (first) {
                 // Make sure that the movement animation is disabled
                 if (self.element.classList.contains('animate-position')) {
                     self.element.classList.remove('animate-position');
-                }                
+                }
             }
 
             // Update the position
@@ -92,13 +92,12 @@ TileViewItem.prototype.startDragDrop = function(e) {
 
             // Last transform
             if (completed) {
-
                 if (self.parent.settings.grid.enforce) {
                     // Get the nearest grid position for the current screen position
-                    var gridPosition = self.parent.translateScreenToGrid(self.x, self.y);                
+                    const gridPosition = self.parent.translateScreenToGrid(self.x, self.y);
 
                     // Translate the grid position back to a screen position
-                    var screenPosition = self.parent.translateGridToScreen(gridPosition.x, gridPosition.y);
+                    const screenPosition = self.parent.translateGridToScreen(gridPosition.x, gridPosition.y);
 
                     // Update the position
                     self.x = screenPosition.x;
@@ -106,13 +105,13 @@ TileViewItem.prototype.startDragDrop = function(e) {
 
                     // Enable the movement animation
                     self.element.classList.add('animate-position');
-                    
+
                     // Apply the position (animated)
                     self.applyPosition();
                 }
             }
-        }
+        },
     });
-}
+};
 
 export default TileViewItem;

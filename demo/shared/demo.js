@@ -1,158 +1,155 @@
 // Available window layouts
-var ELARA_WINDOW_LAYOUTS = [
+const ELARA_WINDOW_LAYOUTS = [
     {
         title: 'Cascade Windows',
         name: 'cascade',
-        icon: 'img/feather/layers.svg'
+        icon: 'img/feather/layers.svg',
     },
     {
         title: 'Split Windows',
         name: 'split',
-        icon: 'img/feather/grid.svg'
+        icon: 'img/feather/grid.svg',
     },
     {
         title: 'Maximize All Windows',
         name: 'maximizeAll',
-        icon: 'img/feather/maximize.svg'
+        icon: 'img/feather/maximize.svg',
     },
     {
         title: 'Minimize All Windows',
         name: 'minimizeAll',
-        icon: 'img/feather/minimize.svg'
+        icon: 'img/feather/minimize.svg',
     },
     {
         title: 'Show All Windows',
         name: 'showAll',
-        icon: 'img/feather/menu.svg'
-    }
+        icon: 'img/feather/menu.svg',
+    },
 ];
 
-function initLauncherZone(toolbar, windows) {    
-    var items = [];
+function initLauncherZone(toolbar, windows) {
+    const items = [];
 
     items.push({
-        'title': 'Welcome',
-        'icon': 'img/feather/triangle.svg',
-        'click': function () {                
+        title: 'Welcome',
+        icon: 'img/feather/triangle.svg',
+        click() {
             openWelcome();
-        }
+        },
     });
 
     items.push({
-        'title': 'Layers.js',
-        'icon': 'img/feather/layers.svg',
-        'click': function () {
+        title: 'Layers.js',
+        icon: 'img/feather/layers.svg',
+        click() {
             openLayersJs();
-        }
-    });        
+        },
+    });
 
     items.push({
-        'title': 'Domotica dashboard',
-        'icon': 'img/feather/grid.svg',
-        'click': function () {
+        title: 'Domotica dashboard',
+        icon: 'img/feather/grid.svg',
+        click() {
             openDashboard();
-        }
-    });        
+        },
+    });
 
     items.push({
-        'title': 'PowerShell',
-        'icon': 'img/feather/terminal.svg',
-        'click': function () {
+        title: 'PowerShell',
+        icon: 'img/feather/terminal.svg',
+        click() {
             openPowerShell();
-        }
-    });        
+        },
+    });
 
     items.push({
-        'title': 'Picture viewer',
-        'icon': 'img/feather/image.svg',
-        'click': function () {
+        title: 'Picture viewer',
+        icon: 'img/feather/image.svg',
+        click() {
             openPictureViewer();
-        }
-    });    
+        },
+    });
 
-    items.push( {
-        'title': 'Animated background',
-        'icon': 'img/feather/zap.svg',
-        'click': function () {
+    items.push({
+        title: 'Animated background',
+        icon: 'img/feather/zap.svg',
+        click() {
             openAnimatedBackground();
-        }           
-    });    
+        },
+    });
 
     toolbar.addDropDownMenu('Applications', items);
 }
 
-function initSystemZone(toolbar, windows)
-{
+function initSystemZone(toolbar, windows) {
     function createLayoutFn(name) {
         return function () {
             windows.getActiveControllerSet()[name]();
         };
     }
-    var items = [];
-    for (var i = 0; i < ELARA_WINDOW_LAYOUTS.length; i++) {
-        let fn = createLayoutFn(ELARA_WINDOW_LAYOUTS[i].name);
+    const items = [];
+    for (let i = 0; i < ELARA_WINDOW_LAYOUTS.length; i++) {
+        const fn = createLayoutFn(ELARA_WINDOW_LAYOUTS[i].name);
         items.push({
-            'title': ELARA_WINDOW_LAYOUTS[i].title,
-            'icon': ELARA_WINDOW_LAYOUTS[i].icon,
-            'click': function () {
+            title: ELARA_WINDOW_LAYOUTS[i].title,
+            icon: ELARA_WINDOW_LAYOUTS[i].icon,
+            click() {
                 fn();
                 return true; // cancel close
-            }
+            },
         });
     }
 
-    for (var j = 0; j < windows.windowSetCollection.count(); j++) {
-        let index = j;
+    for (let j = 0; j < windows.windowSetCollection.count(); j++) {
+        const index = j;
         items.push({
-            'title': 'Workspace ' + (j + 1),
-            'icon': 'img/feather/monitor.svg',
-            'click': function () {
+            title: `Workspace ${j + 1}`,
+            icon: 'img/feather/monitor.svg',
+            click() {
                 windows.windowSetCollection.selectAt(index);
                 return true;
-            }
+            },
         });
     }
     items.push({
-        'title': 'Add workspace',
-        'icon': 'img/feather/plus-square.svg',
-        'click': function () {
+        title: 'Add workspace',
+        icon: 'img/feather/plus-square.svg',
+        click() {
             windows.windowSetCollection.add();
             windows.windowSetCollection.selectAt(windows.windowSetCollection.count() - 1);
             return true;
-        }
+        },
     });
 
     toolbar.addDropDownMenu('Windows', items);
 }
 
 function initWorkspacesDrawer(toolbar, windows) {
-    var workspacesDrawer = toolbar.addDrawer('Workspaces');
-    workspacesDrawer.bind(function(drawer) {
-
+    const workspacesDrawer = toolbar.addDrawer('Workspaces');
+    workspacesDrawer.bind((drawer) => {
         // Workspace click callback
-        var callback = function(index, doubleClick) {   
-            // Select the clicked workspace        
+        const callback = function (index, doubleClick) {
+            // Select the clicked workspace
             windows.windowSetCollection.selectAt(index);
 
             if (doubleClick) {
                 // Close the drawer on double clicks
                 workspacesDrawer.close();
-            }
-            else {
+            } else {
                 // Update the previews because the selected workspace changed
                 updatePreviews();
             }
         };
 
-        function updatePreviews() {            
+        function updatePreviews() {
             // Create the preview elements
-            var previews = windows.windowSetCollection.createPreviews(280, 180, callback);
+            const previews = windows.windowSetCollection.createPreviews(280, 180, callback);
 
             // Update the content of the drawer
-            drawer.innerHTML = '';            
-            for (var i = 0; i < previews.length; i++) {
+            drawer.innerHTML = '';
+            for (let i = 0; i < previews.length; i++) {
                 drawer.appendChild(previews[i]);
-            }    
+            }
         }
 
         // Perform the initial previews update
@@ -161,33 +158,33 @@ function initWorkspacesDrawer(toolbar, windows) {
 }
 
 function startFrame(source, title, options) {
-    var windows = window.windows;
+    const { windows } = window;
     if (options === undefined) {
         options = {
-            title: title,
+            title,
             size: {
                 width: 1400,
-                height:800,
+                height: 800,
             },
-            icon: 'img/feather/circle.svg'
+            icon: 'img/feather/circle.svg',
         };
     }
 
-    var controller = windows.createIFrameWindow(source, options);
+    const controller = windows.createIFrameWindow(source, options);
 
-    controller.iframe.onload = function() {
+    controller.iframe.onload = function () {
         if (controller.iframe.contentDocument !== null) {
             // Set the title
             controller.setTitle(controller.iframe.contentDocument.title);
 
             // Try to read the desired icon from the meta element
-            var iconMetaElement = controller.iframe.contentDocument.head.querySelector('meta[name=elara-icon]');
+            const iconMetaElement = controller.iframe.contentDocument.head.querySelector('meta[name=elara-icon]');
             if (iconMetaElement !== null) {
-                var icon = iconMetaElement.content;        
+                const icon = iconMetaElement.content;
                 controller.setIcon(icon);
             }
         }
-    }    
+    };
 
     controller.focus();
 }
@@ -195,45 +192,44 @@ function startFrame(source, title, options) {
 function updateTileViewItems(tileView) {
     tileView.update([
         {
-            title: 'Welcome',            
+            title: 'Welcome',
             image: 'img/feather/triangle.svg',
-            open: openWelcome
+            open: openWelcome,
         },
         {
             title: 'Dashboard',
             image: 'img/feather/grid.svg',
-            open: openDashboard
+            open: openDashboard,
         },
         {
             title: 'Layers.js',
             image: 'img/feather/layers.svg',
-            open: openLayersJs
+            open: openLayersJs,
         },
         {
             title: 'Animated background',
             image: 'img/feather/zap.svg',
-            open: openAnimatedBackground
+            open: openAnimatedBackground,
         },
         {
             title: 'PowerShell',
             image: 'img/feather/terminal.svg',
-            open: openPowerShell
-        },  
+            open: openPowerShell,
+        },
         {
-            title: 'Pictures',       
+            title: 'Pictures',
             image: 'img/feather/image.svg',
-            open: openPictureViewer
-        }
+            open: openPictureViewer,
+        },
     ]);
 }
 
-function startElaraDemo()
-{
+function startElaraDemo() {
     // Create the window, taskbar and toolbar managers
-    var windows = new Elara.WindowManager();
-    var taskbar = new Elara.Taskbar();
-    var toolbar = new Elara.Toolbar();
-    var tileView = new Elara.TileView();
+    const windows = new Elara.WindowManager();
+    const taskbar = new Elara.Taskbar();
+    const toolbar = new Elara.Toolbar();
+    const tileView = new Elara.TileView();
 
     window.windows = windows;
 
@@ -242,18 +238,18 @@ function startElaraDemo()
     taskbar.bind('.elara-taskbar', windows);
     toolbar.bind('.elara-toolbar', windows);
     tileView.bind('.elara-tile-view');
-    
+
     // Add the second and third workspace
     windows.windowSetCollection.add();
     windows.windowSetCollection.add();
-    
+
     // Initialize the menu's of the toolbar
     toolbar.suspendLayout();
     initLauncherZone(toolbar, windows);
     toolbar.addSeperator();
     initSystemZone(toolbar, windows);
-    initWorkspacesDrawer(toolbar, windows)    
-    toolbar.resumeLayout();    
+    initWorkspacesDrawer(toolbar, windows);
+    toolbar.resumeLayout();
 
     // Update the tile view items
     updateTileViewItems(tileView);
@@ -269,24 +265,24 @@ function openWelcome() {
         title: 'Welcome',
         size: {
             width: 800,
-            height: 870
+            height: 870,
         },
         location: {
             x: 16,
-            y: 16
+            y: 16,
         },
-        icon: 'img/feather/triangle.svg'
+        icon: 'img/feather/triangle.svg',
     });
 }
 
-function openDashboard() {    
+function openDashboard() {
     startFrame('https://hlhielkema.github.io/domotica_dashboard_concept/', 'Dashboard', {
         title: 'Dashboard',
         size: {
             width: 1400,
-            height:800,
+            height: 800,
         },
-        icon: 'img/feather/grid.svg'
+        icon: 'img/feather/grid.svg',
     });
 }
 
@@ -295,20 +291,20 @@ function openLayersJs() {
         title: 'Layers.js',
         size: {
             width: 1260,
-            height:700,
+            height: 700,
         },
-        icon: 'img/feather/layers.svg'
+        icon: 'img/feather/layers.svg',
     });
 }
 
-function openAnimatedBackground() {    
+function openAnimatedBackground() {
     startFrame('https://hlhielkema.github.io/animation_playground/dots/index.html', 'Animated background', {
         title: 'Animated background',
         size: {
             width: 1260,
-            height:700,
+            height: 700,
         },
-        icon: 'img/feather/zap.svg'
+        icon: 'img/feather/zap.svg',
     });
 }
 
@@ -317,9 +313,9 @@ function openPowerShell() {
         title: 'PowerShell',
         size: {
             width: 860,
-            height:500,
+            height: 500,
         },
-        icon: 'img/feather/terminal.svg'
+        icon: 'img/feather/terminal.svg',
     });
 }
 
@@ -328,8 +324,8 @@ function openPictureViewer() {
         title: 'Pictures',
         size: {
             width: 1000,
-            height:800,
+            height: 800,
         },
-        icon: 'img/feather/image.svg'
+        icon: 'img/feather/image.svg',
     });
 }

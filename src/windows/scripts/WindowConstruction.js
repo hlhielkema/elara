@@ -1,28 +1,28 @@
-﻿// constructor: WindowConstruction
+// constructor: WindowConstruction
 function WindowConstruction() { }
 
 // Construct the window
-WindowConstruction.prototype.window = function() {
+WindowConstruction.prototype.window = function () {
     // Create the title bar
-    var titleBar = this.titleBar();
+    const titleBar = this.titleBar();
 
     // Create the content container
-    var content = this.content();
+    const content = this.content();
 
     // Create the window element
-    var window = document.createElement('div');        
-    var windowVisible = document.createElement('div');
-    var windowOverlay = document.createElement('div');
+    const window = document.createElement('div');
+    const windowVisible = document.createElement('div');
+    const windowOverlay = document.createElement('div');
 
     // Set the window class
-    window.className = 'elara-window';        
+    window.className = 'elara-window';
     windowVisible.className = 'elara-window-visible';
     windowOverlay.className = 'elara-window-overlay';
 
     // Combine the elements
-    window.appendChild(windowVisible);        
+    window.appendChild(windowVisible);
     windowVisible.appendChild(titleBar);
-    windowVisible.appendChild(content);     
+    windowVisible.appendChild(content);
     windowVisible.appendChild(windowOverlay);
 
     // Return the created window
@@ -30,35 +30,35 @@ WindowConstruction.prototype.window = function() {
 };
 
 // Construct the title bar
-WindowConstruction.prototype.titleBar = function() {
+WindowConstruction.prototype.titleBar = function () {
     // Create the elements
-    var titleBar = document.createElement('div');
-    var title = document.createElement('div');
-    var iconContainer = document.createElement('div');        
+    const titleBar = document.createElement('div');
+    const title = document.createElement('div');
+    const iconContainer = document.createElement('div');
 
     // Set the classes
     titleBar.className = 'elara-title-bar';
     title.className = 'elara-title';
-    iconContainer.className = 'elara-icon-container';        
+    iconContainer.className = 'elara-icon-container';
 
     // Create the control box
-    var controlBox = this.controlbox();
+    const controlBox = this.controlbox();
 
     // Combine the element
     titleBar.appendChild(iconContainer);
     titleBar.appendChild(title);
-    titleBar.appendChild(controlBox);        
+    titleBar.appendChild(controlBox);
 
-    return titleBar;   
+    return titleBar;
 };
 
 // Construct the control box
-WindowConstruction.prototype.controlbox = function() {
+WindowConstruction.prototype.controlbox = function () {
     // Create the elements
-    var minimize = document.createElement('div');
-    var maximize = document.createElement('div');
-    var close = document.createElement('div');
-    var controlBox = document.createElement('div');
+    const minimize = document.createElement('div');
+    const maximize = document.createElement('div');
+    const close = document.createElement('div');
+    const controlBox = document.createElement('div');
 
     // Set the classes
     minimize.className = 'elara-control-button minimize';
@@ -76,9 +76,9 @@ WindowConstruction.prototype.controlbox = function() {
 };
 
 // Constuct the content container
-WindowConstruction.prototype.content = function() {
+WindowConstruction.prototype.content = function () {
     // Create the element
-    var content = document.createElement('div');
+    const content = document.createElement('div');
 
     // Set the class
     content.className = 'elara-window-content';

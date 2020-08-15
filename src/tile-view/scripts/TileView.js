@@ -1,5 +1,5 @@
-import TileViewItem from "./TileViewItem.js";
-import MouseDragDropTracker from "../../shared/scripts/MouseDragDropTracker.js"
+import TileViewItem from './TileViewItem.js';
+import MouseDragDropTracker from '../../shared/scripts/MouseDragDropTracker.js';
 
 // constructor: TileView
 function TileView() {
@@ -14,24 +14,24 @@ function TileView() {
             tile: {
                 height: 96,
                 width: 96,
-                margin: 16
-            }            
-        }
-    }
+                margin: 16,
+            },
+        },
+    };
 }
 
 // Bind the tile view to a container
-TileView.prototype.bind = function(selector) {
+TileView.prototype.bind = function (selector) {
     this.selector = selector;
 };
 
 // Update the items of the tile view
-TileView.prototype.update = function(items) {
+TileView.prototype.update = function (items) {
     this.items = [];
-    for (var i = 0; i < items.length; i++) {        
+    for (let i = 0; i < items.length; i++) {
         this.items.push(new TileViewItem(this, items[i]));
     }
-    
+
     // Arrange the items in useful way
     this.autoArrangeItems();
 
@@ -40,19 +40,19 @@ TileView.prototype.update = function(items) {
 };
 
 // Auto arrange the items
-TileView.prototype.autoArrangeItems = function() {    
+TileView.prototype.autoArrangeItems = function () {
     // Determine the number of culumns to use.
     // Replace "ceil" by "floor" to prioritise using the height.
-    var columns = Math.ceil(Math.sqrt(this.items.length));
+    const columns = Math.ceil(Math.sqrt(this.items.length));
 
     // Loop throug the items
-    for (var i = 0; i < this.items.length; i++) {   
+    for (let i = 0; i < this.items.length; i++) {
         // Determine the x and y coordinate on the grid
-        var x = i % columns;
-        var y = Math.floor(i / columns);
+        const x = i % columns;
+        const y = Math.floor(i / columns);
 
         // Translate the grid position to a screen position
-        var position = this.translateGridToScreen(x, y);
+        const position = this.translateGridToScreen(x, y);
 
         // Update the item position
         this.items[i].x = position.x;
@@ -61,33 +61,33 @@ TileView.prototype.autoArrangeItems = function() {
 };
 
 // Translate grid coordinates to screen coordinates
-TileView.prototype.translateGridToScreen = function(x, y) {
-    var grid = this.settings.grid;
+TileView.prototype.translateGridToScreen = function (x, y) {
+    const { grid } = this.settings;
     return {
         x: ((grid.tile.width + (grid.tile.margin * 2)) * x) + grid.tile.margin,
-        y: ((grid.tile.height + (grid.tile.margin * 2)) * y) + grid.tile.margin
-    }
+        y: ((grid.tile.height + (grid.tile.margin * 2)) * y) + grid.tile.margin,
+    };
 };
 
 // Translate screen coordinates to the nearest grid coordinates.
-TileView.prototype.translateScreenToGrid = function(x, y) {
-    var grid = this.settings.grid;
+TileView.prototype.translateScreenToGrid = function (x, y) {
+    const { grid } = this.settings;
     return {
         x: +Math.round((x - grid.tile.margin) / (grid.tile.width + (grid.tile.margin * 2))),
-        y: +Math.round((y - grid.tile.margin) / (grid.tile.height + (grid.tile.margin * 2)))
-    }
-}
+        y: +Math.round((y - grid.tile.margin) / (grid.tile.height + (grid.tile.margin * 2))),
+    };
+};
 
 // Construct the tile view
-TileView.prototype.construct = function() {
+TileView.prototype.construct = function () {
     // Get the container
-    var container = document.querySelector(this.selector);
+    const container = document.querySelector(this.selector);
 
-    // Clear the container    
+    // Clear the container
     container.innerHTML = '';
 
     // Add the items
-    for (var i = 0; i < this.items.length; i++) {
+    for (let i = 0; i < this.items.length; i++) {
         container.appendChild(this.items[i].construct());
     }
 };

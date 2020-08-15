@@ -1,10 +1,10 @@
-var previousButton = document.querySelector('.button.previous');
-var nextButton = document.querySelector('.button.next');
-var content = document.querySelector('.content');
+const previousButton = document.querySelector('.button.previous');
+const nextButton = document.querySelector('.button.next');
+const content = document.querySelector('.content');
 
-var index = 0;
+let index = 0;
 
-var images = [
+const images = [
     'img_1.jpg',
     'img_2.jpg',
     'img_3.jpg',
@@ -13,14 +13,14 @@ var images = [
     'img_6.jpg',
 ];
 
-previousButton.addEventListener('click', function() {
+previousButton.addEventListener('click', () => {
     if (--index < 0) {
         index = images.length - 1;
-    }    
+    }
     content.src = images[index];
 });
 
-nextButton.addEventListener('click', function() {
+nextButton.addEventListener('click', () => {
     index = (index + 1) % images.length;
     content.src = images[index];
 });
