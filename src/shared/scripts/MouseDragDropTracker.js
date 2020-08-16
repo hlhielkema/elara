@@ -1,3 +1,5 @@
+import DragDropSession from './DragDropSession';
+
 // constructor: MouseDragDropTracker
 function MouseDragDropTracker() {
     const self = this;
@@ -5,7 +7,7 @@ function MouseDragDropTracker() {
     // Drag-drop session.
     // The session is started from the function start.
     // null = no active session.
-    self.session = null;
+    self.session = null; // typeof DragDropSession
 
     // Handle the mouse down event
     // e:
@@ -17,13 +19,7 @@ function MouseDragDropTracker() {
     //    }
     self.start = function start(e, events) {
         // Create the drag-drop session
-        const session = {
-            target: e.target,
-            initialPageX: e.pageX,
-            initialPageY: e.pageY,
-            first: true,
-            transform: events.transform,
-        };
+        const session = new DragDropSession(e, events);
 
         // Initialize the session
         events.init(session);

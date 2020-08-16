@@ -71,8 +71,7 @@ TileViewItem.prototype.startDragDrop = function startDragDrop(e) {
     this.parent.engine.start(e, {
         init(session) {
             // Store the initial tile position
-            session.initialX = self.x;
-            session.initialY = self.y;
+            session.setInitialPosition(self.x, self.y);
         },
         transform(session, dx, dy, x, y, first, completed) {
             // First transform

@@ -326,6 +326,30 @@ WindowController.prototype.resume = function resume() {
     this.applyState();
 };
 
+// Set if the window is focussed
+WindowController.prototype.setFocus = function setFocus(focus) {
+    if (this.state.focus !== focus) {
+        this.state.focus = focus;
+        this.applyState();
+    }
+};
+
+// Set if the window is moving
+WindowController.prototype.setMoving = function setMoving(moving) {
+    if (this.state.moving !== moving) {
+        this.state.moving = moving;
+        this.applyState();
+    }
+};
+
+// Set if the window is resizing
+WindowController.prototype.setResizing = function setResizing(resizing) {
+    if (this.state.resizing !== resizing) {
+        this.state.resizing = resizing;
+        this.applyState();
+    }
+};
+
 // Set if minimizing the window is allowed
 WindowController.prototype.setAllowMinimize = function setAllowMinimize(allowMinimize) {
     if (this.state.allowMinimize !== allowMinimize) {

@@ -123,14 +123,12 @@ WindowSet.prototype.setFocus = function setFocus(controller) {
     let changed = false;
     for (let i = 0; i < this.controllers.length; i++) {
         if (this.controllers[i].state.focus) {
-            this.controllers[i].state.focus = false;
-            this.controllers[i].applyState();
+            controller.setFocus(false);
             changed = true;
         }
     }
     if (!controller.state.focus) {
-        controller.state.focus = true;
-        controller.applyState();
+        controller.setFocus(true);
         changed = true;
     }
 
@@ -149,8 +147,7 @@ WindowSet.prototype.resetFocus = function resetFocus() {
     let changed = false;
     for (let i = 0; i < this.controllers.length; i++) {
         if (this.controllers[i].state.focus) {
-            this.controllers[i].state.focus = false;
-            this.controllers[i].applyState();
+            this.controllers[i].setFocus(false);
             changed = true;
         }
     }

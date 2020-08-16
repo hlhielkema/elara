@@ -11,15 +11,17 @@ WindowMovement.prototype.onTitlebarGrab = function onTitlebarGrab(e) {
     const self = this;
     self.engine.start(e, {
         init(session) {
-            session.window = session.target.closest('.elara-window');
-            session.controller = self.windowManager.getController(session.window.getAttribute('data-controller-id'));
+            session.setInnerTarget(session.target.closest('.elara-window'));
+            session.setController(self.windowManager.getController(session.innerTarget.getAttribute('data-controller-id')));
 
             // Determine the initial position of the window inside its container
             const containerRect = self.windowManager.windowContainer.getBoundingClientRect();
-            const windowRect = session.window.getBoundingClientRect();
+            const windowRect = session.innerTarget.getBoundingClientRect();
 
-            session.initialWindowLeft = windowRect.left - containerRect.left;
-            session.initialWindowTop = windowRect.top - containerRect.top;
+            // Store the initial position and size of the window
+            const initialX = windowRect.left - containerRect.left;
+            const initialY = windowRect.top - containerRect.top;
+            session.setInitialPosition(initialX, initialY);
         },
         transform(session, dx, dy, x, y, first, completed) {
             if (first) {
@@ -27,18 +29,17 @@ WindowMovement.prototype.onTitlebarGrab = function onTitlebarGrab(e) {
                 self.windowManager.windowContainer.classList.add('window-dragging-active');
 
                 // Update the moving state
-                session.controller.state.moving = true;
-                session.controller.applyState();
+                session.controller.setMoving(true);
 
                 // Focus the window
                 session.controller.focus();
 
                 // Get the window on top of the overlays
-                session.window.style['z-index'] = 2000;
+                session.innerTarget.style.setProperty('z-index', 2000);
             }
 
-            const newX = session.initialWindowLeft + dx;
-            const newY = session.initialWindowTop + dy;
+            const newX = session.initialX + dx;
+            const newY = session.initialY + dy;
 
             // Move the window to the new position
             session.controller.move(newX, newY);
@@ -57,8 +58,7 @@ WindowMovement.prototype.onTitlebarGrab = function onTitlebarGrab(e) {
                 self.windowManager.windowContainer.classList.remove('window-dragging-active');
 
                 // Update the moving state
-                session.controller.state.moving = false;
-                session.controller.applyState();
+                session.controller.setMoving(false);
             }
             else {
                 // Restore its non-relative size when moving the window
@@ -117,27 +117,28 @@ WindowMovement.prototype.onWindowGrab = function onWindowGrab(e) {
     const self = this;
     self.engine.start(e, {
         init(session) {
-            session.window = session.target.closest('.elara-window');
-            session.controller = self.windowManager.getController(session.window.getAttribute('data-controller-id'));
+            session.setInnerTarget(session.target.closest('.elara-window'));
+            session.setController(self.windowManager.getController(session.innerTarget.getAttribute('data-controller-id')));
 
             // Determine the initial position of the window inside its container
             const containerRect = self.windowManager.windowContainer.getBoundingClientRect();
-            const windowRect = session.window.getBoundingClientRect();
+            const windowRect = session.innerTarget.getBoundingClientRect();
 
-            //
-            session.initialWindowX = windowRect.left - containerRect.left;
-            session.initialWindowY = windowRect.top - containerRect.top;
-            session.initialWidth = session.controller.size.x.getPx(); // inner window width
-            session.initialHeight = session.controller.size.y.getPx(); // inner window height
+            // Store the initial position and size of the window
+            const initialX = windowRect.left - containerRect.left;
+            const initialY = windowRect.top - containerRect.top;
+            const initialWidth = session.controller.size.x.getPx(); // inner window width
+            const initialHeight = session.controller.size.y.getPx(); // inner window height
+            session.setInitialPosition(initialX, initialY);
+            session.setInitialSize(initialWidth, initialHeight);
 
             //
             const onWindowX = e.pageX - windowRect.left;
             const onWindowY = e.pageY - windowRect.top;
 
             const modes = self.determineModes(onWindowX, onWindowY, windowRect.width, windowRect.height);
-            session.hmode = modes.hmode;
-            session.vmode = modes.vmode;
-            session.window.style.cursor = self.determineResizeCursor(session.hmode, session.vmode);
+            session.setTransformMode(modes.hmode, modes.vmode);
+            session.innerTarget.style.setProperty('cursor', self.determineResizeCursor(session.hmode, session.vmode));
         },
         transform(session, dx, dy, x, y, first, completed) {
             if (first) {
@@ -145,18 +146,17 @@ WindowMovement.prototype.onWindowGrab = function onWindowGrab(e) {
                 self.windowManager.windowContainer.classList.add('window-resize-active');
 
                 // Update the resizing state
-                session.controller.state.resizing = true;
-                session.controller.applyState();
+                session.controller.setResizing(true);
 
                 // Focus the window
                 session.controller.focus();
 
                 // Get the window on top of the overlays
-                session.window.style['z-index'] = 2000;
+                session.innerTarget.style.setProperty('z-index', 2000);
             }
 
-            let rx = session.initialWindowX;
-            let ry = session.initialWindowY;
+            let rx = session.initialX;
+            let ry = session.initialY;
             let rw = session.initialWidth;
             let rh = session.initialHeight;
 
@@ -184,8 +184,7 @@ WindowMovement.prototype.onWindowGrab = function onWindowGrab(e) {
 
             if (completed) {
                 // Update the resizing state
-                session.controller.state.resizing = false;
-                session.controller.applyState();
+                session.controller.setResizing(false);
 
                 // Remove the class from the window container that indicates that resize is active
                 self.windowManager.windowContainer.classList.remove('window-resize-active');

@@ -14,8 +14,7 @@
         "linebreak-style": ["error", "windows"],
         "indent": ["error", 4],
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true}],
-        "max-len": ["warn", { "code": 200 } ], /* remove this rule later */
-        "no-param-reassign": ["warn"],
+        "max-len": ["warn", { "code": 200 } ], /* remove this rule later */        
         "brace-style": ["error", "stroustrup"]
     }
 }
