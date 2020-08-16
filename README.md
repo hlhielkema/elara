@@ -1,5 +1,5 @@
 
-![banner](logo/banner.svg)
+![banner](media/logo/banner.svg)
 
 Elara enables creating a Windows/MacOS like window manager experience inside a web browser. This JavaScript library is written with performances and compatibility in mind. No third-party libraries or frameworks are needed to use Elara.
 
@@ -17,7 +17,7 @@ Open the [LIVE DEMO](https://hlhielkema.github.io/elara/) to try Elara yourself.
 
 > The demo site is hosted using GitHub pages. Running Elara requires no back-end code besides static file hosting.
 
-![screenshot A](screenshots/screenshot_a.png)
+![screenshot A](media/screenshots/screenshot_a.png)
 
 ---
 
@@ -44,7 +44,9 @@ npm run build
 Grab the files from the `/dist` directory if you want only to use Elara without modifying it.
 
 
-## Run ESLint
+## Linting
+<img src="media/third-party/eslint.png" width="200">
+
 Use this command to run ESLint:
 
 ```
@@ -64,7 +66,7 @@ The Elara library itself does not require any backend to work. However, just ope
 
 ### Node.js demo server
 
-<img src="img/nodejs.png" width="200">
+<img src="media/third-party/nodejs.png" width="200">
 
 *Command:*
 ``` ps
@@ -87,7 +89,7 @@ Elara demo server running at http://127.0.0.1:3000/
 
 ### ASP.NET Core demo server
 
-<img src="img/aspnetcore.png" width="200">
+<img src="media/third-party/aspnetcore.png" width="200">
 
 *Command:*
 ``` ps
@@ -114,7 +116,7 @@ info: Microsoft.Hosting.Lifetime[0]
 
 ### Go demo server
 
-<img src="img/golang.png" width="200">
+<img src="media/third-party/golang.png" width="200">
 
 ## Build and run
 
@@ -136,18 +138,18 @@ go build server.go
 
 ## Screenshots
 
-![screenshot 1](screenshots/screenshot_1.png)
+![screenshot 1](media/screenshots/screenshot_1.png)
 
 
-![screenshot 2](screenshots/screenshot_2.png)
+![screenshot 2](media/screenshots/screenshot_2.png)
 
 
-![screenshot 3](screenshots/screenshot_3.png)
+![screenshot 3](media/screenshots/screenshot_3.png)
 
 
-![screenshot 4](screenshots/screenshot_4.png)
+![screenshot 4](media/screenshots/screenshot_4.png)
 
-[View more](screenshots/)
+[View more](media/screenshots/)
 
 ---
 
