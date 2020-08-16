@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "lint": "eslint ./src/"
+    "lint": "eslint ./src/",
+    "updatedemo": "node updatedemo.js"
   },
   "repository": {
     "type": "git",
