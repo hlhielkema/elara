@@ -45,7 +45,7 @@ Grab the files from the `/dist` directory if you want only to use Elara without 
 
 
 ## Run ESLint
-Use this command to run ESLint.
+Use this command to run ESLint:
 
 ```
 npm run lint
@@ -91,8 +91,7 @@ Elara demo server running at http://127.0.0.1:3000/
 
 *Command:*
 ``` ps
-cd "demo\aspnetcore\ElaraDemo"
-dotnet run
+dotnet run --project .\demo\aspnetcore\ElaraDemo
 ```
 
 *Output:*
