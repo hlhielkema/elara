@@ -19,6 +19,8 @@ Open the [LIVE DEMO](https://hlhielkema.github.io/elara/) to try Elara yourself.
 
 ![screenshot A](media/screenshots/screenshot_a.png)
 
+> [View more](#screenshots)
+
 ---
 
 ## Features
