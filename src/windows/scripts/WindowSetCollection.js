@@ -75,6 +75,7 @@ WindowSetCollection.prototype.exportDimensions = function exportDimensions() {
 };
 
 // Create preview elements for all window sets
+// eslint-disable-next-line max-len
 WindowSetCollection.prototype.createPreviews = function createPreviews(targetWidth, targetHeight, callback) {
     // Create a click callback function
     const createCallback = function createCallback(index, doubleClick) {
@@ -84,7 +85,7 @@ WindowSetCollection.prototype.createPreviews = function createPreviews(targetWid
     };
 
     // Get the dimensions of the window container
-    const windowContainerRect = this.parent.getWindowContainerRect();
+    const { width, height } = this.parent.getWindowContainerRect();
 
     // Create an array to store the results
     const result = [];
@@ -95,7 +96,7 @@ WindowSetCollection.prototype.createPreviews = function createPreviews(targetWid
         const title = `${i + 1}`;
 
         // Create the preview element
-        const element = this.sets[i].createPreview(title, targetWidth, targetHeight, windowContainerRect.width, windowContainerRect.height);
+        const element = this.sets[i].createPreview(title, targetWidth, targetHeight, width, height);
 
         // Bind the click events
         element.addEventListener('click', createCallback(i, false));

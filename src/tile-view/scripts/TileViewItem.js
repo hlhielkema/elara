@@ -94,9 +94,11 @@ TileViewItem.prototype.startDragDrop = function startDragDrop(e) {
                 if (self.parent.settings.grid.enforce) {
                     // Get the nearest grid position for the current screen position
                     const gridPosition = self.parent.translateScreenToGrid(self.x, self.y);
+                    const gridX = gridPosition.x;
+                    const gridY = gridPosition.y;
 
                     // Translate the grid position back to a screen position
-                    const screenPosition = self.parent.translateGridToScreen(gridPosition.x, gridPosition.y);
+                    const screenPosition = self.parent.translateGridToScreen(gridX, gridY);
 
                     // Update the position
                     self.x = screenPosition.x;

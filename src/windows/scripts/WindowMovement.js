@@ -11,8 +11,13 @@ WindowMovement.prototype.onTitlebarGrab = function onTitlebarGrab(e) {
     const self = this;
     self.engine.start(e, {
         init(session) {
+            // Query and store the inner window element
             session.setInnerTarget(session.target.closest('.elara-window'));
-            session.setController(self.windowManager.getController(session.innerTarget.getAttribute('data-controller-id')));
+
+            // Find the controller for the element
+            const controllerId = session.innerTarget.getAttribute('data-controller-id');
+            const controller = self.windowManager.getController(controllerId);
+            session.setController(controller);
 
             // Determine the initial position of the window inside its container
             const containerRect = self.windowManager.windowContainer.getBoundingClientRect();
@@ -91,20 +96,25 @@ WindowMovement.prototype.determineResizeCursor = function determineResizeCursor(
     throw new Error('invalid input');
 };
 
-WindowMovement.prototype.determineModes = function determineModes(onWindowX, onWindowY, realWidth, realHeight) {
+// Determine which transform mode to use for a cursor position.
+// x: cursor x-position relative to the window element.
+// y: cursor y-position relative to the window element.
+// width: window element width in pixels.
+// height: window element height in pixels.
+WindowMovement.prototype.determineModes = function determineModes(x, y, width, height) {
     const zone = this.resizeZoneSize; // default = 16
     let hmode = 'none';
     let vmode = 'none';
-    if (onWindowX < 16) {
+    if (x < 16) {
         hmode = 'move';
     }
-    else if (realWidth - onWindowX < zone) {
+    else if (width - x < zone) {
         hmode = 'resize';
     }
-    if (onWindowY < zone) {
+    if (y < zone) {
         vmode = 'move';
     }
-    else if (realHeight - onWindowY < zone) {
+    else if (height - y < zone) {
         vmode = 'resize';
     }
     return {
@@ -117,8 +127,13 @@ WindowMovement.prototype.onWindowGrab = function onWindowGrab(e) {
     const self = this;
     self.engine.start(e, {
         init(session) {
+            // Query and store the inner window element
             session.setInnerTarget(session.target.closest('.elara-window'));
-            session.setController(self.windowManager.getController(session.innerTarget.getAttribute('data-controller-id')));
+
+            // Find the controller for the element
+            const controllerId = session.innerTarget.getAttribute('data-controller-id');
+            const controller = self.windowManager.getController(controllerId);
+            session.setController(controller);
 
             // Determine the initial position of the window inside its container
             const containerRect = self.windowManager.windowContainer.getBoundingClientRect();
@@ -132,13 +147,19 @@ WindowMovement.prototype.onWindowGrab = function onWindowGrab(e) {
             session.setInitialPosition(initialX, initialY);
             session.setInitialSize(initialWidth, initialHeight);
 
-            //
-            const onWindowX = e.pageX - windowRect.left;
-            const onWindowY = e.pageY - windowRect.top;
+            // Get the relative cursor position and window size
+            const relativeX = e.pageX - windowRect.left;
+            const relativeY = e.pageY - windowRect.top;
+            const windowWidth = windowRect.width;
+            const windowHeight = windowRect.height;
 
-            const modes = self.determineModes(onWindowX, onWindowY, windowRect.width, windowRect.height);
+            // Determine the transform mode for the current cursor position
+            const modes = self.determineModes(relativeX, relativeY, windowWidth, windowHeight);
             session.setTransformMode(modes.hmode, modes.vmode);
-            session.innerTarget.style.setProperty('cursor', self.determineResizeCursor(session.hmode, session.vmode));
+
+            // Determine which cursor to use and set it
+            const cursor = self.determineResizeCursor(session.hmode, session.vmode);
+            session.innerTarget.style.setProperty('cursor', cursor);
         },
         transform(session, dx, dy, x, y, first, completed) {
             if (first) {
@@ -199,7 +220,8 @@ WindowMovement.prototype.init = function init() {
     // Bind a mouse-down event on title bars of windows
     document.addEventListener('mousedown', (e) => {
         // Move
-        if (e.target.classList.contains('elara-title-bar') || e.target.classList.contains('elara-title')) {
+        if (e.target.classList.contains('elara-title-bar')
+            || e.target.classList.contains('elara-title')) {
             self.onTitlebarGrab(e);
         }
         else if (e.target.classList.contains('elara-window')) {
@@ -208,9 +230,11 @@ WindowMovement.prototype.init = function init() {
         else {
             // Try to find a window element in the click event path
             for (let i = 0; i < e.path.length; i++) {
-                if (e.path[i].classList !== undefined && e.path[i].classList.contains('elara-window')) {
+                if (e.path[i].classList !== undefined
+                    && e.path[i].classList.contains('elara-window')) {
                     // Get the controller of the window
-                    const controller = self.windowManager.getController(e.path[i].getAttribute('data-controller-id'));
+                    const controllerId = e.path[i].getAttribute('data-controller-id');
+                    const controller = self.windowManager.getController(controllerId);
                     if (!controller.state.focus) {
                         // Focus the window
                         controller.focus();
@@ -222,12 +246,21 @@ WindowMovement.prototype.init = function init() {
     });
 
     document.addEventListener('mousemove', (e) => {
-        if (e.target.classList !== undefined && e.target.classList.contains('elara-window') && !self.engine.hasSession()) {
+        if (e.target.classList !== undefined
+            && e.target.classList.contains('elara-window')
+            && !self.engine.hasSession()) {
             const window = e.target;
             const windowRect = window.getBoundingClientRect();
-            const onWindowX = e.pageX - windowRect.left;
-            const onWindowY = e.pageY - windowRect.top;
-            const modes = self.determineModes(onWindowX, onWindowY, windowRect.width, windowRect.height);
+
+            // Get the relative cursor position and window size
+            const relativeX = e.pageX - windowRect.left;
+            const relativeY = e.pageY - windowRect.top;
+            const windowWidth = windowRect.width;
+            const windowHeight = windowRect.height;
+
+            // Determine the transform mode for the current cursor position.
+            // Use this to determine which cursor to use and set that cursor.
+            const modes = self.determineModes(relativeX, relativeY, windowWidth, windowHeight);
             window.style.cursor = self.determineResizeCursor(modes.hmode, modes.vmode);
         }
     });

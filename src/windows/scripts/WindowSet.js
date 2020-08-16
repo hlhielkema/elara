@@ -181,6 +181,7 @@ WindowSet.prototype.exportDimensions = function exportDimensions() {
 };
 
 // Create a preview element for the window set
+// eslint-disable-next-line max-len
 WindowSet.prototype.createPreview = function createPreview(title, targetWidth, targetHeight, containerWidth, containerHeight) {
     // Map px/% positions to positions in the target dimensions
     const map = function map(val, container, target) {

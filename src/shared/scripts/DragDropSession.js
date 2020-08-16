@@ -41,7 +41,6 @@ DragDropSession.prototype.setController = function setController(controller) {
 // Attach an inner target to the session
 DragDropSession.prototype.setInnerTarget = function setInnerTarget(innerTarget) {
     this.innerTarget = innerTarget;
-    this.window = 'dont use me';
 };
 
 export default DragDropSession;

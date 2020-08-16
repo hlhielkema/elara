@@ -88,7 +88,12 @@ WindowController.prototype.setRelative = function setRelative(relative) {
         this.state.relative = relative;
         this.applyState();
         if (relative) {
-            this.setNonRelativeDimensions(this.position.x.raw(), this.position.y.raw(), this.size.x.raw(), this.size.y.raw());
+            const x = this.position.x.raw();
+            const y = this.position.y.raw();
+            const width = this.size.x.raw();
+            const height = this.size.y.raw();
+
+            this.setNonRelativeDimensions(x, y, width, height);
         }
         else {
             this.restoreNonRelativeDimensions();
@@ -207,6 +212,7 @@ WindowController.prototype.setIcon = function setIcon(icon) {
 };
 
 // Set the non-relative dimensions of the window
+// eslint-disable-next-line max-len
 WindowController.prototype.setNonRelativeDimensions = function setNonRelativeDimensions(x, y, width, height) {
     if (x === null) {
         this.nonRelativeDimensions = null;
