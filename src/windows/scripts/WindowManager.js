@@ -112,6 +112,8 @@ WindowManager.prototype.createWindow = function createWindow(customOptions) {
         allowMaximize: true,
         allowClose: true,
         alwaysOnTop: false,
+        allowDocking: true,
+        allowResizing: true,
     };
 
     // Apply the custom options on the default options
@@ -138,6 +140,8 @@ WindowManager.prototype.createWindow = function createWindow(customOptions) {
     controller.setAllowMaximize(options.allowMaximize);
     controller.setAllowClose(options.allowClose);
     controller.setAlwaysOnTop(options.alwaysOnTop);
+    controller.setAllowDocking(options.allowDocking);
+    controller.setAllowResizing(options.allowResizing);
 
     // Add the window element to the windows container
     this.windowContainer.appendChild(window);

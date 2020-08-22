@@ -50,9 +50,16 @@ WindowMovement.prototype.onTitlebarGrab = function onTitlebarGrab(e) {
             session.controller.move(newX, newY);
 
             if (completed) {
-                const docking = self.windowManager.getSuggestedDocking(x, y);
-                if (docking != null) {
-                    session.controller.resize(docking);
+                // Allowing docking is optional.
+                if (session.controller.state.allowDocking) {
+                    const docking = self.windowManager.getSuggestedDocking(x, y);
+                    if (docking != null) {
+                        session.controller.resize(docking);
+                    }
+                    else {
+                        // Move the window to the new position
+                        session.controller.move(newX, newY);
+                    }
                 }
                 else {
                     // Move the window to the new position
@@ -71,8 +78,11 @@ WindowMovement.prototype.onTitlebarGrab = function onTitlebarGrab(e) {
                     session.controller.setRelative(false);
                 }
 
-                // Render the docking suggestion
-                self.windowManager.renderSuggestedDocking(x, y);
+                // Only render suggested docking location if it's allowed for the window
+                if (session.controller.state.allowDocking) {
+                    // Render the docking suggestion
+                    self.windowManager.renderSuggestedDocking(x, y);
+                }
             }
         },
     });
@@ -225,7 +235,14 @@ WindowMovement.prototype.init = function init() {
             self.onTitlebarGrab(e);
         }
         else if (e.target.classList.contains('elara-window')) {
-            self.onWindowGrab(e);
+            // Find the controller for the window element
+            const controllerId = e.target.getAttribute('data-controller-id');
+            const controller = this.windowManager.getController(controllerId);
+
+            // Resizing can be disabled
+            if (controller.state.allowResizing) {
+                self.onWindowGrab(e);
+            }
         }
         else {
             // Try to find a window element in the click event path
@@ -252,16 +269,23 @@ WindowMovement.prototype.init = function init() {
             const window = e.target;
             const windowRect = window.getBoundingClientRect();
 
-            // Get the relative cursor position and window size
-            const relativeX = e.pageX - windowRect.left;
-            const relativeY = e.pageY - windowRect.top;
-            const windowWidth = windowRect.width;
-            const windowHeight = windowRect.height;
+            // Find the controller for the window element
+            const controllerId = window.getAttribute('data-controller-id');
+            const controller = this.windowManager.getController(controllerId);
 
-            // Determine the transform mode for the current cursor position.
-            // Use this to determine which cursor to use and set that cursor.
-            const modes = self.determineModes(relativeX, relativeY, windowWidth, windowHeight);
-            window.style.cursor = self.determineResizeCursor(modes.hmode, modes.vmode);
+            // Resizing can be disabled
+            if (controller.state.allowResizing) {
+                // Get the relative cursor position and window size
+                const relativeX = e.pageX - windowRect.left;
+                const relativeY = e.pageY - windowRect.top;
+                const windowWidth = windowRect.width;
+                const windowHeight = windowRect.height;
+
+                // Determine the transform mode for the current cursor position.
+                // Use this to determine which cursor to use and set that cursor.
+                const modes = self.determineModes(relativeX, relativeY, windowWidth, windowHeight);
+                window.style.cursor = self.determineResizeCursor(modes.hmode, modes.vmode);
+            }
         }
     });
 };

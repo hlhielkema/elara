@@ -30,6 +30,8 @@ function WindowController(id) {
         allowMaximize: true,
         allowClose: true,
         alwaysOnTop: false,
+        allowDocking: true,
+        allowResizing: true,
     };
 
     // Window element
@@ -79,6 +81,7 @@ WindowController.prototype.applyState = function applyState() {
         applySingleState('allowMaximize', 'elara-window-disable-maximize', true);
         applySingleState('allowClose', 'elara-window-disable-close', true);
         applySingleState('alwaysOnTop', 'elara-window-always-on-top', false);
+        applySingleState('allowResizing', 'elara-window-resizable', false);
     }
 };
 
@@ -168,7 +171,10 @@ WindowController.prototype.bindWindowElement = function bindWindowElement(window
         controller.close();
     });
     window.querySelector('.elara-title-bar').addEventListener('dblclick', () => {
-        controller.toggleMaximize();
+        // Ignore the double click if maximizing the window is not allowed
+        if (controller.state.allowMaximize) {
+            controller.toggleMaximize();
+        }
     });
 
     // Add the controller id to the window div
@@ -384,6 +390,22 @@ WindowController.prototype.setAllowClose = function setAllowClose(allowClose) {
 WindowController.prototype.setAlwaysOnTop = function setAlwaysOnTop(alwaysOnTop) {
     if (this.state.alwaysOnTop !== alwaysOnTop) {
         this.state.alwaysOnTop = alwaysOnTop;
+        this.applyState();
+    }
+};
+
+// Set if docking the window is allowed
+WindowController.prototype.setAllowDocking = function setAllowDocking(allowDocking) {
+    if (this.state.allowDocking !== allowDocking) {
+        this.state.allowDocking = allowDocking;
+        this.applyState();
+    }
+};
+
+// Set if resizing is allowed
+WindowController.prototype.setAllowResizing = function setAllowResizing(allowResizing) {
+    if (this.state.allowResizing !== allowResizing) {
+        this.state.allowResizing = allowResizing;
         this.applyState();
     }
 };
