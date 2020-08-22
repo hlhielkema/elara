@@ -1,0 +1,21 @@
+name: UpdateLiveDemo
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Run NPM install
+      run: npm install
+    - name: Run update script
+      run: npm run updatedemo
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v4
+      with:
+        author_name: H.L. Hielkema
+        author_email: hielkehielkema93@gmail.com
+        message: "Update live demo code 🤖"
+        add: "*"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
