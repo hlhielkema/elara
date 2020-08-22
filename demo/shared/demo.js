@@ -68,7 +68,7 @@ const demoApps = [
         title: 'PowerShell',
         image: 'img/feather/terminal.svg',
         open: function open() {
-            window.windows.createIFrameWindow('powershell_cli/index.html', {
+            window.windows.createIFrameWindow('https://hlhielkema.github.io/elara_demo_apps/powershell_cli/index.html', {
                 title: 'PowerShell',
                 size: {
                     width: 860,
@@ -83,7 +83,7 @@ const demoApps = [
         title: 'Pictures',
         image: 'img/feather/image.svg',
         open: function open() {
-            window.windows.createIFrameWindow('picture_viewer/index.html', {
+            window.windows.createIFrameWindow('https://hlhielkema.github.io/elara_demo_apps/picture_viewer/index.html', {
                 title: 'Pictures',
                 size: {
                     width: 1000,
