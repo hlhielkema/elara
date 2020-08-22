@@ -1,15 +1,39 @@
 const fs = require('fs');
+const path = require('path');
+const ncp = require('ncp');
 
-function copyFile(from, to) {
-    fs.copyFile(from, to, (err) => {
-        if (err) {
-            throw err;
-        }
-
-        // eslint-disable-next-line no-console
-        console.log(`${from} was copied to ${to}`);
-    });
+function deleteFolderRecursive(directoryPath) {
+    if (fs.existsSync(directoryPath)) {
+        fs.readdirSync(directoryPath).forEach((file) => {
+            const curPath = path.join(directoryPath, file);
+            if (fs.lstatSync(curPath).isDirectory()) { // recurse
+                deleteFolderRecursive(curPath);
+            }
+            else { // delete file
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(directoryPath);
+    }
 }
 
-copyFile('dist/elara.js', 'docs/dist/elara.js');
-copyFile('dist/elara.css', 'docs/dist/elara.css');
+// Delete the docs directory
+deleteFolderRecursive('docs');
+
+// Create the docs and dist directory
+fs.mkdirSync('docs');
+fs.mkdirSync('docs/dist');
+
+// Copy shared demo files
+ncp.ncp('demo/shared', 'docs', (err) => {
+    if (err) {
+        throw err;
+    }
+});
+
+// Copy dist files
+ncp.ncp('dist', 'docs/dist', (err) => {
+    if (err) {
+        throw err;
+    }
+});
