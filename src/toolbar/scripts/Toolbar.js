@@ -176,4 +176,43 @@ Toolbar.prototype.createWindowsMenuItems = function createWindowsMenuItems(windo
     return items;
 };
 
+// Add a workspaces drawer.
+// This is a build-in implementation of dropdown menu to manage the windows.
+// windows should be an instance of type Elara.WindowManager.
+Toolbar.prototype.addWorkspacesDrawer = function addWorkspacesDrawer(windows) {
+    const workspacesDrawer = this.addDrawer('Workspaces');
+
+    function renderPreviews(drawerElement, callback) {
+        // Create the preview elements
+        const previews = windows.windowSetCollection.createPreviews(280, 180, callback);
+
+        // Update the content of the drawer
+        // eslint-disable-next-line no-param-reassign
+        drawerElement.innerHTML = '';
+        for (let i = 0; i < previews.length; i++) {
+            drawerElement.appendChild(previews[i]);
+        }
+    }
+
+    workspacesDrawer.bind((drawerElement) => {
+        // Workspace click callback
+        const callback = function callback(index, doubleClick) {
+            // Select the clicked workspace
+            windows.windowSetCollection.selectAt(index);
+
+            if (doubleClick) {
+                // Close the drawer on double clicks
+                workspacesDrawer.close();
+            }
+            else {
+                // Update the previews because the selected workspace changed
+                renderPreviews(drawerElement, callback);
+            }
+        };
+
+        // Perform the initial previews update
+        renderPreviews(drawerElement, callback);
+    });
+};
+
 export default Toolbar;

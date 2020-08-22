@@ -5,31 +5,14 @@ body, html {
     font-family: 'Roboto', sans-serif;
 }
 
-body, .elera-window-set-preview {
-    background: url('wallpaper2.png') no-repeat;
-    background-size: cover;
-}
-
-.scrollable-y-container {
-    overflow-y: auto;
-}
-
-.elara-version {
-    color: rgba(255, 255, 255, 0.5);
-    position: absolute;
-    right: 6px;
-    top: 6px;
-    font-size: 11px;
-    line-height: 16px;
-}
-
 .elara-container {
     float: left;
     width: 100%;
     height: 100%;
-
 }
 
-.elara-container.hidden {
-    display: none;
+/* Workspaces menu preview windows back */
+body, .elera-window-set-preview {
+    background: url('wallpaper2.png') no-repeat;
+    background-size: cover;
 }
