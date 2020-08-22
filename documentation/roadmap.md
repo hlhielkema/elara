@@ -2,11 +2,9 @@
 
 ## Roadmap (Stage 1)
 - General improvements
-- Basic toolbar
 - Improved (svg) image handling
 - (Extendable) context menu for taskbar
 - (Extendable) context menu for the window container
-- Include serval-js?
 - Enable/Disable close/min/max buttons
 - Support fixed window size
 - Unsnap cursor position
@@ -20,7 +18,6 @@
 - Support always on top
 - Support start position modes
 - Launcher like spotlight
-- Improved workspace selection
 
 ## Roadmap (Stage 3)
 - Desktop with launch icons (extension)
