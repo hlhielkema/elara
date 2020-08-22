@@ -1,33 +1,4 @@
-// Available window layouts
-const ELARA_WINDOW_LAYOUTS = [
-    {
-        title: 'Cascade Windows',
-        name: 'cascade',
-        icon: 'img/feather/layers.svg',
-    },
-    {
-        title: 'Split Windows',
-        name: 'split',
-        icon: 'img/feather/grid.svg',
-    },
-    {
-        title: 'Maximize All Windows',
-        name: 'maximizeAll',
-        icon: 'img/feather/maximize.svg',
-    },
-    {
-        title: 'Minimize All Windows',
-        name: 'minimizeAll',
-        icon: 'img/feather/minimize.svg',
-    },
-    {
-        title: 'Show All Windows',
-        name: 'showAll',
-        icon: 'img/feather/menu.svg',
-    },
-];
-
-function initLauncherZone(toolbar, windows) {
+function initLauncherZone(toolbar) {
     const items = [];
 
     items.push({
@@ -81,48 +52,6 @@ function initLauncherZone(toolbar, windows) {
     toolbar.addDropDownMenu('Applications', items);
 }
 
-function initSystemZone(toolbar, windows) {
-    function createLayoutFn(name) {
-        return function () {
-            windows.getActiveControllerSet()[name]();
-        };
-    }
-    const items = [];
-    for (let i = 0; i < ELARA_WINDOW_LAYOUTS.length; i++) {
-        const fn = createLayoutFn(ELARA_WINDOW_LAYOUTS[i].name);
-        items.push({
-            title: ELARA_WINDOW_LAYOUTS[i].title,
-            icon: ELARA_WINDOW_LAYOUTS[i].icon,
-            click() {
-                fn();
-                return true; // cancel close
-            },
-        });
-    }
-
-    for (let j = 0; j < windows.windowSetCollection.count(); j++) {
-        const index = j;
-        items.push({
-            title: `Workspace ${j + 1}`,
-            icon: 'img/feather/monitor.svg',
-            click() {
-                windows.windowSetCollection.selectAt(index);
-                return true;
-            },
-        });
-    }
-    items.push({
-        title: 'Add workspace',
-        icon: 'img/feather/plus-square.svg',
-        click() {
-            windows.windowSetCollection.add();
-            windows.windowSetCollection.selectAt(windows.windowSetCollection.count() - 1);
-            return true;
-        },
-    });
-
-    toolbar.addDropDownMenu('Windows', items);
-}
 
 function initWorkspacesDrawer(toolbar, windows) {
     const workspacesDrawer = toolbar.addDrawer('Workspaces');
@@ -171,21 +100,6 @@ function startFrame(source, title, options) {
     }
 
     const controller = windows.createIFrameWindow(source, options);
-
-    controller.iframe.onload = function () {
-        if (controller.iframe.contentDocument !== null) {
-            // Set the title
-            controller.setTitle(controller.iframe.contentDocument.title);
-
-            // Try to read the desired icon from the meta element
-            const iconMetaElement = controller.iframe.contentDocument.head.querySelector('meta[name=elara-icon]');
-            if (iconMetaElement !== null) {
-                const icon = iconMetaElement.content;
-                controller.setIcon(icon);
-            }
-        }
-    };
-
     controller.focus();
 }
 
@@ -245,9 +159,9 @@ function startElaraDemo() {
 
     // Initialize the menu's of the toolbar
     toolbar.suspendLayout();
-    initLauncherZone(toolbar, windows);
+    initLauncherZone(toolbar);
     toolbar.addSeperator();
-    initSystemZone(toolbar, windows);
+    toolbar.addWindowsMenu(windows);
     initWorkspacesDrawer(toolbar, windows);
     toolbar.resumeLayout();
 

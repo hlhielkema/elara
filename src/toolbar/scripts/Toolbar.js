@@ -8,6 +8,7 @@ function Toolbar() {
     this.items = [];
     this.autoUpdate = true;
     this.pendingConstruct = false;
+    this.imageBasePath = 'img/menu';
 }
 
 Toolbar.prototype.suspendLayout = function suspendLayout() {
@@ -77,8 +78,10 @@ Toolbar.prototype.addSeperator = function addSeperator() {
 
 // Add a dropdown menu
 Toolbar.prototype.addDropDownMenu = function addDropDownMenu(title, items) {
-    this.items.push(new ToolbarDropdownMenu(this, title, items));
+    const menu = new ToolbarDropdownMenu(this, title, items);
+    this.items.push(menu);
     this.constructIfEnabled();
+    return menu;
 };
 
 // Add a drawer
@@ -87,6 +90,90 @@ Toolbar.prototype.addDrawer = function addDrawer(title, height) {
     this.items.push(drawer);
     this.constructIfEnabled();
     return drawer;
+};
+
+// Add a windows menu.
+// This is a build-in implementation of dropdown menu to manage the windows.
+// windows should be an instance of type Elara.WindowManager.
+Toolbar.prototype.addWindowsMenu = function addWindowsMenu(windows) {
+    // Create the initial menu items list and add the drop menu
+    const items = this.createWindowsMenuItems(windows);
+    const menu = this.addDropDownMenu('Windows', items);
+
+    // Create a listener for the change event of the window set collection
+    const self = this;
+    const updateItems = function updateItems() {
+        // Update the menu items
+        menu.updateItems(self.createWindowsMenuItems(windows));
+
+        // Contruct the menu again
+        self.constructIfEnabled();
+    };
+
+    // Bind the change event o fthe window set collection.
+    // This will cause the menu to update when a set is added or removed.
+    windows.windowSetCollection.events.added.subscribe(updateItems);
+    windows.windowSetCollection.events.removed.subscribe(updateItems);
+};
+
+// Create menu items for a windows menu.
+// This is for a build-in implementation of dropdown menu to manage the windows.
+// windows should be an instance of type Elara.WindowManager.
+Toolbar.prototype.createWindowsMenuItems = function createWindowsMenuItems(windows) {
+    const items = [];
+
+    // Create function which will apply a layout function to the active controller set
+    function createLayoutFn(name) {
+        return function applyLayout() {
+            windows.getActiveControllerSet()[name]();
+        };
+    }
+
+    // Layouts
+    const windowLayouts = windows.windowSetCollection.getLayouts(this.imageBasePath);
+    for (let i = 0; i < windowLayouts.length; i++) {
+        const fn = createLayoutFn(windowLayouts[i].name);
+        items.push({
+            title: windowLayouts[i].title,
+            icon: windowLayouts[i].icon,
+            click() {
+                fn();
+
+                // Cancel closing the menu
+                return true;
+            },
+        });
+    }
+
+    // Available workspaces
+    for (let j = 0; j < windows.windowSetCollection.count(); j++) {
+        const index = j;
+        items.push({
+            title: `Workspace ${j + 1}`,
+            icon: `${this.imageBasePath}/workspace.svg`,
+            click() {
+                windows.windowSetCollection.selectAt(index);
+
+                // Close the menu
+                return true;
+            },
+        });
+    }
+
+    // Add workspace button
+    items.push({
+        title: 'Add workspace',
+        icon: `${this.imageBasePath}/add-workspace.svg`,
+        click() {
+            windows.windowSetCollection.add();
+            windows.windowSetCollection.selectAt(windows.windowSetCollection.count() - 1);
+
+            // Close the menu
+            return true;
+        },
+    });
+
+    return items;
 };
 
 export default Toolbar;

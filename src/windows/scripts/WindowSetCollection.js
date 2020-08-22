@@ -115,4 +115,35 @@ WindowSetCollection.prototype.createPreviews = function createPreviews(targetWid
     return result;
 };
 
+// Get all available window layouts
+WindowSetCollection.prototype.getLayouts = function getLayouts(imageBasePath) {
+    return [
+        {
+            title: 'Cascade Windows',
+            name: 'cascade',
+            icon: `${imageBasePath}/cascade.svg`,
+        },
+        {
+            title: 'Split Windows',
+            name: 'split',
+            icon: `${imageBasePath}/split-windows.svg`,
+        },
+        {
+            title: 'Maximize All Windows',
+            name: 'maximizeAll',
+            icon: `${imageBasePath}/maximize.svg`,
+        },
+        {
+            title: 'Minimize All Windows',
+            name: 'minimizeAll',
+            icon: `${imageBasePath}/minimize.svg`,
+        },
+        {
+            title: 'Show All Windows',
+            name: 'showAll',
+            icon: `${imageBasePath}/show-all.svg`,
+        },
+    ];
+};
+
 export default WindowSetCollection;

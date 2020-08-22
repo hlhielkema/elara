@@ -79,7 +79,9 @@ WindowManager.prototype.createIFrameWindow = function createIFrameWindow(source,
 
     // Use the title of the page as the title of the window
     iframe.onload = function onload() {
-        controller.setTitle(iframe.contentDocument.title);
+        if (iframe.contentDocument !== null) {
+            controller.setTitle(iframe.contentDocument.title);
+        }
     };
 
     // Attach the iframe to the controller for easy access

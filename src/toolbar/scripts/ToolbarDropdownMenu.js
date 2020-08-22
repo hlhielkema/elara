@@ -116,4 +116,9 @@ ToolbarDropdownMenu.prototype.close = function close() {
     }
 };
 
+// Update the menu items
+ToolbarDropdownMenu.prototype.updateItems = function updateItems(items) {
+    this.items = items;
+};
+
 export default ToolbarDropdownMenu;
