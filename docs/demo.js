@@ -75,6 +75,9 @@ const demoApps = [
                     height: 500,
                 },
                 icon: 'img/feather/terminal.svg',
+                allowMaximize: false,
+                allowDocking: false,
+                allowResizing: false,
             }).focus();
         },
     },
