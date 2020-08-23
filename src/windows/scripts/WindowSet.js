@@ -123,7 +123,7 @@ WindowSet.prototype.setFocus = function setFocus(controller) {
     let changed = false;
     for (let i = 0; i < this.controllers.length; i++) {
         if (this.controllers[i].state.focus) {
-            controller.setFocus(false);
+            this.controllers[i].setFocus(false);
             changed = true;
         }
     }
