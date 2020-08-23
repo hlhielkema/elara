@@ -146,7 +146,7 @@
             background: #E7494A;
         }
     }
-
+  
     .elara-window-content {
         float: left;
         background: #fff;
@@ -162,14 +162,18 @@
 
     .elara-window-overlay {
         position: absolute;
-        left: 0;
-        top: 0;        
-        height: 100%;
-        width: 100%;
+        left: 8px;
+        top: 40px;
+        height: calc(100% - 48px);
+        width: calc(100% - 16px);        
+        cursor: default;
         display: none;
     }
 
-    &.elara-window-resizing .elara-window-overlay {
+    // This does not work properly.
+    // The overlay blocks the click in the iframe.
+    &.elara-window-resizing .elara-window-overlay, 
+    &.elara-iframe-window:not(.elara-window-focus) .elara-window-overlay {
         display: block;
     }
 

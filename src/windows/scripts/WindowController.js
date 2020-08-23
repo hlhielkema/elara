@@ -32,6 +32,7 @@ function WindowController(id) {
         alwaysOnTop: false,
         allowDocking: true,
         allowResizing: true,
+        containsIframe: false,
     };
 
     // Window element
@@ -82,6 +83,7 @@ WindowController.prototype.applyState = function applyState() {
         applySingleState('allowClose', 'elara-window-disable-close', true);
         applySingleState('alwaysOnTop', 'elara-window-always-on-top', false);
         applySingleState('allowResizing', 'elara-window-resizable', false);
+        applySingleState('containsIframe', 'elara-iframe-window', false);
     }
 };
 
@@ -406,6 +408,14 @@ WindowController.prototype.setAllowDocking = function setAllowDocking(allowDocki
 WindowController.prototype.setAllowResizing = function setAllowResizing(allowResizing) {
     if (this.state.allowResizing !== allowResizing) {
         this.state.allowResizing = allowResizing;
+        this.applyState();
+    }
+};
+
+// Set if resizing is allowed
+WindowController.prototype.setContainsIframe = function setContainsIframe(containsIframe) {
+    if (this.state.containsIframe !== containsIframe) {
+        this.state.containsIframe = containsIframe;
         this.applyState();
     }
 };

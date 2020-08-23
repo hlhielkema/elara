@@ -87,6 +87,10 @@ WindowManager.prototype.createIFrameWindow = function createIFrameWindow(source,
     // Attach the iframe to the controller for easy access
     controller.iframe = iframe;
 
+    // Update the hasIframe state of the controller.
+    // This will result in some special event handling for focus.
+    controller.setContainsIframe(true);
+
     // Return the new window controller
     return controller;
 };
