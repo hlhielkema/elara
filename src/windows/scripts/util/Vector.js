@@ -39,6 +39,16 @@ function ComplexValue(value) {
     self.cssValue = function cssValue() {
         return self.number + self.unit;
     };
+
+    self.convertToPx = function convertToPx(range) {
+        if (self.unit === 'px') {
+            return self.number;
+        }
+        if (self.unit === '%') {
+            return (self.number * range) / 100;
+        }
+        throw new Error('Invalid value');
+    };
 }
 
 // constructor: Vector2

@@ -43,7 +43,8 @@
     min-height: 200px;    
     -webkit-transition: width .2s,height .2s,top .2s,left .2s;
     transition: width .2s,height .2s,top .2s,left .2s;
-
+    box-sizing: border-box;
+    
     .elara-window-visible {
         float: left;
         width: 100%;

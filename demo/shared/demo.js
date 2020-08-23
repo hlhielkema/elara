@@ -8,7 +8,7 @@ const demoApps = [
                 title: 'Welcome',
                 size: {
                     width: 800,
-                    height: 870,
+                    height: 890,
                 },
                 location: {
                     x: 16,

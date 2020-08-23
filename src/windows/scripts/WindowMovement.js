@@ -71,6 +71,12 @@ WindowMovement.prototype.onTitlebarGrab = function onTitlebarGrab(e) {
 
                 // Update the moving state
                 session.controller.setMoving(false);
+
+                // Get the bounds of the window container
+                const bounds = self.windowManager.windowContainer.getBoundingClientRect();
+
+                // Ensure that the windows is inside the allowed bounds
+                session.controller.ensureBounds(bounds.width, bounds.height);
             }
             else {
                 // Restore its non-relative size when moving the window

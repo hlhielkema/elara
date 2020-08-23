@@ -328,6 +328,47 @@ WindowController.prototype.resize = function resize(width, height) {
     }
 };
 
+// Ensure that the windows is inside the allowed bounds
+WindowController.prototype.ensureBounds = function ensureBounds(width, height) {
+    let changes = false;
+    const titlebarHeight = 40;
+
+    // Map complex values to pixels
+    const xPx = this.position.x.convertToPx(width);
+    const yPx = this.position.y.convertToPx(height);
+    const wPx = this.size.x.convertToPx(width);
+    const hPx = this.size.y.convertToPx(height);
+
+    // Ensure that the window does not go to far to the left
+    if (xPx < 0) {
+        this.position.x = new ComplexValue(0);
+        changes = true;
+    }
+
+    // Ensure that the window does not go to far to the right
+    else if (xPx + wPx > width) {
+        this.position.x = new ComplexValue(Math.max(width - wPx, 0));
+        changes = true;
+    }
+
+    // Ensure that the window does not go to far to the top
+    if (yPx < 0) {
+        this.position.y = new ComplexValue(0);
+        changes = true;
+    }
+
+    // Ensure that the window does not go to far to the bottom
+    else if (yPx + titlebarHeight > height) {
+        this.position.y = new ComplexValue(Math.max(height - hPx, 0));
+        changes = true;
+    }
+
+    // Update the dimensions if anything was changed
+    if (changes) {
+        this.applyDimensions();
+    }
+};
+
 // Stash the window
 WindowController.prototype.stash = function stash() {
     this.state.stashed = true;
