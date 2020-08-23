@@ -1,4 +1,4 @@
 import WindowManager from './scripts/WindowManager';
-import './styles/_windows.min.css';
+import './styles/windows.min.css';
 
 export default WindowManager;

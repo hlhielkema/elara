@@ -1,4 +1,4 @@
 import TileView from './scripts/TileView';
-import './styles/TileView.min.css';
+import './styles/tile-view.min.css';
 
 export default TileView;

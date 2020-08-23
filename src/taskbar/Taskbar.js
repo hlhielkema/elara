@@ -1,4 +1,4 @@
 import Taskbar from './scripts/Taskbar';
-import './styles/_taskbar.min.css';
+import './styles/taskbar.min.css';
 
 export default Taskbar;
