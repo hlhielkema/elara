@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/hlhielkema/elara#readme",
   "devDependencies": {
-    "css-loader": "^4.2.2",
+    "css-loader": "^4.3.0",
     "eslint": "^7.8.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
