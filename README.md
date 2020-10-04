@@ -19,7 +19,7 @@ Open the [LIVE DEMO](https://hlhielkema.github.io/elara/) to try Elara yourself.
 
 ![screenshot A](media/screenshots/screenshot_a.png)
 
-> [View more](#screenshots)
+> [View more](media/screenshots/)
 
 ---
 
@@ -38,6 +38,7 @@ Open the [LIVE DEMO](https://hlhielkema.github.io/elara/) to try Elara yourself.
 ## 🖥 Environment Support
 - Supports all major web browsers.
 - Can run directly on [Electron](http://electron.atom.io/), [CEF](https://github.com/chromiumembedded/cef) and other Web standards-based environments.
+- Technically works, but it is not very useful in mobile web browsers.
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Opera |
 | --------- | --------- | --------- | --------- | --------- |
@@ -57,7 +58,7 @@ Grab the files from the `/dist` directory if you want only to use Elara without 
 ## ✔️ Linting
 <img src="media/third-party/eslint.png" width="200">
 
-Use this command to run ESLint:
+This project uses ESLint to ensure a consistent coding style. The rules are a minor extension on the Airbnb rules. Use this command to run ESLint:
 
 ```
 npm run lint
@@ -82,7 +83,7 @@ Contributing to the project in welcome and appreciated. If you would like to con
 
 
 ## ⚙️ Run local demo server
-The Elara library itself does not require any backend to work. However, just opening *index.html* on your local system will not work properly. This repository contains 3 implementations of simple servers to try or test Elara. Each server is written in a different programming language. Please use the server implementation you prefer. Use the online live demo described earlier in this document if you just want to try the last stable version of Elara. The server implementations are written in:
+**The Elara library itself does not require any backend to work.** However, just opening *index.html* on your local system will not work properly. This repository contains 3 implementations of simple servers to try or test Elara. Each server is written in a different programming language. Please use the server implementation you prefer. Use the online live demo described earlier in this document if you just want to try the last stable version of Elara. The server implementations are written in:
 
 - Node.js
 - ASP.NET Core
