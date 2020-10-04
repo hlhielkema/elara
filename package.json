@@ -20,14 +20,14 @@
   },
   "homepage": "https://github.com/hlhielkema/elara#readme",
   "devDependencies": {
-    "css-loader": "^4.2.1",
-    "eslint": "^7.7.0",
+    "css-loader": "^4.3.0",
+    "eslint": "^7.10.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.0",
-    "mini-css-extract-plugin": "^0.10.0",
+    "eslint-plugin-import": "^2.22.1",
+    "mini-css-extract-plugin": "^0.11.2",
     "ncp": "^2.0.0",
     "style-loader": "^1.2.1",
-    "webpack": "^4.44.1",
+    "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }
 }
