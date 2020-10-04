@@ -168,3 +168,10 @@ Some of the icons used in the demo are from the Feather icon pack. Feather is li
 
 - Website: [feathericons.com](https://feathericons.com)
 - GitHub: [feathericons/feather](https://github.com/feathericons/feather)
+
+
+### Browsers support badges
+An useful tool to generate browser support tables in markdown format. This project is licensed under the MIT License.
+
+- Website: [godban.github.io/browsers-support-badges/](https://godban.github.io/browsers-support-badges/)
+- GitHub: [godban/browsers-support-badges](https://github.com/godban/browsers-support-badges)
