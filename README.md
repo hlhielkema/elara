@@ -71,6 +71,16 @@ Please create a [new issue](https://github.com/hlhielkema/elara/issues/new) if y
 ## 🤝 Contributing
 Contributing to the project in welcome and appreciated. If you would like to contribute, feel free to create a [pull request](https://github.com/hlhielkema/elara/pulls) or [bug report](https://github.com/hlhielkema/elara/issues/new). Code contributors will be listed in the README.
 
+## 💻 Screenshots
+
+| | |
+|:---|:---|
+| ![screenshot 1](media/screenshots/screenshot_1.png) | ![screenshot 2](media/screenshots/screenshot_2.png) |
+| ![screenshot 3](media/screenshots/screenshot_3.png) | ![screenshot 4](media/screenshots/screenshot_4.png) |
+
+[View more](media/screenshots/)
+
+
 ## ⚙️ Run local demo server
 The Elara library itself does not require any backend to work. However, just opening *index.html* on your local system will not work properly. This repository contains 3 implementations of simple servers to try or test Elara. Each server is written in a different programming language. Please use the server implementation you prefer. Use the online live demo described earlier in this document if you just want to try the last stable version of Elara. The server implementations are written in:
 
@@ -147,17 +157,6 @@ go build server.go
 ```
 
 > TIP: Press Ctrl+C to shut down.
-
----
-
-## 💻 Screenshots
-
-| | |
-|:---|:---|
-| ![screenshot 1](media/screenshots/screenshot_1.png) | ![screenshot 2](media/screenshots/screenshot_2.png) |
-| ![screenshot 3](media/screenshots/screenshot_3.png) | ![screenshot 4](media/screenshots/screenshot_4.png) |
-
-[View more](media/screenshots/)
 
 ---
 
