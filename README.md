@@ -9,7 +9,7 @@ Elara enables creating a Windows/MacOS like window manager experience inside a w
 
 ---
 
-## Live demo
+## 🌈 Live demo
 
 Open the [LIVE DEMO](https://hlhielkema.github.io/elara/) to try Elara yourself.
 
@@ -23,7 +23,7 @@ Open the [LIVE DEMO](https://hlhielkema.github.io/elara/) to try Elara yourself.
 
 ---
 
-## Features
+## ✨ Features
 -	Move windows around the screen.
 -	Resize windows from all sides.
 -	Maximize/Minimize/Close windows.
@@ -35,8 +35,16 @@ Open the [LIVE DEMO](https://hlhielkema.github.io/elara/) to try Elara yourself.
 -	Animations and smooth movement.
 -	Split windows, cascade windows, maximize/minimize/show all.
 
+## 🖥 Environment Support
+- Supports all major web browsers.
+- Can run directly on [Electron](http://electron.atom.io/), [CEF](https://github.com/chromiumembedded/cef) and other Web standards-based environments.
 
-## Build
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Opera |
+| --------- | --------- | --------- | --------- | --------- |
+| IE11, Edge| last 2 versions| last 2 versions| last 2 versions| last 2 versions
+
+
+## 📦 Build
 Bundling the Elara code into a single Javascript and CSS file with **Webpack** requires **Node.js**. [Install Node.js](https://nodejs.org/en/) and run the command below to bundle Elara. The files that can be used for distribution will be placed in the `/dist` directory.
 
 ```
@@ -46,7 +54,7 @@ npm run build
 Grab the files from the `/dist` directory if you want only to use Elara without modifying it.
 
 
-## Linting
+## ✔️ Linting
 <img src="media/third-party/eslint.png" width="200">
 
 Use this command to run ESLint:
@@ -56,6 +64,12 @@ npm run lint
 ```
 
 > Use `eslint --fix ./src/` for automated fixing (where possible).
+
+## ❓ Community Support
+Please create a [new issue](https://github.com/hlhielkema/elara/issues/new) if you encounter any issues with this project.
+
+## 🤝 Contributing
+Contributing to the project in welcome and appreciated. If you would like to contribute, feel free to create a [pull request](https://github.com/hlhielkema/elara/pulls) or [bug report](https://github.com/hlhielkema/elara/issues/new). Code contributors will be listed in the README.
 
 ## Run local demo server
 The Elara library itself does not require any backend to work. However, just opening *index.html* on your local system will not work properly. This repository contains 3 implementations of simple servers to try or test Elara. Each server is written in a different programming language. Please use the server implementation you prefer. Use the online live demo described earlier in this document if you just want to try the last stable version of Elara. The server implementations are written in:
@@ -120,7 +134,7 @@ info: Microsoft.Hosting.Lifetime[0]
 
 <img src="media/third-party/golang.png" width="200">
 
-## Build and run
+## ⚙️ Build and run
 
 *Command:*
 ```
@@ -138,7 +152,7 @@ go build server.go
 
 ---
 
-## Screenshots
+## 💻 Screenshots
 
 ![screenshot 1](media/screenshots/screenshot_1.png)
 
@@ -155,7 +169,7 @@ go build server.go
 
 ---
 
-## Third-party resources
+## 🔗 Third-party resources
 
 ### Feather
 Some of the icons used in the demo are from the Feather icon pack. Feather is licensed under the MIT License.
