@@ -154,16 +154,10 @@ go build server.go
 
 ## 💻 Screenshots
 
-![screenshot 1](media/screenshots/screenshot_1.png)
-
-
-![screenshot 2](media/screenshots/screenshot_2.png)
-
-
-![screenshot 3](media/screenshots/screenshot_3.png)
-
-
-![screenshot 4](media/screenshots/screenshot_4.png)
+| | |
+|:---|:---|
+| ![screenshot 1](media/screenshots/screenshot_1.png) | ![screenshot 2](media/screenshots/screenshot_2.png) |
+| ![screenshot 3](media/screenshots/screenshot_3.png) | ![screenshot 4](media/screenshots/screenshot_4.png) |
 
 [View more](media/screenshots/)
 
