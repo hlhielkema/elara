@@ -270,6 +270,16 @@ WindowController.prototype.hasFocus = function hasFocus() {
 WindowController.prototype.focus = function focus() {
     // Invoke the focus event
     this.events.focus.invoke();
+
+    // Focus the iframe.
+    // This is needed for 'pollForIFrameFocus' to work properly.
+    const iframe = this.windowElement.querySelector('iframe');
+    if (iframe !== null && iframe !== document.activeElement) {
+        // Focus and unfocus the IFrane to prevent switching back to the previous window.
+        // Not using 'blur' will lock the value of document.activeElement.
+        iframe.focus();
+        iframe.blur();
+    }
 };
 
 // Toggle the focus state of the window.

@@ -173,8 +173,12 @@
 
     // This does not work properly.
     // The overlay blocks the click in the iframe.
-    &.elara-window-resizing .elara-window-overlay, 
+    /*&.elara-window-resizing .elara-window-overlay, 
     &.elara-iframe-window:not(.elara-window-focus) .elara-window-overlay {
+        display: block;
+    }*/
+    
+    &.elara-window-resizing .elara-window-overlay {
         display: block;
     }
 

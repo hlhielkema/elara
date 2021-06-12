@@ -21,6 +21,9 @@ function WindowManager() {
     this.dragging = new WindowMovement(this);
     this.construct = new WindowConstruction();
 
+    //
+    this.pollForIFrameFocusActive = false;
+
     // Create unique ID's for the window controller.
     // The id will increase after each get.
     let windowIdCounter = 1;
@@ -29,6 +32,37 @@ function WindowManager() {
         return windowIdCounter;
     };
 }
+
+// Check the active element with a fixed interval to detect focus on an iframe.
+WindowManager.prototype.pollForIFrameFocus = function pollForIFrameFocus() {
+    // Prevent running it twice
+    if (this.pollForIFrameFocusActive) {
+        return;
+    }
+    this.pollForIFrameFocusActive = true;
+
+    // There is no event for 'document.activeElement'.
+    // Check it's value with an interval of 100ms.
+    const self = this;
+    setInterval(() => {
+        // Check if the active element is a IFrame
+        if (document.activeElement instanceof HTMLIFrameElement) {
+            // Get the id of the controller of the iframe
+            const controllerId = document.activeElement.dataset.id;
+
+            // Get the active controller set
+            const activeSet = self.getActiveControllerSet();
+
+            // Get the controller of the active window
+            const activeFocus = activeSet.getCurrentFocus();
+
+            // Change the focus if the IFrame of an inactive window is active
+            if (controllerId !== activeFocus.id) {
+                activeSet.setFocus(activeSet.get(controllerId));
+            }
+        }
+    }, 100);
+};
 
 // Bind to an element and initialize
 WindowManager.prototype.bind = function bind(elementSelector) {
@@ -74,6 +108,9 @@ WindowManager.prototype.createIFrameWindow = function createIFrameWindow(source,
     const iframe = document.createElement('iframe');
     iframe.src = source;
 
+    // Add the controller id to the iframe element
+    iframe.dataset.id = controller.id;
+
     // Add the iframe to the content container
     content.appendChild(iframe);
 
@@ -90,6 +127,9 @@ WindowManager.prototype.createIFrameWindow = function createIFrameWindow(source,
     // Update the hasIframe state of the controller.
     // This will result in some special event handling for focus.
     controller.setContainsIframe(true);
+
+    // Check the active element with a fixed interval to detect focus on an iframe.
+    this.pollForIFrameFocus();
 
     // Return the new window controller
     return controller;
