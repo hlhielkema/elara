@@ -25,7 +25,7 @@ WindowSetCollection.prototype.getAt = function getAt(index) {
 
 // Add a window set
 WindowSetCollection.prototype.add = function add() {
-    const set = new WindowSet();
+    const set = new WindowSet(this);
     this.sets.push(set);
 
     // Invoke the added event
@@ -126,7 +126,7 @@ WindowSetCollection.prototype.getLayouts = function getLayouts(imageBasePath) {
         {
             title: 'Split Windows',
             name: 'split',
-            icon: `${imageBasePath}/split-windows.svg`,
+            icon: `${imageBasePath}/pause.svg`,
         },
         {
             title: 'Maximize All Windows',

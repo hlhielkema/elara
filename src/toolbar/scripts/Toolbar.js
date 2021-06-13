@@ -145,6 +145,17 @@ Toolbar.prototype.createWindowsMenuItems = function createWindowsMenuItems(windo
         });
     }
 
+    // Add expose button
+    items.push({
+        title: 'Expose',
+        icon: `${this.imageBasePath}/split-windows.svg`,
+        click() {
+            windows.toggleExpose();
+            // Close the menu
+            return false;
+        },
+    });
+
     // Available workspaces
     for (let j = 0; j < windows.windowSetCollection.count(); j++) {
         const index = j;
@@ -154,7 +165,7 @@ Toolbar.prototype.createWindowsMenuItems = function createWindowsMenuItems(windo
             click() {
                 windows.windowSetCollection.selectAt(index);
 
-                // Close the menu
+                // Cancel closing the menu
                 return true;
             },
         });
@@ -168,7 +179,7 @@ Toolbar.prototype.createWindowsMenuItems = function createWindowsMenuItems(windo
             windows.windowSetCollection.add();
             windows.windowSetCollection.selectAt(windows.windowSetCollection.count() - 1);
 
-            // Close the menu
+            // Cancel closing the menu
             return true;
         },
     });

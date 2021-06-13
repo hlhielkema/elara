@@ -2,10 +2,12 @@ import WindowManagerEvent from './util/WindowManagerEvent';
 import { ComplexValue } from './util/Vector';
 
 // constructor: WindowSet
-function WindowSet() {
+function WindowSet(parent) {
+    this.parent = parent;
     this.controllers = []; // ordered by z-index
     this.orderedControllers = []; // ordered by add order
     this.focus = null;
+    this.exposeActive = false;
 
     this.events = {
         changed: new WindowManagerEvent(this),
@@ -29,6 +31,9 @@ WindowSet.prototype.add = function add(controller) {
     });
 
     controller.events.focus.subscribe(() => {
+        // Quit expose when a window is focussed
+        collection.quitExpose();
+
         collection.setFocus(controller);
     });
 
@@ -57,6 +62,9 @@ WindowSet.prototype.stash = function stash() {
     for (let i = 0; i < this.controllers.length; i++) {
         this.controllers[i].stash();
     }
+
+    // Quit expose mode when stashing the windows
+    this.quitExpose();
 };
 
 // Resume(undo stash) the windows of all controllers in this collection
@@ -294,6 +302,52 @@ WindowSet.prototype.split = function split() {
         for (let i = 4; i < count; i++) {
             reversedControllers[i].hide();
         }
+    }
+};
+
+// --------- EXPOSE ---------
+
+// Toggle expose mode
+WindowSet.prototype.toggleExpose = function toggleExpose() {
+    if (this.exposeActive) {
+        this.quitExpose();
+    }
+    else {
+        this.expose();
+    }
+};
+
+// Enable expose mode
+WindowSet.prototype.expose = function expose() {
+    // Prevent performing the expose actions twice
+    if (!this.exposeActive && this.controllers.length > 0) {
+        // Get the bounds of the window container
+        const bounds = this.parent.parent.getWindowContainerRect();
+
+        // Calulcate the number for windows in a row in expose mode
+        const elementInRow = Math.floor((bounds.width - 64) / 400);
+
+        // Enable expose mode for all windows
+        for (let i = 0; i < this.controllers.length; i++) {
+            this.controllers[i].expose(i, elementInRow);
+        }
+
+        // Register the new expose state
+        this.exposeActive = true;
+    }
+};
+
+// Quit expose mode
+WindowSet.prototype.quitExpose = function quitExpose() {
+    // Prevent performing the quit actions twice
+    if (this.exposeActive) {
+        // Quit expose mode for all windows
+        for (let i = 0; i < this.controllers.length; i++) {
+            this.controllers[i].quitExpose();
+        }
+
+        // Register the new expose state
+        this.exposeActive = false;
     }
 };
 

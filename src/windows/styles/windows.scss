@@ -96,7 +96,7 @@
 
     &.elara-window-hidden, &.elara-window-stashed {
         display: none;
-    }
+    } 
 
     .elara-title-bar {
         float: left;
@@ -178,6 +178,7 @@
         display: block;
     }*/
     
+    &.elara-mode-expose .elara-window-overlay,
     &.elara-window-resizing .elara-window-overlay {
         display: block;
     }
@@ -196,5 +197,16 @@
 
     &.elara-window-always-on-top {
         z-index: 1000;
+    }
+
+    &.elara-mode-expose {        
+        cursor: pointer;
+        transform-origin: 0 0;
+        &:hover {
+            background: orange;
+        }
+        .elara-title-bar, .elara-window-overlay {
+            cursor: pointer;
+        }        
     }
 }

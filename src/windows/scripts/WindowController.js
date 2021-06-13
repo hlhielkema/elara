@@ -20,6 +20,7 @@ function WindowController(id) {
     // Window state
     // Use this.applyState() to apply the state on the window element.
     this.state = {
+        mode: 'default', // default | expose
         hidden: false,
         relative: false,
         moving: false,
@@ -49,19 +50,21 @@ function WindowController(id) {
 // Apply the dimensions from this.position and this.size on the window element.
 WindowController.prototype.applyDimensions = function applyDimensions() {
     if (this.windowElement !== null) {
-        this.windowElement.style.left = this.position.x.cssValue();
-        this.windowElement.style.top = this.position.y.cssValue();
-        this.windowElement.style['z-index'] = this.position.z.raw();
-        this.windowElement.style.width = this.size.x.cssValue();
-        this.windowElement.style.height = this.size.y.cssValue();
+        if (this.state.mode === 'default') {
+            this.windowElement.style.left = this.position.x.cssValue();
+            this.windowElement.style.top = this.position.y.cssValue();
+            this.windowElement.style['z-index'] = this.position.z.raw();
+            this.windowElement.style.width = this.size.x.cssValue();
+            this.windowElement.style.height = this.size.y.cssValue();
+        }
     }
 };
 
 // Apply the states from this.state on the window element
 WindowController.prototype.applyState = function applyState() {
     const controller = this;
-    function applySingleState(stateName, className, invert) {
-        if (controller.state[stateName] !== invert) {
+    function setHasClass(enabled, className) {
+        if (enabled) {
             if (!controller.windowElement.classList.contains(className)) {
                 controller.windowElement.classList.add(className);
             }
@@ -69,6 +72,9 @@ WindowController.prototype.applyState = function applyState() {
         else if (controller.windowElement.classList.contains(className)) {
             controller.windowElement.classList.remove(className);
         }
+    }
+    function applySingleState(stateName, className, invert) {
+        setHasClass(controller.state[stateName] !== invert, className);
     }
 
     if (this.windowElement !== null) {
@@ -84,6 +90,9 @@ WindowController.prototype.applyState = function applyState() {
         applySingleState('alwaysOnTop', 'elara-window-always-on-top', false);
         applySingleState('allowResizing', 'elara-window-resizable', false);
         applySingleState('containsIframe', 'elara-iframe-window', false);
+
+        setHasClass(this.state.mode === 'default', 'elara-mode-default');
+        setHasClass(this.state.mode === 'expose', 'elara-mode-expose');
     }
 };
 
@@ -164,18 +173,30 @@ WindowController.prototype.bindWindowElement = function bindWindowElement(window
     // Add the click event listeners
     const controller = this;
     window.querySelector('.elara-control-button.minimize').addEventListener('click', () => {
-        controller.minimize();
+        // Only minize in default mode
+        if (controller.state.mode === 'default') {
+            controller.minimize();
+        }
     });
     window.querySelector('.elara-control-button.maximize').addEventListener('click', () => {
-        controller.maximize();
+        // Only maximize in default mode
+        if (controller.state.mode === 'default') {
+            controller.maximize();
+        }
     });
     window.querySelector('.elara-control-button.close').addEventListener('click', () => {
-        controller.close();
+        // Only close in default mode
+        if (controller.state.mode === 'default') {
+            controller.close();
+        }
     });
     window.querySelector('.elara-title-bar').addEventListener('dblclick', () => {
-        // Ignore the double click if maximizing the window is not allowed
-        if (controller.state.allowMaximize) {
-            controller.toggleMaximize();
+        // Only toggle maximize in default mode
+        if (controller.state.mode === 'default') {
+            // Ignore the double click if maximizing the window is not allowed
+            if (controller.state.allowMaximize) {
+                controller.toggleMaximize();
+            }
         }
     });
 
@@ -469,6 +490,43 @@ WindowController.prototype.setContainsIframe = function setContainsIframe(contai
         this.state.containsIframe = containsIframe;
         this.applyState();
     }
+};
+
+// Set the window mode
+WindowController.prototype.setMode = function setMode(mode) {
+    this.state.mode = mode;
+
+    this.applyDimensions();
+    this.applyState();
+};
+
+// Enable expose mode for the window
+WindowController.prototype.expose = function expose(index, elementInRow) {
+    // Switch to the expose mode
+    this.setMode('expose');
+
+    // Set transform effect to scale the window
+    this.windowElement.style.transform = 'scale(0.3)';
+
+    // Calculate the x and y on the "grid"
+    const x = index % elementInRow;
+    const y = Math.floor(index / elementInRow);
+
+    // Calculate dimensions
+    this.windowElement.style.left = `${x * 400 + 32}px`;
+    this.windowElement.style.top = `${y * 220 + 32}px`;
+    this.windowElement.style['z-index'] = 0;
+    this.windowElement.style.width = '1200px';
+    this.windowElement.style.height = '600px';
+};
+
+// Quit expose mode for the window
+WindowController.prototype.quitExpose = function expose() {
+    // Clear transform effect
+    this.windowElement.style.transform = null;
+
+    // Switch back to the default mode
+    this.setMode('default');
 };
 
 export default WindowController;

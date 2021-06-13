@@ -57,8 +57,8 @@ WindowManager.prototype.pollForIFrameFocus = function pollForIFrameFocus() {
             const activeFocus = activeSet.getCurrentFocus();
 
             // Change the focus if the IFrame of an inactive window is active
-            if (controllerId !== activeFocus.id) {
-                activeSet.setFocus(activeSet.get(controllerId));
+            if (+controllerId !== activeFocus.id) {
+                activeSet.get(controllerId).focus();
             }
         }
     }, 100);
@@ -137,6 +137,9 @@ WindowManager.prototype.createIFrameWindow = function createIFrameWindow(source,
 
 // Create a new window in the current controller collection
 WindowManager.prototype.createWindow = function createWindow(customOptions) {
+    // Quit expose when adding a new window
+    this.quitExpose();
+
     // Create the window controller
     const controller = new WindowController(this.getNextId());
 
@@ -266,6 +269,21 @@ WindowManager.prototype.renderSuggestedDocking = function renderSuggestedDocking
 WindowManager.prototype.getWindowContainerRect = function getWindowContainerRect() {
     // Get the dimensions of the window container rectangle
     return this.windowContainer.getBoundingClientRect();
+};
+
+// Toggle expose mode
+WindowManager.prototype.toggleExpose = function toggleExpose() {
+    this.getActiveControllerSet().toggleExpose();
+};
+
+// Enable expose mode
+WindowManager.prototype.expose = function expose() {
+    this.getActiveControllerSet().expose();
+};
+
+// Quit expose mode
+WindowManager.prototype.quitExpose = function quitExpose() {
+    this.getActiveControllerSet().quitExpose();
 };
 
 export default WindowManager;

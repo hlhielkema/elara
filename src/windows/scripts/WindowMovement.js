@@ -235,40 +235,53 @@ WindowMovement.prototype.init = function init() {
     const self = this;
     // Bind a mouse-down event on title bars of windows
     document.addEventListener('mousedown', (e) => {
-        // Move
-        if (e.target.classList.contains('elara-title-bar')
-            || e.target.classList.contains('elara-title')) {
-            self.onTitlebarGrab(e);
+        const windowElement = e.target.closest('.elara-window');
+        if (windowElement == null) {
+            return;
         }
-        else if (e.target.classList.contains('elara-window')) {
-            // Find the controller for the window element
-            const controllerId = e.target.getAttribute('data-controller-id');
-            const controller = this.windowManager.getController(controllerId);
 
-            // Resizing can be disabled
-            if (controller.state.allowResizing) {
-                self.onWindowGrab(e);
+        // Only allow movement when the window is in its default mode
+        if (windowElement.classList.contains('elara-mode-default')) {
+            // Move
+            if (e.target.classList.contains('elara-title-bar')
+            || e.target.classList.contains('elara-title')) {
+                self.onTitlebarGrab(e);
             }
-        }
-        else {
-            // Try to find a window element in the click event path
-            for (let i = 0; i < e.path.length; i++) {
-                if (e.path[i].classList !== undefined
-                    && e.path[i].classList.contains('elara-window')) {
-                    // Get the controller of the window
-                    const controllerId = e.path[i].getAttribute('data-controller-id');
-                    const controller = self.windowManager.getController(controllerId);
-                    if (!controller.state.focus) {
-                        // Focus the window
-                        controller.focus();
-                    }
-                    return;
+            else if (e.target.classList.contains('elara-window')) {
+                // Find the controller for the window element
+                const controllerId = e.target.getAttribute('data-controller-id');
+                const controller = this.windowManager.getController(controllerId);
+
+                // Resizing can be disabled
+                if (controller.state.allowResizing) {
+                    self.onWindowGrab(e);
                 }
             }
+            else {
+                // Get the controller
+                const controllerId = windowElement.getAttribute('data-controller-id');
+                const controller = self.windowManager.getController(controllerId);
+
+                // Focus the window
+                controller.focus();
+            }
+        }
+
+        // Focus the window when clicking it anywhere when in expose mode
+        else if (windowElement.classList.contains('elara-mode-expose')) {
+            const controllerId = windowElement.getAttribute('data-controller-id');
+            const controller = self.windowManager.getController(controllerId);
+            controller.focus();
         }
     });
 
     document.addEventListener('mousemove', (e) => {
+        // Only allow movement when the window is in its default mode
+        const windowElement = e.target.closest('.elara-window');
+        if (windowElement == null || !windowElement.classList.contains('elara-mode-default')) {
+            return;
+        }
+
         if (e.target.classList !== undefined
             && e.target.classList.contains('elara-window')
             && !self.engine.hasSession()) {
