@@ -70,7 +70,7 @@ npm run lint
 Please create a [new issue](https://github.com/hlhielkema/elara/issues/new) if you encounter any issues with this project.
 
 ## 🤝 Contributing
-Contributing to the project in welcome and appreciated. If you would like to contribute, feel free to create a [pull request](https://github.com/hlhielkema/elara/pulls) or [bug report](https://github.com/hlhielkema/elara/issues/new). Code contributors will be listed in the README.
+Contributing to the project is welcome and appreciated. If you would like to contribute, feel free to create a [pull request](https://github.com/hlhielkema/elara/pulls) or [bug report](https://github.com/hlhielkema/elara/issues/new). Code contributors will be listed in the README.
 
 ## 💻 Screenshots
 
