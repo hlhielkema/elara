@@ -22,7 +22,7 @@
   "devDependencies": {
     "css-loader": "^6.7.1",
     "eslint": "^7.27.0",
-    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.23.4",
     "mini-css-extract-plugin": "^2.6.1",
     "ncp": "^2.0.0",
