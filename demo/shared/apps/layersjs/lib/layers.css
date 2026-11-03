@@ -1,0 +1,132 @@
+.layers-container {
+  position: relative;
+  float: left;
+  width: 450px;
+  height: 500px;
+}
+
+.layers-container > img, .layers-container > .layer {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.layers-container > .layer > .generated-shape-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  transform-origin: top left;
+  transform: rotateX(54deg) rotate(-45deg) translate(-170px, 187px);
+  font-size: 60px;
+  line-height: 318px;
+  text-align: center;
+  margin: -8px;
+  box-sizing: border-box;
+}
+
+.layers-container > .layer .generated-shape {
+  float: left;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #2b2c34;
+  color: #000;
+  margin: 8px;
+}
+
+.layers-container > .layer .generated-shape.half {
+  width: calc(100% - 16px);
+  height: calc(50% - 16px);
+  line-height: 138px;
+  font-size: 46px;
+}
+
+.layers-container > .layer .generated-shape.quarter {
+  width: calc(50% - 16px);
+  height: calc(50% - 16px);
+  line-height: 138px;
+  font-size: 46px;
+}
+
+.layers-container > .layer .generated-shape > .border.border-bottom {
+  width: 100%;
+  height: 12px;
+  background: #000;
+  bottom: -12px;
+  position: absolute;
+  transform: skewX(-45deg);
+  transform-origin: top left;
+}
+
+.layers-container > .layer .generated-shape > .border.border-left {
+  width: 12px;
+  height: 100%;
+  background: #000;
+  left: -12px;
+  top: 12px;
+  position: absolute;
+  transform: skewY(-45deg);
+  transform-origin: top left;
+}
+
+.layers-container.animate-none > img, .layers-container.animate-none > .layer {
+  display: none;
+}
+
+.layers-container.animate-none > img.visible, .layers-container.animate-none > .layer.visible {
+  display: block;
+}
+
+.layers-container.animate-fade > img, .layers-container.animate-fade > .layer {
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+.layers-container.animate-fade > img.visible, .layers-container.animate-fade > .layer.visible {
+  opacity: 1;
+}
+
+.layers-container.animate-fade-up > img, .layers-container.animate-fade-up > .layer {
+  top: -16px;
+  opacity: 0;
+  transition: opacity .5s, top .5s;
+}
+
+.layers-container.animate-fade-up > img.visible, .layers-container.animate-fade-up > .layer.visible {
+  top: 0;
+  opacity: 1;
+}
+
+.layers-container.animate-fade-right > img, .layers-container.animate-fade-right > .layer {
+  left: 16px;
+  opacity: 0;
+  transition: opacity .5s, left .5s;
+}
+
+.layers-container.animate-fade-right > img.visible, .layers-container.animate-fade-right > .layer.visible {
+  left: 0;
+  opacity: 1;
+}
+
+.layers-container.animate-fade-down > img, .layers-container.animate-fade-down > .layer {
+  top: 16px;
+  opacity: 0;
+  transition: opacity .5s, top .5s;
+}
+
+.layers-container.animate-fade-down > img.visible, .layers-container.animate-fade-down > .layer.visible {
+  top: 0;
+  opacity: 1;
+}
+
+.layers-container.animate-fade-left > img, .layers-container.animate-fade-left > .layer {
+  left: -16px;
+  opacity: 0;
+  transition: opacity .5s, left .5s;
+}
+
+.layers-container.animate-fade-left > img.visible, .layers-container.animate-fade-left > .layer.visible {
+  left: 0;
+  opacity: 1;
+}
