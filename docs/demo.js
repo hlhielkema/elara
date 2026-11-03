@@ -4,7 +4,7 @@ const demoApps = [
         title: 'Welcome',
         image: 'img/feather/triangle.svg',
         open: function open() {
-            window.windows.createIFrameWindow('welcome/index.html', {
+            window.windows.createIFrameWindow('apps/welcome/index.html', {
                 title: 'Welcome',
                 size: {
                     width: 800,
@@ -23,7 +23,7 @@ const demoApps = [
         title: 'Dashboard',
         image: 'img/feather/grid.svg',
         open: function open() {
-            window.windows.createIFrameWindow('https://hlhielkema.github.io/domotica_dashboard_concept/', {
+            window.windows.createIFrameWindow('apps/dashboard/index.html', {
                 title: 'Dashboard',
                 size: {
                     width: 1400,
@@ -38,7 +38,7 @@ const demoApps = [
         title: 'Layers.js',
         image: 'img/feather/layers.svg',
         open: function open() {
-            window.windows.createIFrameWindow('https://hlhielkema.github.io/layers.js/', {
+            window.windows.createIFrameWindow('apps/layersjs/index.html', {
                 title: 'Layers.js',
                 size: {
                     width: 1260,
@@ -53,7 +53,7 @@ const demoApps = [
         title: 'Animated background',
         image: 'img/feather/zap.svg',
         open: function open() {
-            window.windows.createIFrameWindow('https://hlhielkema.github.io/animation_playground/dots/index.html', {
+            window.windows.createIFrameWindow('apps/dots/index.html', {
                 title: 'Animated background',
                 size: {
                     width: 1260,
@@ -68,7 +68,7 @@ const demoApps = [
         title: 'PowerShell',
         image: 'img/feather/terminal.svg',
         open: function open() {
-            window.windows.createIFrameWindow('https://hlhielkema.github.io/elara_demo_apps/powershell_cli/index.html', {
+            window.windows.createIFrameWindow('apps/powershell_cli/index.html', {
                 title: 'PowerShell',
                 size: {
                     width: 860,
@@ -86,7 +86,7 @@ const demoApps = [
         title: 'Pictures',
         image: 'img/feather/image.svg',
         open: function open() {
-            window.windows.createIFrameWindow('https://hlhielkema.github.io/elara_demo_apps/picture_viewer/index.html', {
+            window.windows.createIFrameWindow('apps/picture_viewer/index.html', {
                 title: 'Pictures',
                 size: {
                     width: 1000,
