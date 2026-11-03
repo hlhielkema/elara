@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layers Demo</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> 
+    
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="lib/layers.css" />    
+    <link rel="stylesheet" href="css/demo.css" />    
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="half">
+            <h1>Layers.js</h1>
+            <p>This is a demo for a layers javascript library.</p> 
+            
+            <h2>Visible layers</h2>
+            <div class="option-buttons visible-layers">
+                <div class="button active" data-value="a">
+                    All
+                </div>
+                <div class="button" data-value="b">
+                    Bottom 3
+                </div>
+                <div class="button" data-value="c">
+                    Bottom 2
+                </div>
+                <div class="button" data-value="d">
+                    Bottom 1
+                </div>
+                <div class="button" data-value="e">
+                    A, C, D
+                </div>               
+            </div>
+            <h2>Animation mode</h2>
+            <div class="option-buttons animation-mode">
+                <div class="button active" data-value="fade-up">
+                    Fade up
+                </div>
+                <div class="button" data-value="fade-right">
+                    Fade right
+                </div>  
+                <div class="button" data-value="fade-down">
+                    Fade down
+                </div>
+                <div class="button" data-value="fade-left">
+                    Fade left
+                </div>                   
+                <div class="button" data-value="fade">
+                    Fade
+                </div>     
+                <div class="button" data-value="none">
+                    None
+                </div>     
+            </div>
+        </div>
+
+        <div class="half">
+            <div class="layers-container animate-fade-up"></div>
+        </div>
+    </div>      
+    <script src="lib/layers.js"></script>                  
+    <script src="js/demo.js"></script> 
+</body>
+</html>
